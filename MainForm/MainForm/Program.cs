@@ -11,6 +11,7 @@ namespace MainForm
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+        /// ругайся сколько хочешь
         [STAThread]
         static void Main()
         {
