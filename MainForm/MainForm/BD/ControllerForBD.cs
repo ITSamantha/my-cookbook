@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+
 namespace MainForm.BD
 {
     internal static class ControllerForBD
@@ -60,7 +61,7 @@ namespace MainForm.BD
         {
             try
             {
-                string textCommand = "Insert into myrecipes(name, category, ingredients, guide, time, marklike, markDifficult )";
+                string textCommand = "Insert into my recipes(name, category, ingredients, guide, time, marklike, markDifficult )";
                 textCommand += $"values ('{name}','{category}','{ingredients}','{guide}','{time}',{marklike},{markdif})";
                 textCommand += " returning id;";
                 NpgsqlCommand npgsqlCommand = new NpgsqlCommand(textCommand, connection);
