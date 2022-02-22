@@ -21,12 +21,15 @@ namespace MainForm
             //ИЗМЕНЕНИЕ ФОРМЫ-ИЗМЕНЕНИЕ РАЗМЕРОВ ДОДЕЛАЙ!
             Height = (int)System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
-            buttonPanel.Size = new Size((int)(Width / 4), Height);
+            buttonPanel.Size = new Size((int)(Width / 10), Height);
+            
+            lab.BackColor = Color.FromArgb(126, 124, 232);
 
+            lab.Size = new Size(Width, Height / 16);
 
+            tabContr.Size= new Size((int)(Width)- (int)(Width / 10), Height- Height / 16);
 
-
-
+            //tabContr.Location = new Size((int)(Width) - (int)(Width / 10), Height - Height / 16);
         }
 
         private void Form1_Load(object sender, EventArgs e)
