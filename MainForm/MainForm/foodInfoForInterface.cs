@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MainForm
 {
+    //Для двуязычия и логики программы
     public static class foodInfoForInterface
     {
         static public bool isRu = true;
