@@ -44,13 +44,23 @@
             this.GeneralPage = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.addRecPage = new System.Windows.Forms.TabPage();
-            this.rec_name = new System.Windows.Forms.TextBox();
+            this.CategoryCB = new System.Windows.Forms.ComboBox();
             this.AddLabel = new System.Windows.Forms.Label();
             this.settingsPage = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.helpPage = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
-            this.CategoryCB = new System.Windows.Forms.ComboBox();
+            this.TitlePanel = new System.Windows.Forms.TableLayoutPanel();
+            this.TitleL = new System.Windows.Forms.Label();
+            this.rec_name = new System.Windows.Forms.TextBox();
+            this.PhotoPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.PhotoLab = new System.Windows.Forms.Label();
+            this.RecPhoto = new System.Windows.Forms.PictureBox();
+            this.CategoryPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.CategoryL = new System.Windows.Forms.Label();
+            this.TimePanel = new System.Windows.Forms.TableLayoutPanel();
+            this.TimeL = new System.Windows.Forms.Label();
+            this.time_rec = new System.Windows.Forms.TextBox();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.FavPage.SuspendLayout();
@@ -58,6 +68,11 @@
             this.addRecPage.SuspendLayout();
             this.settingsPage.SuspendLayout();
             this.helpPage.SuspendLayout();
+            this.TitlePanel.SuspendLayout();
+            this.PhotoPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RecPhoto)).BeginInit();
+            this.CategoryPanel.SuspendLayout();
+            this.TimePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonPanel
@@ -282,8 +297,10 @@
             // addRecPage
             // 
             this.addRecPage.BackColor = System.Drawing.Color.White;
-            this.addRecPage.Controls.Add(this.CategoryCB);
-            this.addRecPage.Controls.Add(this.rec_name);
+            this.addRecPage.Controls.Add(this.TimePanel);
+            this.addRecPage.Controls.Add(this.CategoryPanel);
+            this.addRecPage.Controls.Add(this.PhotoPanel);
+            this.addRecPage.Controls.Add(this.TitlePanel);
             this.addRecPage.Controls.Add(this.AddLabel);
             this.addRecPage.Location = new System.Drawing.Point(4, 30);
             this.addRecPage.Name = "addRecPage";
@@ -291,15 +308,16 @@
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
-            // rec_name
+            // CategoryCB
             // 
-            this.rec_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.rec_name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rec_name.Font = new System.Drawing.Font("Bahnschrift Condensed", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rec_name.Location = new System.Drawing.Point(37, 106);
-            this.rec_name.Name = "rec_name";
-            this.rec_name.Size = new System.Drawing.Size(578, 36);
-            this.rec_name.TabIndex = 1;
+            this.CategoryCB.BackColor = System.Drawing.Color.White;
+            this.CategoryCB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CategoryCB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CategoryCB.FormattingEnabled = true;
+            this.CategoryCB.Location = new System.Drawing.Point(6, 35);
+            this.CategoryCB.Name = "CategoryCB";
+            this.CategoryCB.Size = new System.Drawing.Size(121, 37);
+            this.CategoryCB.TabIndex = 2;
             // 
             // AddLabel
             // 
@@ -349,15 +367,137 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "label5";
             // 
-            // CategoryCB
+            // TitlePanel
             // 
-            this.CategoryCB.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.CategoryCB.Font = new System.Drawing.Font("Bahnschrift Condensed", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CategoryCB.FormattingEnabled = true;
-            this.CategoryCB.Location = new System.Drawing.Point(37, 166);
-            this.CategoryCB.Name = "CategoryCB";
-            this.CategoryCB.Size = new System.Drawing.Size(121, 37);
-            this.CategoryCB.TabIndex = 2;
+            this.TitlePanel.BackColor = System.Drawing.Color.White;
+            this.TitlePanel.ColumnCount = 1;
+            this.TitlePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TitlePanel.Controls.Add(this.rec_name, 0, 1);
+            this.TitlePanel.Controls.Add(this.TitleL, 0, 0);
+            this.TitlePanel.Location = new System.Drawing.Point(37, 56);
+            this.TitlePanel.Name = "TitlePanel";
+            this.TitlePanel.RowCount = 2;
+            this.TitlePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.TitlePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.TitlePanel.Size = new System.Drawing.Size(618, 36);
+            this.TitlePanel.TabIndex = 3;
+            // 
+            // TitleL
+            // 
+            this.TitleL.AutoSize = true;
+            this.TitleL.Dock = System.Windows.Forms.DockStyle.Left;
+            this.TitleL.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TitleL.Location = new System.Drawing.Point(0, 0);
+            this.TitleL.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.TitleL.Name = "TitleL";
+            this.TitleL.Size = new System.Drawing.Size(0, 24);
+            this.TitleL.TabIndex = 0;
+            // 
+            // rec_name
+            // 
+            this.rec_name.BackColor = System.Drawing.Color.White;
+            this.rec_name.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rec_name.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rec_name.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rec_name.Location = new System.Drawing.Point(3, 27);
+            this.rec_name.Name = "rec_name";
+            this.rec_name.Size = new System.Drawing.Size(616, 33);
+            this.rec_name.TabIndex = 2;
+            // 
+            // PhotoPanel
+            // 
+            this.PhotoPanel.ColumnCount = 1;
+            this.PhotoPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.PhotoPanel.Controls.Add(this.PhotoLab, 0, 0);
+            this.PhotoPanel.Controls.Add(this.RecPhoto, 0, 1);
+            this.PhotoPanel.Location = new System.Drawing.Point(37, 122);
+            this.PhotoPanel.Name = "PhotoPanel";
+            this.PhotoPanel.RowCount = 2;
+            this.PhotoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.PhotoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.PhotoPanel.Size = new System.Drawing.Size(262, 138);
+            this.PhotoPanel.TabIndex = 4;
+            // 
+            // PhotoLab
+            // 
+            this.PhotoLab.BackColor = System.Drawing.Color.Transparent;
+            this.PhotoLab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PhotoLab.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PhotoLab.Location = new System.Drawing.Point(0, 0);
+            this.PhotoLab.Margin = new System.Windows.Forms.Padding(0);
+            this.PhotoLab.Name = "PhotoLab";
+            this.PhotoLab.Size = new System.Drawing.Size(262, 13);
+            this.PhotoLab.TabIndex = 0;
+            this.PhotoLab.Text = "l";
+            // 
+            // RecPhoto
+            // 
+            this.RecPhoto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RecPhoto.Location = new System.Drawing.Point(3, 16);
+            this.RecPhoto.Name = "RecPhoto";
+            this.RecPhoto.Size = new System.Drawing.Size(256, 119);
+            this.RecPhoto.TabIndex = 1;
+            this.RecPhoto.TabStop = false;
+            // 
+            // CategoryPanel
+            // 
+            this.CategoryPanel.ColumnCount = 1;
+            this.CategoryPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CategoryPanel.Controls.Add(this.CategoryL, 0, 0);
+            this.CategoryPanel.Controls.Add(this.CategoryCB, 0, 1);
+            this.CategoryPanel.Location = new System.Drawing.Point(338, 122);
+            this.CategoryPanel.Name = "CategoryPanel";
+            this.CategoryPanel.RowCount = 2;
+            this.CategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.CategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.CategoryPanel.Size = new System.Drawing.Size(318, 70);
+            this.CategoryPanel.TabIndex = 5;
+            // 
+            // CategoryL
+            // 
+            this.CategoryL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CategoryL.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CategoryL.Location = new System.Drawing.Point(30, 7);
+            this.CategoryL.Margin = new System.Windows.Forms.Padding(0);
+            this.CategoryL.Name = "CategoryL";
+            this.CategoryL.Size = new System.Drawing.Size(35, 13);
+            this.CategoryL.TabIndex = 0;
+            this.CategoryL.Text = "CategoryL";
+            // 
+            // TimePanel
+            // 
+            this.TimePanel.ColumnCount = 1;
+            this.TimePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TimePanel.Controls.Add(this.TimeL, 0, 0);
+            this.TimePanel.Controls.Add(this.time_rec, 0, 1);
+            this.TimePanel.Location = new System.Drawing.Point(338, 214);
+            this.TimePanel.Name = "TimePanel";
+            this.TimePanel.RowCount = 2;
+            this.TimePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.TimePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.TimePanel.Size = new System.Drawing.Size(200, 89);
+            this.TimePanel.TabIndex = 6;
+            // 
+            // TimeL
+            // 
+            this.TimeL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TimeL.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TimeL.Location = new System.Drawing.Point(40, 11);
+            this.TimeL.Margin = new System.Windows.Forms.Padding(0);
+            this.TimeL.Name = "TimeL";
+            this.TimeL.Size = new System.Drawing.Size(35, 13);
+            this.TimeL.TabIndex = 0;
+            this.TimeL.Text = "label3";
+            // 
+            // time_rec
+            // 
+            this.time_rec.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.time_rec.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.time_rec.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.time_rec.Location = new System.Drawing.Point(0, 55);
+            this.time_rec.Name = "time_rec";
+            this.time_rec.Size = new System.Drawing.Size(200, 33);
+            this.time_rec.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -381,11 +521,17 @@
             this.GeneralPage.ResumeLayout(false);
             this.GeneralPage.PerformLayout();
             this.addRecPage.ResumeLayout(false);
-            this.addRecPage.PerformLayout();
             this.settingsPage.ResumeLayout(false);
             this.settingsPage.PerformLayout();
             this.helpPage.ResumeLayout(false);
             this.helpPage.PerformLayout();
+            this.TitlePanel.ResumeLayout(false);
+            this.TitlePanel.PerformLayout();
+            this.PhotoPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.RecPhoto)).EndInit();
+            this.CategoryPanel.ResumeLayout(false);
+            this.TimePanel.ResumeLayout(false);
+            this.TimePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -412,8 +558,18 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label AddLabel;
-        private System.Windows.Forms.TextBox rec_name;
         private System.Windows.Forms.ComboBox CategoryCB;
+        private System.Windows.Forms.TableLayoutPanel TitlePanel;
+        private System.Windows.Forms.TextBox rec_name;
+        private System.Windows.Forms.Label TitleL;
+        private System.Windows.Forms.TableLayoutPanel PhotoPanel;
+        private System.Windows.Forms.Label PhotoLab;
+        private System.Windows.Forms.PictureBox RecPhoto;
+        private System.Windows.Forms.TableLayoutPanel CategoryPanel;
+        private System.Windows.Forms.Label CategoryL;
+        private System.Windows.Forms.TableLayoutPanel TimePanel;
+        private System.Windows.Forms.Label TimeL;
+        private System.Windows.Forms.TextBox time_rec;
     }
 }
 

@@ -9,8 +9,8 @@ namespace MainForm.BD
     public class Recipe
     {
         private int id;
-        private string name;
-        private string category;
+        private string name;//!
+        private string category;//!
         private string ingredients;
         private string guide;
         private string marklike;

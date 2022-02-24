@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MainForm
 {
-    public static class helpThings
+    public static class Instruments
     {
         public static int intervalX = 300;
 
-        public static int intervalY = 70;
+        public static int intervalY = 50;
         
     }
 }

@@ -134,27 +134,68 @@ namespace MainForm
             //AddRecPage changes 
             {
                 AddLabel.SetBounds(addRecPage.Bounds.X, addRecPage.Bounds.Y-30, (int)((Width) - (Width / 10)), Height / 16);
+                //Lavender
 
-                rec_name.SetBounds(addRecPage.Bounds.X, addRecPage.Bounds.Y + helpThings.intervalY, (int)((Width) - (Width / 2)), Height / 16);
+                //"Название"
+                {
+                    TitlePanel.BackColor = Color.FromArgb(126, 124, 232);
 
-                CategoryCB.SetBounds(addRecPage.Bounds.X, addRecPage.Bounds.Y +  2*helpThings.intervalY, (int)((Width) - (Width / 2)), Height / 16);
+                    TitlePanel.SetBounds(addRecPage.Bounds.X + Instruments.intervalX, addRecPage.Bounds.Y + Instruments.intervalY, (int)((Width) - (Width / 2)), Height / 14);
+
+                    TitleL.Text = Languages.isRu == true ? Languages.titleRu : Languages.titleEn;
+                }
+
+                //"Фото"
+                {
+                    PhotoPanel.BackColor = Color.FromArgb(126, 124, 232);
+
+                    PhotoPanel.SetBounds(TitlePanel.Bounds.X, addRecPage.Bounds.Y + TitlePanel.Bounds.Y+Instruments.intervalY , 282/*(int)((Width) - (Width / 2))/3*/, 282/*Height / 4*/);
+
+                    PhotoLab.Text= Languages.isRu == true ? Languages.photoRu : Languages.photoEn;
+
+                    RecPhoto.Size = new Size(256, 256);//ПОДУМАТЬ над фото(размер, основное) и т.п.
+
+                    RecPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+
+                //"Категория"
+                {
+                    CategoryPanel.BackColor = Color.FromArgb(126, 124, 232);
+
+                    CategoryPanel.SetBounds(TitlePanel.Bounds.X + Instruments.intervalX, addRecPage.Bounds.Y + TitlePanel.Bounds.Y + Instruments.intervalY, (int)(((Width) - (Width / 2))/1.6), Height / 13);
+
+                    CategoryL.Text = Languages.isRu == true ? Languages.categoryRu : Languages.categoryEn;
+                }
+
+                //"Время приготовления"
+                {
+                    TimePanel.BackColor = Color.FromArgb(126, 124, 232);
+
+                    TimePanel.SetBounds(TitlePanel.Bounds.X + Instruments.intervalX, addRecPage.Bounds.Y + TitlePanel.Bounds.Y + Instruments.intervalY, (int)(((Width) - (Width / 2)) / 1.6), Height / 13);
+                    
+                    TimeL.Text = Languages.isRu == true ? Languages.timeRu : Languages.timeEn;
+                    
+                }
+
+
+                
 
 
             }
         }
 
-        public void categoryInit()//ДОБАВИТЬ ПАРАМЕТР ЯЗЫК!
+        public void categoryInit()
         {
-            if (foodInfoForInterface.isRu)
+            if (Languages.isRu)
             {
-                foreach (var item in foodInfoForInterface.categoriesRu)//Инициализация категорий
+                foreach (var item in Languages.categoriesRu)//Инициализация категорий
                 {
                     CategoryCB.Items.Add(item);
                 }
             }
             else
             {
-                foreach (var item in foodInfoForInterface.categoriesEn)//Инициализация категорий
+                foreach (var item in Languages.categoriesEn)//Инициализация категорий
                 {
                     CategoryCB.Items.Add(item);
                 }
