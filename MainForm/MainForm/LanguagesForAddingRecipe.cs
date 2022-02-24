@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MainForm
 {
     //Для двуязычия и логики программы
-    public static class Languages
+    public static class LanguagesForAddingRecipe
     {
         static public bool isRu = true;
 
@@ -15,13 +15,17 @@ namespace MainForm
 
         static public string[] categoriesEn = new string[] { "Snacks", "Salads", "First courses", "Main courses", "Sauces", "Pastries", "Drinks", "Desserts" };
 
-        static public string titleRu = "Название";
+        static public string addRu = "Добавление рецепта";
+
+        static public string addEn = "Adding a recipe";
+
+        static public string titleRu = "Название ";
 
         static public string titleEn = "Title";
 
-        static public string photoRu = "Фото рецепта";
+        static public string photoRu = "Фото блюда";
 
-        static public string photoEn = "Recipe photo";
+        static public string photoEn = "Dish photo";
 
         static public string categoryRu = "Категория";
 
@@ -30,5 +34,21 @@ namespace MainForm
         static public string timeRu = "Время приготовления";
 
         static public string timeEn = "Cooking time";
+
+        static public string rateRu = "Оценка рецепта";
+
+        static public string rateEn = "Prescription evaluation";
+
+        static public string diffRu = "Оценка сложности рецепта(1-10)";//По-другому?
+
+        static public string diffEn = "Recipe Difficulty Score(1-10)";
+
+        static public string ingRu = "Ингредиенты";
+
+        static public string ingEn = "Ingredients";
+
+        static public string guideRu = "Инструкция";
+
+        static public string guideEn = "Instruction";
     }
 }

@@ -48,16 +48,19 @@ namespace MainForm
         private void myRecB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.My_Rec);
+            tabContr.SelectedIndex = (int)Buttons.My_Rec;
         }
 
         private void favB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.Fav_Rec);
+            tabContr.SelectedIndex = (int)Buttons.Fav_Rec;
         }
 
         private void generalB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.General_Rec);
+            tabContr.SelectedIndex = (int)Buttons.General_Rec;
         }
 
         private void addRecB_Click(object sender, EventArgs e)
@@ -69,11 +72,13 @@ namespace MainForm
         private void settingsB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.Settings);
+            tabContr.SelectedIndex = (int)Buttons.Settings;
         }
 
         private void helpB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.Help);
+            tabContr.SelectedIndex = (int)Buttons.Help;
         }
 
         //Функция для проверки активности кнопок
@@ -133,69 +138,112 @@ namespace MainForm
 
             //AddRecPage changes 
             {
-                AddLabel.SetBounds(addRecPage.Bounds.X, addRecPage.Bounds.Y-30, (int)((Width) - (Width / 10)), Height / 16);
+                int pieces = 9;
+
+                float eps = 6.65f;
+
+                //"Заголовок"
+                {
+                    AddLabel.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
+
+                    AddLabel.SetBounds(addRecPage.Bounds.X, addRecPage.Bounds.Y - 30, (int)((Width) - (Width / 10)), Height / 16);
+                }
+                
                 //Lavender
 
                 //"Название"
                 {
                     TitlePanel.BackColor = Color.FromArgb(126, 124, 232);
 
-                    TitlePanel.SetBounds(addRecPage.Bounds.X + Instruments.intervalX, addRecPage.Bounds.Y + Instruments.intervalY, (int)((Width) - (Width / 2)), Height / 14);
+                    TitlePanel.SetBounds(addRecPage.Bounds.X + Instruments.intervalX, addRecPage.Bounds.Y + Instruments.intervalY/2, (int)( (Width / 2.5)), Height / 12);
 
-                    TitleL.Text = Languages.isRu == true ? Languages.titleRu : Languages.titleEn;
+                    TitleL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.titleRu : LanguagesForAddingRecipe.titleEn;
                 }
 
                 //"Фото"
                 {
                     PhotoPanel.BackColor = Color.FromArgb(126, 124, 232);
 
-                    PhotoPanel.SetBounds(TitlePanel.Bounds.X, addRecPage.Bounds.Y + TitlePanel.Bounds.Y+Instruments.intervalY , 282/*(int)((Width) - (Width / 2))/3*/, 282/*Height / 4*/);
+                    PhotoPanel.SetBounds(TitlePanel.Bounds.X, TitlePanel.Bounds.Y + Instruments.intervalY, (int)(Height / 2.5), (int)(Height / 2.5));
 
-                    PhotoLab.Text= Languages.isRu == true ? Languages.photoRu : Languages.photoEn;
+                    PhotoLab.Text= LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.photoRu : LanguagesForAddingRecipe.photoEn;
 
-                    RecPhoto.Size = new Size(256, 256);//ПОДУМАТЬ над фото(размер, основное) и т.п.
+                    //RecPhoto.Size = new Size(256, 256);//ПОДУМАТЬ над фото(размер, основное) и т.п.
 
-                    RecPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    //RecPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
 
                 //"Категория"
                 {
                     CategoryPanel.BackColor = Color.FromArgb(126, 124, 232);
 
-                    CategoryPanel.SetBounds(TitlePanel.Bounds.X + Instruments.intervalX, addRecPage.Bounds.Y + TitlePanel.Bounds.Y + Instruments.intervalY, (int)(((Width) - (Width / 2))/1.6), Height / 13);
+                    CategoryPanel.SetBounds(TitlePanel.Bounds.X + (int)(4*Instruments.intervalX), TitlePanel.Bounds.Y + Instruments.intervalY, (int)(Width/eps), Height / pieces);
 
-                    CategoryL.Text = Languages.isRu == true ? Languages.categoryRu : Languages.categoryEn;
+                    CategoryL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.categoryRu : LanguagesForAddingRecipe.categoryEn;
                 }
 
                 //"Время приготовления"
                 {
                     TimePanel.BackColor = Color.FromArgb(126, 124, 232);
 
-                    TimePanel.SetBounds(TitlePanel.Bounds.X + Instruments.intervalX, addRecPage.Bounds.Y + TitlePanel.Bounds.Y + Instruments.intervalY, (int)(((Width) - (Width / 2)) / 1.6), Height / 13);
+                    TimePanel.SetBounds(TitlePanel.Bounds.X + (int)(4 * Instruments.intervalX), addRecPage.Bounds.Y+CategoryPanel.Bounds.Y + Instruments.intervalY, (int)(Width / eps), Height / pieces);
                     
-                    TimeL.Text = Languages.isRu == true ? Languages.timeRu : Languages.timeEn;
-                    
+                    TimeL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.timeRu : LanguagesForAddingRecipe.timeEn;    
                 }
 
+                //"Сложность"
+                {
+                    DifficultyPanel.BackColor = Color.FromArgb(126, 124, 232);
+
+                    DifficultyPanel.SetBounds(TimePanel.Bounds.X, addRecPage.Bounds.Y + TimePanel.Bounds.Y + Instruments.intervalY, (int)(Width / eps), Height / pieces);
+
+                    DiffL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
+                }
+                
+                //"Оценка рецепта"
+                {
+                    RatingPanel.BackColor = Color.FromArgb(126, 124, 232);
+
+                    RatingPanel.SetBounds(PhotoPanel.Bounds.X, DifficultyPanel.Bounds.Y + (int)(1.2*Instruments.intervalY), (int)(Width / 6), Height / pieces);
+
+                    RateLable.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.rateRu : LanguagesForAddingRecipe.rateEn;
+                }
+
+                //"Ингредиенты"
+                {
+                    IngrPanel.BackColor = Color.FromArgb(126, 124, 232);
+
+                    IngrPanel.SetBounds(TitlePanel.Bounds.X+7*Instruments.intervalX, TitlePanel.Bounds.Y, (int)(Height / 1.7), (int)(Height /4 ));
+
+                    IngredL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.ingRu : LanguagesForAddingRecipe.ingEn;
+                }
+
+                //"Инструкция"
+                {
+                    InstrPanel.BackColor = Color.FromArgb(126, 124, 232);
+
+                    InstrPanel.SetBounds(IngrPanel.Bounds.X , TitlePanel.Bounds.Y+2*Instruments.intervalX+35, (int)(Height / 1.7), (int)(Height / 4));
+
+                    InstrL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.guideRu : LanguagesForAddingRecipe.guideEn;
+                }
 
                 
-
 
             }
         }
 
         public void categoryInit()
         {
-            if (Languages.isRu)
+            if (LanguagesForAddingRecipe.isRu)
             {
-                foreach (var item in Languages.categoriesRu)//Инициализация категорий
+                foreach (var item in LanguagesForAddingRecipe.categoriesRu)//Инициализация категорий
                 {
                     CategoryCB.Items.Add(item);
                 }
             }
             else
             {
-                foreach (var item in Languages.categoriesEn)//Инициализация категорий
+                foreach (var item in LanguagesForAddingRecipe.categoriesEn)//Инициализация категорий
                 {
                     CategoryCB.Items.Add(item);
                 }

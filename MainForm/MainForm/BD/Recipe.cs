@@ -14,9 +14,9 @@ namespace MainForm.BD
         private string ingredients;
         private string guide;
         private string marklike;
-        private string time;
+        private string time;//!
         private bool star;
-        private string markdif;
+        private string markdif;//!
 
         // картинка
         public Recipe(int id, string category, string ingredients, string time, string guide, string marklike, string name, string markdif, bool star)

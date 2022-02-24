@@ -8,9 +8,9 @@ namespace MainForm
 {
     public static class Instruments
     {
-        public static int intervalX = 300;
+        public static int intervalX = 100;
 
-        public static int intervalY = 50;
+        public static int intervalY = 100;
         
     }
 }
