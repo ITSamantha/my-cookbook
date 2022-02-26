@@ -11,6 +11,7 @@ namespace MainForm
     {
         static public bool isRu = true;
 
+        //Page "AddRec"
         static public string[] categoriesRu = new string[] { "Закуски", "Салаты", "Первые блюда", "Вторые блюда", "Соусы", "Выпечка", "Напитки", "Десерты" };
 
         static public string[] categoriesEn = new string[] { "Snacks", "Salads", "First courses", "Main courses", "Sauces", "Pastries", "Drinks", "Desserts" };
@@ -50,5 +51,52 @@ namespace MainForm
         static public string guideRu = "Инструкция";
 
         static public string guideEn = "Instruction";
+
+        static public string addBRu = "Добавить";
+
+        static public string addBEn = "Add";
+
+        static public string cancelRu = "Очистить";
+
+        static public string cancelEn = "Clean";
+
+        //Page "Settings"
+        static public string setLRu = "Настройки";
+
+        static public string setLEn = "Settings";
+
+        static public string changeLRu = "Смена языка";
+
+        static public string changeLEn = "Changing language";
+
+        static public string RuRu = "Русский";
+
+        static public string RuEn = "Russian";
+
+        static public string EnRu = "Английский";
+
+        static public string EnEn = "English";
+
+        //Page "General Rec"
+        static public string generalRu = "Общие рецепты";
+
+        static public string generalEn = "General recipes";
+
+        //Page "Favourite Rec"
+        static public string favRu = "Избранные рецепты";
+
+        static public string favEn = "Favourite recipes";
+
+        //Page "My Rec"
+        static public string myRecRu = "Мои рецепты";
+
+        static public string myRecEn = "My recipes";
+
+        //Page "Help"
+        static public string helpRu = "Помощь";
+
+        static public string helpEn = "Help";
+
+
     }
 }
