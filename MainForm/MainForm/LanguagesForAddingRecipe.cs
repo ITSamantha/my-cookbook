@@ -71,10 +71,6 @@ namespace MainForm
 
         static public string RuRu = "Русский";
 
-        static public string RuEn = "Russian";
-
-        static public string EnRu = "Английский";
-
         static public string EnEn = "English";
 
         //Page "General Rec"

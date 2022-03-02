@@ -39,9 +39,14 @@
             this.lab = new System.Windows.Forms.Label();
             this.tabContr = new System.Windows.Forms.TabControl();
             this.MyRecPage = new System.Windows.Forms.TabPage();
+            this.myL = new System.Windows.Forms.Label();
             this.FavPage = new System.Windows.Forms.TabPage();
+            this.favL = new System.Windows.Forms.Label();
             this.GeneralPage = new System.Windows.Forms.TabPage();
+            this.genL = new System.Windows.Forms.Label();
             this.addRecPage = new System.Windows.Forms.TabPage();
+            this.CancelB = new System.Windows.Forms.Button();
+            this.RecReadyB = new System.Windows.Forms.Button();
             this.RatingPanel = new System.Windows.Forms.TableLayoutPanel();
             this.RateLable = new System.Windows.Forms.Label();
             this.Rate = new System.Windows.Forms.TableLayoutPanel();
@@ -73,17 +78,12 @@
             this.RecPhoto = new System.Windows.Forms.PictureBox();
             this.AddLabel = new System.Windows.Forms.Label();
             this.settingsPage = new System.Windows.Forms.TabPage();
-            this.helpPage = new System.Windows.Forms.TabPage();
-            this.RecReadyB = new System.Windows.Forms.Button();
-            this.CancelB = new System.Windows.Forms.Button();
-            this.SettingsL = new System.Windows.Forms.Label();
-            this.helpL = new System.Windows.Forms.Label();
-            this.genL = new System.Windows.Forms.Label();
-            this.favL = new System.Windows.Forms.Label();
-            this.myL = new System.Windows.Forms.Label();
             this.LanguagePanel = new System.Windows.Forms.TableLayoutPanel();
             this.ChangeLLabel = new System.Windows.Forms.Label();
             this.LangCB = new System.Windows.Forms.ComboBox();
+            this.SettingsL = new System.Windows.Forms.Label();
+            this.helpPage = new System.Windows.Forms.TabPage();
+            this.helpL = new System.Windows.Forms.Label();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -106,8 +106,8 @@
             this.PhotoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecPhoto)).BeginInit();
             this.settingsPage.SuspendLayout();
-            this.helpPage.SuspendLayout();
             this.LanguagePanel.SuspendLayout();
+            this.helpPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonPanel
@@ -291,6 +291,16 @@
             this.MyRecPage.Text = "tabPage1";
             this.MyRecPage.UseVisualStyleBackColor = true;
             // 
+            // myL
+            // 
+            this.myL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.myL.Location = new System.Drawing.Point(277, 4);
+            this.myL.Name = "myL";
+            this.myL.Size = new System.Drawing.Size(357, 52);
+            this.myL.TabIndex = 3;
+            this.myL.Text = "Мои рецепты";
+            this.myL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FavPage
             // 
             this.FavPage.Controls.Add(this.favL);
@@ -302,6 +312,16 @@
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
             // 
+            // favL
+            // 
+            this.favL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.favL.Location = new System.Drawing.Point(286, 0);
+            this.favL.Name = "favL";
+            this.favL.Size = new System.Drawing.Size(357, 52);
+            this.favL.TabIndex = 2;
+            this.favL.Text = "Избранные рецепты";
+            this.favL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // GeneralPage
             // 
             this.GeneralPage.Controls.Add(this.genL);
@@ -311,6 +331,16 @@
             this.GeneralPage.TabIndex = 2;
             this.GeneralPage.Text = "tabPage1";
             this.GeneralPage.UseVisualStyleBackColor = true;
+            // 
+            // genL
+            // 
+            this.genL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.genL.Location = new System.Drawing.Point(273, 2);
+            this.genL.Name = "genL";
+            this.genL.Size = new System.Drawing.Size(357, 52);
+            this.genL.TabIndex = 1;
+            this.genL.Text = "Общие рецепты";
+            this.genL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // addRecPage
             // 
@@ -332,13 +362,35 @@
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
+            // CancelB
+            // 
+            this.CancelB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CancelB.Location = new System.Drawing.Point(722, 562);
+            this.CancelB.Name = "CancelB";
+            this.CancelB.Size = new System.Drawing.Size(75, 23);
+            this.CancelB.TabIndex = 16;
+            this.CancelB.Text = "button1";
+            this.CancelB.UseVisualStyleBackColor = true;
+            this.CancelB.Click += new System.EventHandler(this.CancelB_Click);
+            // 
+            // RecReadyB
+            // 
+            this.RecReadyB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.RecReadyB.Location = new System.Drawing.Point(369, 563);
+            this.RecReadyB.Name = "RecReadyB";
+            this.RecReadyB.Size = new System.Drawing.Size(75, 23);
+            this.RecReadyB.TabIndex = 15;
+            this.RecReadyB.Text = "button1";
+            this.RecReadyB.UseVisualStyleBackColor = true;
+            this.RecReadyB.Click += new System.EventHandler(this.RecReadyB_Click);
+            // 
             // RatingPanel
             // 
             this.RatingPanel.ColumnCount = 1;
             this.RatingPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.RatingPanel.Controls.Add(this.RateLable, 0, 0);
             this.RatingPanel.Controls.Add(this.Rate, 0, 1);
-            this.RatingPanel.Location = new System.Drawing.Point(339, 457);
+            this.RatingPanel.Location = new System.Drawing.Point(344, 156);
             this.RatingPanel.Name = "RatingPanel";
             this.RatingPanel.RowCount = 2;
             this.RatingPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -554,7 +606,7 @@
             this.DifficultyPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.DifficultyPanel.Controls.Add(this.DiffL, 0, 0);
             this.DifficultyPanel.Controls.Add(this.markDif, 0, 1);
-            this.DifficultyPanel.Location = new System.Drawing.Point(339, 324);
+            this.DifficultyPanel.Location = new System.Drawing.Point(338, 383);
             this.DifficultyPanel.Name = "DifficultyPanel";
             this.DifficultyPanel.RowCount = 2;
             this.DifficultyPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -600,7 +652,7 @@
             this.TimePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TimePanel.Controls.Add(this.TimeL, 0, 0);
             this.TimePanel.Controls.Add(this.time_rec, 0, 1);
-            this.TimePanel.Location = new System.Drawing.Point(338, 198);
+            this.TimePanel.Location = new System.Drawing.Point(339, 335);
             this.TimePanel.Name = "TimePanel";
             this.TimePanel.RowCount = 2;
             this.TimePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -635,7 +687,7 @@
             this.CategoryPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.CategoryPanel.Controls.Add(this.CategoryL, 0, 0);
             this.CategoryPanel.Controls.Add(this.CategoryCB, 0, 1);
-            this.CategoryPanel.Location = new System.Drawing.Point(338, 122);
+            this.CategoryPanel.Location = new System.Drawing.Point(338, 259);
             this.CategoryPanel.Name = "CategoryPanel";
             this.CategoryPanel.RowCount = 2;
             this.CategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -699,6 +751,7 @@
             this.RecPhoto.Size = new System.Drawing.Size(289, 281);
             this.RecPhoto.TabIndex = 1;
             this.RecPhoto.TabStop = false;
+            this.RecPhoto.Click += new System.EventHandler(this.RecPhoto_Click);
             // 
             // AddLabel
             // 
@@ -720,88 +773,6 @@
             this.settingsPage.TabIndex = 4;
             this.settingsPage.Text = "Настройки";
             this.settingsPage.UseVisualStyleBackColor = true;
-            // 
-            // helpPage
-            // 
-            this.helpPage.Controls.Add(this.helpL);
-            this.helpPage.Location = new System.Drawing.Point(4, 30);
-            this.helpPage.Name = "helpPage";
-            this.helpPage.Size = new System.Drawing.Size(1021, 652);
-            this.helpPage.TabIndex = 5;
-            this.helpPage.Text = "tabPage1";
-            this.helpPage.UseVisualStyleBackColor = true;
-            // 
-            // RecReadyB
-            // 
-            this.RecReadyB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.RecReadyB.Location = new System.Drawing.Point(269, 592);
-            this.RecReadyB.Name = "RecReadyB";
-            this.RecReadyB.Size = new System.Drawing.Size(75, 23);
-            this.RecReadyB.TabIndex = 15;
-            this.RecReadyB.Text = "button1";
-            this.RecReadyB.UseVisualStyleBackColor = true;
-            this.RecReadyB.Click += new System.EventHandler(this.RecReadyB_Click);
-            // 
-            // CancelB
-            // 
-            this.CancelB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CancelB.Location = new System.Drawing.Point(456, 592);
-            this.CancelB.Name = "CancelB";
-            this.CancelB.Size = new System.Drawing.Size(75, 23);
-            this.CancelB.TabIndex = 16;
-            this.CancelB.Text = "button1";
-            this.CancelB.UseVisualStyleBackColor = true;
-            this.CancelB.Click += new System.EventHandler(this.CancelB_Click);
-            // 
-            // SettingsL
-            // 
-            this.SettingsL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SettingsL.Location = new System.Drawing.Point(282, 2);
-            this.SettingsL.Name = "SettingsL";
-            this.SettingsL.Size = new System.Drawing.Size(357, 52);
-            this.SettingsL.TabIndex = 1;
-            this.SettingsL.Text = "Настройки";
-            this.SettingsL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // helpL
-            // 
-            this.helpL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.helpL.Location = new System.Drawing.Point(332, 300);
-            this.helpL.Name = "helpL";
-            this.helpL.Size = new System.Drawing.Size(357, 52);
-            this.helpL.TabIndex = 2;
-            this.helpL.Text = "Помощь";
-            this.helpL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // genL
-            // 
-            this.genL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.genL.Location = new System.Drawing.Point(332, 300);
-            this.genL.Name = "genL";
-            this.genL.Size = new System.Drawing.Size(357, 52);
-            this.genL.TabIndex = 1;
-            this.genL.Text = "Добавление рецепта";
-            this.genL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // favL
-            // 
-            this.favL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.favL.Location = new System.Drawing.Point(332, 300);
-            this.favL.Name = "favL";
-            this.favL.Size = new System.Drawing.Size(357, 52);
-            this.favL.TabIndex = 2;
-            this.favL.Text = "Добавление рецепта";
-            this.favL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // myL
-            // 
-            this.myL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.myL.Location = new System.Drawing.Point(332, 300);
-            this.myL.Name = "myL";
-            this.myL.Size = new System.Drawing.Size(357, 52);
-            this.myL.TabIndex = 3;
-            this.myL.Text = "Добавление рецепта";
-            this.myL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LanguagePanel
             // 
@@ -835,11 +806,42 @@
             this.LangCB.FormattingEnabled = true;
             this.LangCB.Items.AddRange(new object[] {
             "Русский",
-            "Английский"});
+            "English"});
             this.LangCB.Location = new System.Drawing.Point(3, 25);
             this.LangCB.Name = "LangCB";
             this.LangCB.Size = new System.Drawing.Size(305, 37);
             this.LangCB.TabIndex = 1;
+            this.LangCB.SelectedIndexChanged += new System.EventHandler(this.LangCB_SelectedIndexChanged);
+            // 
+            // SettingsL
+            // 
+            this.SettingsL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SettingsL.Location = new System.Drawing.Point(282, 2);
+            this.SettingsL.Name = "SettingsL";
+            this.SettingsL.Size = new System.Drawing.Size(357, 52);
+            this.SettingsL.TabIndex = 1;
+            this.SettingsL.Text = "Настройки";
+            this.SettingsL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // helpPage
+            // 
+            this.helpPage.Controls.Add(this.helpL);
+            this.helpPage.Location = new System.Drawing.Point(4, 30);
+            this.helpPage.Name = "helpPage";
+            this.helpPage.Size = new System.Drawing.Size(1021, 652);
+            this.helpPage.TabIndex = 5;
+            this.helpPage.Text = "tabPage1";
+            this.helpPage.UseVisualStyleBackColor = true;
+            // 
+            // helpL
+            // 
+            this.helpL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.helpL.Location = new System.Drawing.Point(332, 300);
+            this.helpL.Name = "helpL";
+            this.helpL.Size = new System.Drawing.Size(357, 52);
+            this.helpL.TabIndex = 2;
+            this.helpL.Text = "Помощь";
+            this.helpL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
@@ -882,8 +884,8 @@
             this.PhotoPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.RecPhoto)).EndInit();
             this.settingsPage.ResumeLayout(false);
-            this.helpPage.ResumeLayout(false);
             this.LanguagePanel.ResumeLayout(false);
+            this.helpPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
