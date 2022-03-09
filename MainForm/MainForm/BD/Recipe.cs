@@ -9,12 +9,12 @@ namespace bd
     public class Recipe
     {
         private int id;
-        private string name;
-        private string category;
+        private string name;//!
+        private string category;//!
         private string ingredients;
         private string guide;
         private string marklike;
-        private string time;
+        private string time;//!
         private bool star;
         private string markdif;
         private byte[]  pic;
