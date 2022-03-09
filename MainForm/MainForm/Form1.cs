@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bd;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -54,7 +55,7 @@ namespace MainForm
             languageChanges();
             
             //Подключение БД
-            BD.ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = 01dr10kv; Database = MyDatabase; ");
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = 01dr10kv; Database = MyDatabase; ");
 
             categoryInit();
             
@@ -64,7 +65,7 @@ namespace MainForm
         //ПРИ ЗАКРЫТИИ ФОРМЫ ЗАКРЫТИЕ DB
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)//Отключение БД
         {
-            BD.ControllerForBD.Disconnect();
+            ControllerForBD.Disconnect();
         }
 
         private void myRecB_Click(object sender, EventArgs e)

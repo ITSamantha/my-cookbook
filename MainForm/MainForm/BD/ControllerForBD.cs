@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace bd
@@ -242,7 +243,7 @@ namespace bd
             try
             {
                 Thread th = new Thread(SelectAllMyRecipes);
-                th.UnsafeStart();
+                th.Start();
             }
             catch (Exception e)
             {
@@ -287,7 +288,7 @@ namespace bd
             try
             {
                 Thread th = new Thread(SelectAllInetRecipes);
-                th.UnsafeStart();
+                th.Start();
             }
             catch (Exception e)
             {
@@ -352,12 +353,12 @@ namespace bd
 
 
 
-        public static void StartSelectSearchRecipes(object? pair)
+        public static void StartSelectSearchRecipes(object pair)
         {
             try
             {
                 Thread th = new Thread(SelectForSearch);
-                th.UnsafeStart(pair);
+                th.Start(pair);
             }
             catch (Exception e)
             {
@@ -365,7 +366,7 @@ namespace bd
             }
         }
 
-        private static void SelectForSearch(object? pair)
+        private static void SelectForSearch(object pair)
         {
             try
             {
