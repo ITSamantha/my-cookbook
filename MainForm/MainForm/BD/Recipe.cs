@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MainForm.BD
+namespace bd
 {
     public class Recipe
     {
@@ -17,10 +17,9 @@ namespace MainForm.BD
         private string time;
         private bool star;
         private string markdif;
-
-        // картинка
-        public Recipe(int id, string category, string ingredients, string time, string guide, string marklike, string name, string markdif, bool star)
-        {
+        private byte[]  pic;
+      
+        public Recipe(  int id,   string category, string ingredients, string time, string guide, string marklike, string name, string markdif, bool star) {
             this.id = id;
             this.name = name;
             this.category = category;
@@ -43,7 +42,7 @@ namespace MainForm.BD
         }
         public string Name
         {
-            get { return name; }
+            get { return name;  }
             set { name = value; }
         }
         public string Category
@@ -64,7 +63,7 @@ namespace MainForm.BD
         public string Marklike
         {
             get { return marklike; }
-            set { marklike = value; }
+            set { marklike = value;  }
         }
         public string Markdif
         {
@@ -75,6 +74,11 @@ namespace MainForm.BD
         {
             get { return star; }
             set { star = value; }
+        }
+        public byte[] Pic
+        {
+            get { return pic; }
+            set { pic = value; }
         }
 
     }
