@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,9 +43,10 @@ namespace MainForm
 
         public bool isClicked5 = false; 
         //НЕ ЗАБУДЬ ПРИ ПРЕЗЕНТАЦИИ ПРОЕКТА ПОМЕНЯТЬ!
-        public string ImageFileNameOpacity = "C:\\Users\\diana\\source\\repos\\My-cookbook\\images\\opacity_star.png";
+        public string ImageFileNameOpacity = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\opacity_star.png";
 
-        public string ImageFileNameFull = "C:\\Users\\diana\\source\\repos\\My-cookbook\\images\\full_star.png";
+        public string ImageFileNameFull = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\full_star.png";
+       
 
         public MainForm()
         {
@@ -65,7 +67,7 @@ namespace MainForm
         //ПРИ ЗАКРЫТИИ ФОРМЫ ЗАКРЫТИЕ DB
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)//Отключение БД
         {
-            ControllerForBD.Disconnect();
+            //ControllerForBD.Disconnect();
         }
 
         private void myRecB_Click(object sender, EventArgs e)
@@ -109,6 +111,7 @@ namespace MainForm
         // МБ ЧТО-ТО С НОМЕРАМИ ТИПА ЕСЛИ 4, ТО ПЕРЕД ЭТИМ ЕЩЕ 1,2,3,4??
         private void pictureBox1_Click(object sender, EventArgs e)//Star1
         {
+            
             isClicked1 = true;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameOpacity);
@@ -121,8 +124,9 @@ namespace MainForm
         {
             if (!isClicked1 && !isClicked2 && !isClicked3 && !isClicked4 && !isClicked5)
             {
+
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
-                pictureBox2.Image = Image.FromFile(ImageFileNameOpacity);
+                pictureBox2.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox3.Image = Image.FromFile(ImageFileNameOpacity);
                 pictureBox4.Image = Image.FromFile(ImageFileNameOpacity);
                 pictureBox5.Image = Image.FromFile(ImageFileNameOpacity);
