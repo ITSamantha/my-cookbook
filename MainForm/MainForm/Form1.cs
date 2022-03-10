@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MainForm
-{
+{//ДОДЕЛАТЬ ВРЕМЯ ПРИГОТОВЛЕНИЯ В ФОРМАТЕ час : мин : сек
     public partial class MainForm : Form
     {
         public enum Buttons: int//Перечисление номера кнопок
@@ -59,7 +59,7 @@ namespace MainForm
             categoryInit();
             
         }//СДЕЛАТЬ НЕ КЛИКАБЕЛЬНЫМИ СТРАНИЧНЫЕ ТАБЫ
-
+        //ИЗМЕНЕНИЕ ШРИФТА ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМ
         //ДОБАВИТЬ ТАБ ДЛЯ РЕЗУЛЬТАТА ПОИСКА?
         //ПРИ ЗАКРЫТИИ ФОРМЫ ЗАКРЫТИЕ DB
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)//Отключение БД
@@ -276,7 +276,7 @@ namespace MainForm
 
             buttonPanel.Size = new Size((int)(Width / 10), Height);//Размер панели кнопок
 
-            lab.BackColor = Color.FromArgb(126, 124, 232);//Размер и цвет лэйбла
+            lab.BackColor = Color.FromArgb(126, 124, 232);
 
             lab.Size = new Size(Width, Height / 16);
 
@@ -316,7 +316,8 @@ namespace MainForm
                     PhotoPanel.BackColor = Color.FromArgb(126, 124, 232);
 
                     PhotoPanel.SetBounds(TitlePanel.Bounds.X, TitlePanel.Bounds.Y + Instruments.intervalY, (int)(Height / 2.5), (int)(Height / 2.4));
-                    
+
+                    RecPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
 
                 //"Категория"
@@ -567,9 +568,9 @@ namespace MainForm
 
             RecPhoto.Image = Image.FromFile(filename);
 
-            RecPhoto.Size = new Size(256, 256);//ПОДУМАТЬ над фото(размер, основное) и т.п.
+            //RecPhoto.Size = new Size(Height/3, Height / 3);//ПОДУМАТЬ над фото(размер, основное) и т.п.
 
-            RecPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+            
         }
     }
 }

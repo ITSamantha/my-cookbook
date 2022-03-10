@@ -635,12 +635,7 @@
             "2",
             "3",
             "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
+            "5"});
             this.markDif.Location = new System.Drawing.Point(3, 25);
             this.markDif.Name = "markDif";
             this.markDif.Size = new System.Drawing.Size(305, 37);
@@ -746,6 +741,7 @@
             // RecPhoto
             // 
             this.RecPhoto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RecPhoto.Image = ((System.Drawing.Image)(resources.GetObject("RecPhoto.Image")));
             this.RecPhoto.Location = new System.Drawing.Point(3, 34);
             this.RecPhoto.Name = "RecPhoto";
             this.RecPhoto.Size = new System.Drawing.Size(289, 281);

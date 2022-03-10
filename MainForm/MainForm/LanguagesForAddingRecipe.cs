@@ -16,9 +16,9 @@ namespace MainForm
 
         static public string[] categoriesEn = new string[] { "Snacks", "Salads", "First courses", "Main courses", "Sauces", "Pastries", "Drinks", "Desserts" };
 
-        static public string addRu = "Добавление рецепта";
+        static public string addRu = "Добавить рецепт";
 
-        static public string addEn = "Adding a recipe";
+        static public string addEn = "Add a recipe";
 
         static public string titleRu = "Название ";
 
@@ -40,9 +40,9 @@ namespace MainForm
 
         static public string rateEn = "Prescription evaluation";
 
-        static public string diffRu = "Оценка сложности рецепта(1-10)";//По-другому?
+        static public string diffRu = "Оценка сложности рецепта(1-5)";//По-другому?
 
-        static public string diffEn = "Recipe Difficulty Score(1-10)";
+        static public string diffEn = "Recipe Difficulty Score(1-5)";
 
         static public string ingRu = "Ингредиенты";
 
@@ -65,9 +65,9 @@ namespace MainForm
 
         static public string setLEn = "Settings";
 
-        static public string changeLRu = "Смена языка";
+        static public string changeLRu = "Язык";
 
-        static public string changeLEn = "Changing language";
+        static public string changeLEn = "Language";
 
         static public string RuRu = "Русский";
 
