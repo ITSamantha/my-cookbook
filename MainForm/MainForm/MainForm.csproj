@@ -142,7 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BD\ControllerForBD.cs" />
+    <Compile Include="BD\PairSearch.cs" />
     <Compile Include="BD\Recipe.cs" />
+    <Compile Include="BD\Search.cs" />
     <Compile Include="LanguagesForAddingRecipe.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
