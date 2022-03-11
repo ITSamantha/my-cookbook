@@ -641,13 +641,7 @@ namespace MainForm
                     }
                 }else
                 {
-                    Label l = new Label();
-
-                    l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
-
-                    l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
-
-                    my_recipes_list.Controls.Add(l, 1, 0);
+                   
                     if ((ControllerForBD.isDoneMy))
                     {
                         isAll = true;
@@ -655,13 +649,7 @@ namespace MainForm
                    
                 }
 
-               /* Label l = new Label();
-
-                l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
-
-                l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
-
-                my_recipes_list.Controls.Add(l, 1, 0);*/
+              
 
             }
         }
