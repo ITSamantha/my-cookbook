@@ -46,7 +46,7 @@ namespace MainForm
             InitializeComponent();
 
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = 01dr10kv; Database = MyDatabase; ");
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = ; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
             //formChanges(1400,800);
@@ -470,7 +470,7 @@ namespace MainForm
                 //Панель для рецептов
                 {
                     my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height + Instruments.intervalHeight / 4, 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight));
-                    //showAllMyRecipes();
+                    showAllMyRecipes();
                 }
             }
 
@@ -641,7 +641,14 @@ namespace MainForm
                     {
                         isAll = true;
                     }
+                }else
+                {
+                    if ((ControllerForBD.isDoneMy))
+                    {
+                        isAll = true;
+                    }
                 }
+
 
             }
         }
