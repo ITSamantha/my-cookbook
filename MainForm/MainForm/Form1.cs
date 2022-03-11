@@ -254,7 +254,7 @@ namespace MainForm
             Image img = (Image)converter.ConvertFrom(b);
 
             if (ControllerForBD.InsertToMyRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text/*, b*/)){
-                MessageBox.Show("Рецепт успешно добавлен.");
+                MessageBox.Show("Рецепт успешно добавлен.","Оповещение");//МБ СДЕЛАТЬ СВОЮ ФОРМУ
             }
         }
 
@@ -472,6 +472,7 @@ namespace MainForm
 
             //MyRecPage changes
             {
+                whatClicked = 1;
                 //"Заголовок"
                 {
                     myL.SetBounds(MyRecPage.Bounds.X, MyRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
