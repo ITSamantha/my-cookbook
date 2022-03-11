@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -471,7 +472,9 @@ namespace MainForm
                 //Панель для рецептов
                 {
                     my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height + Instruments.intervalHeight / 4, 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight));
-                    showAllMyRecipes();
+                    ControllerForBD.StartSelectAllMyRecipes();
+                    Thread thread = new Thread(showAllMyRecipes);
+                    thread.Start();
                 }
             }
 
@@ -623,8 +626,6 @@ namespace MainForm
 
         public void showAllMyRecipes()
         {
-            ControllerForBD.StartSelectAllMyRecipes();
-
             bool isAll = false;
             while (!isAll)
             {
@@ -640,17 +641,19 @@ namespace MainForm
                     {
                         isAll = true;
                     }
-                }else
+                }
+                else
                 {
-                   
                     if ((ControllerForBD.isDoneMy))
                     {
                         isAll = true;
+                        Label l = new Label();
+                        l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
+                        l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
+                        my_recipes_list.Controls.Add(l, 1, 0);
                     }
-                   
+                    
                 }
-
-              
 
             }
         }
