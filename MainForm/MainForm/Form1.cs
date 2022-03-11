@@ -7,7 +7,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -47,7 +46,7 @@ namespace MainForm
             InitializeComponent();
 
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = ; Database = MyDatabase; ");
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
             //formChanges(1400,800);
@@ -243,7 +242,7 @@ namespace MainForm
             allStarsOpacityNull();
         }
         
-        private void RecReadyB_Click(object sender, EventArgs e)//Добавление в БД рецепта
+        private void RecReadyB_Click(object sender, EventArgs e)//Insert recipe into DB
         {
             ImageConverter converter = new ImageConverter();//Конвертация фото в bytea
 
@@ -251,7 +250,7 @@ namespace MainForm
 
             Image img = (Image)converter.ConvertFrom(b);
 
-            if (ControllerForBD.InsertToInetRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, "1", markDif.Text, time_rec.Text, b)){
+            if (ControllerForBD.InsertToInetRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text, b)){
                 MessageBox.Show("Рецепт успешно добавлен.");
             }
         }
@@ -472,9 +471,7 @@ namespace MainForm
                 //Панель для рецептов
                 {
                     my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height + Instruments.intervalHeight / 4, 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight));
-                    ControllerForBD.StartSelectAllMyRecipes();
-                    Thread thread = new Thread(showAllMyRecipes);
-                    thread.Start();
+                    showAllMyRecipes();
                 }
             }
 
@@ -626,9 +623,7 @@ namespace MainForm
 
         public void showAllMyRecipes()
         {
-            //ControllerForBD.StartSelectAllMyRecipes();
-
-           
+            ControllerForBD.StartSelectAllMyRecipes();
 
             bool isAll = false;
             while (!isAll)
@@ -647,13 +642,27 @@ namespace MainForm
                     }
                 }else
                 {
+                    Label l = new Label();
+
+                    l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
+
+                    l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
+
+                    my_recipes_list.Controls.Add(l, 1, 0);
                     if ((ControllerForBD.isDoneMy))
                     {
                         isAll = true;
-                        //НЕТ РЕЦЕПТОВ!!!!!!!!!!!!!!!!!!
                     }
+                   
                 }
 
+               /* Label l = new Label();
+
+                l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
+
+                l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
+
+                my_recipes_list.Controls.Add(l, 1, 0);*/
 
             }
         }
