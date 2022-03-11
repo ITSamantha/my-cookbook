@@ -33,15 +33,7 @@ namespace MainForm
             Mark5=5
         }
 
-        public bool isClicked1 = false;
-
-        public bool isClicked2 = false;
-
-        public bool isClicked3 = false;
-
-        public bool isClicked4 = false;
-
-        public bool isClicked5 = false; 
+        public int whatClicked = 0;
 
         public string ImageFileNameOpacity = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\opacity_star.png";
 
@@ -54,7 +46,7 @@ namespace MainForm
             InitializeComponent();
 
 
-
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = 01dr10kv; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
             //formChanges(1400,800);
@@ -67,16 +59,18 @@ namespace MainForm
             languageChanges();
             
             //Подключение БД
-           // ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = 01dr10kv; Database = MyDatabase; ");
+           
             
         }//СДЕЛАТЬ НЕ КЛИКАБЕЛЬНЫМИ СТРАНИЧНЫЕ ТАБЫ
         //ИЗМЕНЕНИЕ ШРИФТА ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМ
         //ДОБАВИТЬ ТАБ ДЛЯ РЕЗУЛЬТАТА ПОИСКА?
         
-        private void myRecB_Click(object sender, EventArgs e)
+        private void myRecB_Click(object sender, EventArgs e)//Раздел "Мои рецепты"
         {
             checkButtonsColors((int)Buttons.My_Rec);
             tabContr.SelectedIndex = (int)Buttons.My_Rec;
+
+            
         }
 
         private void favB_Click(object sender, EventArgs e)
@@ -114,8 +108,7 @@ namespace MainForm
         // МБ ЧТО-ТО С НОМЕРАМИ ТИПА ЕСЛИ 4, ТО ПЕРЕД ЭТИМ ЕЩЕ 1,2,3,4??
         private void pictureBox1_Click(object sender, EventArgs e)//Star1
         {
-            
-            isClicked1 = true;
+            whatClicked = 1;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameOpacity);
             pictureBox3.Image = Image.FromFile(ImageFileNameOpacity);
@@ -125,7 +118,7 @@ namespace MainForm
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!isClicked1 && !isClicked2 && !isClicked3 && !isClicked4 && !isClicked5)
+            if (whatClicked ==0)
             {
 
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
@@ -143,7 +136,7 @@ namespace MainForm
 
         private void pictureBox2_Click(object sender, EventArgs e)//Star2
         {
-            isClicked2 = true;
+            whatClicked = 2;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameFull);
             pictureBox3.Image = Image.FromFile(ImageFileNameOpacity);
@@ -153,7 +146,7 @@ namespace MainForm
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!isClicked1 && !isClicked2 && !isClicked3 && !isClicked4 && !isClicked5)
+            if (whatClicked ==0)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox2.Image = Image.FromFile(ImageFileNameFull);
@@ -170,7 +163,7 @@ namespace MainForm
 
         private void pictureBox3_Click(object sender, EventArgs e)//Star3
         {
-            isClicked3 = true;
+            whatClicked = 3;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameFull);
             pictureBox3.Image = Image.FromFile(ImageFileNameFull);
@@ -180,7 +173,7 @@ namespace MainForm
 
         private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!isClicked1 && !isClicked2 && !isClicked3 && !isClicked4 && !isClicked5)
+            if (whatClicked ==0)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox2.Image = Image.FromFile(ImageFileNameFull);
@@ -197,7 +190,7 @@ namespace MainForm
 
         private void pictureBox4_Click(object sender, EventArgs e)//Star4
         {
-            isClicked4 = true;
+            whatClicked = 4;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameFull);
             pictureBox3.Image = Image.FromFile(ImageFileNameFull);
@@ -207,7 +200,7 @@ namespace MainForm
 
         private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!isClicked1 && !isClicked2 && !isClicked3 && !isClicked4 && !isClicked5)
+            if (whatClicked ==0)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox2.Image = Image.FromFile(ImageFileNameFull);
@@ -224,7 +217,7 @@ namespace MainForm
 
         private void pictureBox5_Click(object sender, EventArgs e)//Star5
         {
-            isClicked5 = true;
+            whatClicked = 5;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameFull);
             pictureBox3.Image = Image.FromFile(ImageFileNameFull);
@@ -234,7 +227,7 @@ namespace MainForm
 
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!isClicked1 && !isClicked2 && !isClicked3 && !isClicked4 && !isClicked5)
+            if (whatClicked ==0)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox2.Image = Image.FromFile(ImageFileNameFull);
@@ -251,9 +244,12 @@ namespace MainForm
         
         private void RecReadyB_Click(object sender, EventArgs e)//Добавление в БД рецепта
         {
-            ImageConverter converter = new ImageConverter();
+            ImageConverter converter = new ImageConverter();//Конвертация фото в bytea
+
             Byte[] b = (byte[])converter.ConvertTo(this.RecPhoto.Image, typeof(byte[]));
-             Image img = (Image)converter.ConvertFrom(b);
+
+            Image img = (Image)converter.ConvertFrom(b);
+
             if (ControllerForBD.InsertToInetRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, "1", markDif.Text, time_rec.Text, b)){
                 MessageBox.Show("Рецепт успешно добавлен.");
             }
@@ -470,6 +466,12 @@ namespace MainForm
                 {
                     myL.SetBounds(MyRecPage.Bounds.X, MyRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
+
+                //Панель для рецептов
+                {
+                    my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height + Instruments.intervalHeight / 4, 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight));
+                    //showAllMyRecipes();
+                }
             }
 
             //GeneralPage changes
@@ -485,51 +487,51 @@ namespace MainForm
         {
             categoryInit();
             
-            myRecB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.myRecRu : LanguagesForAddingRecipe.myRecEn;
+            myRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.myRecRu : LanguagesForAddingRecipe.myRecEn;
 
-            generalB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.generalRu : LanguagesForAddingRecipe.generalEn;
+            generalB.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.generalRu : LanguagesForAddingRecipe.generalEn;
 
-            settingsB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.setLRu : LanguagesForAddingRecipe.setLEn;
+            settingsB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.setLRu : LanguagesForAddingRecipe.setLEn;
 
-            helpB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.helpRu : LanguagesForAddingRecipe.helpEn;
+            helpB.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.helpRu : LanguagesForAddingRecipe.helpEn;
 
-            addRecB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
+            addRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
 
-            favB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.favRu : LanguagesForAddingRecipe.favEn;
+            favB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.favRu : LanguagesForAddingRecipe.favEn;
 
-            TitleL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.titleRu : LanguagesForAddingRecipe.titleEn;
+            TitleL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.titleRu : LanguagesForAddingRecipe.titleEn;
 
-            RateLable.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.rateRu : LanguagesForAddingRecipe.rateEn;
+            RateLable.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.rateRu : LanguagesForAddingRecipe.rateEn;
             
-            PhotoLab.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.photoRu : LanguagesForAddingRecipe.photoEn;
+            PhotoLab.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.photoRu : LanguagesForAddingRecipe.photoEn;
             
-            CategoryL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.categoryRu : LanguagesForAddingRecipe.categoryEn;
+            CategoryL.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.categoryRu : LanguagesForAddingRecipe.categoryEn;
 
-            IngredL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.ingRu : LanguagesForAddingRecipe.ingEn;
+            IngredL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.ingRu : LanguagesForAddingRecipe.ingEn;
             
-            TimeL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.timeRu : LanguagesForAddingRecipe.timeEn;
+            TimeL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.timeRu : LanguagesForAddingRecipe.timeEn;
 
-            genL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.generalRu : LanguagesForAddingRecipe.generalEn;
+            genL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.generalRu : LanguagesForAddingRecipe.generalEn;
 
-            myL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.myRecRu : LanguagesForAddingRecipe.myRecEn;
+            myL.Text = LanguagesForAddingRecipe.isRu? LanguagesForAddingRecipe.myRecRu : LanguagesForAddingRecipe.myRecEn;
             
-            favL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.favRu : LanguagesForAddingRecipe.favEn;
+            favL.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.favRu : LanguagesForAddingRecipe.favEn;
 
-            helpL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.helpRu : LanguagesForAddingRecipe.helpEn;
+            helpL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.helpRu : LanguagesForAddingRecipe.helpEn;
 
-            ChangeLLabel.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.changeLRu : LanguagesForAddingRecipe.changeLEn;
+            ChangeLLabel.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.changeLRu : LanguagesForAddingRecipe.changeLEn;
             
-            SettingsL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.setLRu : LanguagesForAddingRecipe.setLEn;
+            SettingsL.Text = LanguagesForAddingRecipe.isRu? LanguagesForAddingRecipe.setLRu : LanguagesForAddingRecipe.setLEn;
 
-            CancelB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.cancelRu : LanguagesForAddingRecipe.cancelEn;
+            CancelB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.cancelRu : LanguagesForAddingRecipe.cancelEn;
 
-            RecReadyB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.addBRu : LanguagesForAddingRecipe.addBEn;
+            RecReadyB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addBRu : LanguagesForAddingRecipe.addBEn;
 
-            AddLabel.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
+            AddLabel.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
 
-            InstrL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.guideRu : LanguagesForAddingRecipe.guideEn;
+            InstrL.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.guideRu : LanguagesForAddingRecipe.guideEn;
 
-            DiffL.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
+            DiffL.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
 
         }
 
@@ -555,7 +557,7 @@ namespace MainForm
 
         private void allStarsOpacityNull()
         {
-            if (!isClicked1 && !isClicked2 && !isClicked3 && !isClicked4 && !isClicked5)
+            if (whatClicked ==0)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameOpacity);
                 pictureBox2.Image = Image.FromFile(ImageFileNameOpacity);
@@ -574,7 +576,7 @@ namespace MainForm
             CategoryCB.SelectedIndex = 0;
             Ingr_rec.Clear();
             Instr_rec.Clear();
-            isClicked1 = isClicked2 = isClicked3 = isClicked4 = isClicked5 = false;
+            whatClicked = 0;
             allStarsOpacityNull();
         }
 
@@ -617,6 +619,31 @@ namespace MainForm
             }
             else { helpB.BackColor = Color.Transparent; }
         }
+
+        public void showAllMyRecipes()
+        {
+            //ControllerForBD.StartSelectAllMyRecipes();
+
+            ControllerForBD.StartSelectAllMyRecipes();
+
+            bool isAll = false;
+            while (!isAll)
+            {
+                if (ControllerForBD.myRecipes != null)
+                {
+                    if (ControllerForBD.myRecipes.Count != 0)
+                    {
+                        Recipe r = ControllerForBD.myRecipes.ElementAt(0);
+                        Console.WriteLine(r.Name);
+                        ControllerForBD.myRecipes.Remove(r);
+                    }
+                    if ((ControllerForBD.myRecipes.Count == 0) && (ControllerForBD.isDoneMy))
+                    {
+                        isAll = true;
+                    }
+                }
+
+            }
+        }
     }
 }
-//ПОПРАВЬ "ДОБАВЛЕНИЕ РЕЦЕПТА!

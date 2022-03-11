@@ -88,6 +88,10 @@ namespace MainForm
 
         static public string myRecEn = "My recipes";
 
+        static public string haveSomeRecRu = "В этом разделе нет рецептов.";
+
+        static public string haveSomeRecEn = "There are no recipes in this section.";
+
         //Page "Help"
         static public string helpRu = "Помощь";
 

@@ -209,8 +209,7 @@ namespace bd
         private static void SelectAllMyRecipes()
         {
             myRecipes = new List<Recipe>();
-
-
+            
             try
             {
                 NpgsqlConnection connection = new NpgsqlConnection(configConnection);

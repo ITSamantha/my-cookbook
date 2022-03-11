@@ -39,6 +39,7 @@
             this.lab = new System.Windows.Forms.Label();
             this.tabContr = new System.Windows.Forms.TabControl();
             this.MyRecPage = new System.Windows.Forms.TabPage();
+            this.my_recipes_list = new System.Windows.Forms.TableLayoutPanel();
             this.myL = new System.Windows.Forms.Label();
             this.FavPage = new System.Windows.Forms.TabPage();
             this.favL = new System.Windows.Forms.Label();
@@ -283,6 +284,7 @@
             // 
             // MyRecPage
             // 
+            this.MyRecPage.Controls.Add(this.my_recipes_list);
             this.MyRecPage.Controls.Add(this.myL);
             this.MyRecPage.Location = new System.Drawing.Point(4, 30);
             this.MyRecPage.Name = "MyRecPage";
@@ -291,6 +293,19 @@
             this.MyRecPage.TabIndex = 0;
             this.MyRecPage.Text = "tabPage1";
             this.MyRecPage.UseVisualStyleBackColor = true;
+            // 
+            // my_recipes_list
+            // 
+            this.my_recipes_list.AutoScroll = true;
+            this.my_recipes_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.my_recipes_list.ColumnCount = 1;
+            this.my_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.my_recipes_list.Location = new System.Drawing.Point(294, 179);
+            this.my_recipes_list.Name = "my_recipes_list";
+            this.my_recipes_list.RowCount = 1;
+            this.my_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.my_recipes_list.Size = new System.Drawing.Size(200, 100);
+            this.my_recipes_list.TabIndex = 4;
             // 
             // myL
             // 
@@ -305,10 +320,10 @@
             // FavPage
             // 
             this.FavPage.Controls.Add(this.favL);
-            this.FavPage.Location = new System.Drawing.Point(4, 30);
+            this.FavPage.Location = new System.Drawing.Point(4, 22);
             this.FavPage.Name = "FavPage";
             this.FavPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FavPage.Size = new System.Drawing.Size(1021, 652);
+            this.FavPage.Size = new System.Drawing.Size(1021, 660);
             this.FavPage.TabIndex = 1;
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
@@ -326,9 +341,9 @@
             // GeneralPage
             // 
             this.GeneralPage.Controls.Add(this.genL);
-            this.GeneralPage.Location = new System.Drawing.Point(4, 30);
+            this.GeneralPage.Location = new System.Drawing.Point(4, 22);
             this.GeneralPage.Name = "GeneralPage";
-            this.GeneralPage.Size = new System.Drawing.Size(1021, 652);
+            this.GeneralPage.Size = new System.Drawing.Size(1021, 660);
             this.GeneralPage.TabIndex = 2;
             this.GeneralPage.Text = "tabPage1";
             this.GeneralPage.UseVisualStyleBackColor = true;
@@ -406,7 +421,7 @@
             this.RateLable.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.RateLable.Location = new System.Drawing.Point(3, 0);
             this.RateLable.Name = "RateLable";
-            this.RateLable.Size = new System.Drawing.Size(271, 40);
+            this.RateLable.Size = new System.Drawing.Size(271, 35);
             this.RateLable.TabIndex = 0;
             this.RateLable.Text = "label3";
             // 
@@ -424,7 +439,7 @@
             this.Rate.Controls.Add(this.pictureBox3, 2, 0);
             this.Rate.Controls.Add(this.pictureBox2, 1, 0);
             this.Rate.Controls.Add(this.pictureBox1, 0, 0);
-            this.Rate.Location = new System.Drawing.Point(10, 43);
+            this.Rate.Location = new System.Drawing.Point(0, 35);
             this.Rate.Margin = new System.Windows.Forms.Padding(0);
             this.Rate.Name = "Rate";
             this.Rate.RowCount = 1;
@@ -589,7 +604,7 @@
             this.TitleL.Location = new System.Drawing.Point(0, 0);
             this.TitleL.Margin = new System.Windows.Forms.Padding(0);
             this.TitleL.Name = "TitleL";
-            this.TitleL.Size = new System.Drawing.Size(619, 15);
+            this.TitleL.Size = new System.Drawing.Size(619, 17);
             this.TitleL.TabIndex = 0;
             this.TitleL.Text = "label3";
             // 
@@ -598,11 +613,11 @@
             this.rec_name.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rec_name.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.rec_name.Font = new System.Drawing.Font("Bahnschrift Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rec_name.Location = new System.Drawing.Point(3, 18);
+            this.rec_name.Location = new System.Drawing.Point(3, 20);
             this.rec_name.Multiline = true;
             this.rec_name.Name = "rec_name";
             this.rec_name.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.rec_name.Size = new System.Drawing.Size(613, 29);
+            this.rec_name.Size = new System.Drawing.Size(613, 27);
             this.rec_name.TabIndex = 1;
             // 
             // DifficultyPanel
@@ -770,9 +785,9 @@
             // 
             this.settingsPage.Controls.Add(this.LanguagePanel);
             this.settingsPage.Controls.Add(this.SettingsL);
-            this.settingsPage.Location = new System.Drawing.Point(4, 30);
+            this.settingsPage.Location = new System.Drawing.Point(4, 22);
             this.settingsPage.Name = "settingsPage";
-            this.settingsPage.Size = new System.Drawing.Size(1021, 652);
+            this.settingsPage.Size = new System.Drawing.Size(1021, 660);
             this.settingsPage.TabIndex = 4;
             this.settingsPage.Text = "Настройки";
             this.settingsPage.UseVisualStyleBackColor = true;
@@ -829,9 +844,9 @@
             // helpPage
             // 
             this.helpPage.Controls.Add(this.helpL);
-            this.helpPage.Location = new System.Drawing.Point(4, 30);
+            this.helpPage.Location = new System.Drawing.Point(4, 22);
             this.helpPage.Name = "helpPage";
-            this.helpPage.Size = new System.Drawing.Size(1021, 652);
+            this.helpPage.Size = new System.Drawing.Size(1021, 660);
             this.helpPage.TabIndex = 5;
             this.helpPage.Text = "tabPage1";
             this.helpPage.UseVisualStyleBackColor = true;
@@ -952,6 +967,7 @@
         public System.Windows.Forms.TabControl tabContr;
         private System.Windows.Forms.MaskedTextBox time_rec;
         public System.Windows.Forms.Button myRecB;
+        private System.Windows.Forms.TableLayoutPanel my_recipes_list;
     }
 }
 
