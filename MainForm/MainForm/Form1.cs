@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -470,7 +471,9 @@ namespace MainForm
                 //Панель для рецептов
                 {
                     my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height + Instruments.intervalHeight / 4, 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight));
-                    showAllMyRecipes();
+                    ControllerForBD.StartSelectAllMyRecipes();
+                    Thread thread = new Thread(showAllMyRecipes);
+                    thread.Start();
                 }
             }
 
@@ -624,7 +627,7 @@ namespace MainForm
         {
             //ControllerForBD.StartSelectAllMyRecipes();
 
-            ControllerForBD.StartSelectAllMyRecipes();
+           
 
             bool isAll = false;
             while (!isAll)
@@ -646,6 +649,7 @@ namespace MainForm
                     if ((ControllerForBD.isDoneMy))
                     {
                         isAll = true;
+                        //НЕТ РЕЦЕПТОВ!!!!!!!!!!!!!!!!!!
                     }
                 }
 
