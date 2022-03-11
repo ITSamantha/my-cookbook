@@ -85,6 +85,8 @@
             this.SettingsL = new System.Windows.Forms.Label();
             this.helpPage = new System.Windows.Forms.TabPage();
             this.helpL = new System.Windows.Forms.Label();
+            this.fav_recipes_list = new System.Windows.Forms.TableLayoutPanel();
+            this.general_recipes_list = new System.Windows.Forms.TableLayoutPanel();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -319,11 +321,12 @@
             // 
             // FavPage
             // 
+            this.FavPage.Controls.Add(this.fav_recipes_list);
             this.FavPage.Controls.Add(this.favL);
-            this.FavPage.Location = new System.Drawing.Point(4, 22);
+            this.FavPage.Location = new System.Drawing.Point(4, 30);
             this.FavPage.Name = "FavPage";
             this.FavPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FavPage.Size = new System.Drawing.Size(1021, 660);
+            this.FavPage.Size = new System.Drawing.Size(1021, 652);
             this.FavPage.TabIndex = 1;
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
@@ -340,10 +343,11 @@
             // 
             // GeneralPage
             // 
+            this.GeneralPage.Controls.Add(this.general_recipes_list);
             this.GeneralPage.Controls.Add(this.genL);
-            this.GeneralPage.Location = new System.Drawing.Point(4, 22);
+            this.GeneralPage.Location = new System.Drawing.Point(4, 30);
             this.GeneralPage.Name = "GeneralPage";
-            this.GeneralPage.Size = new System.Drawing.Size(1021, 660);
+            this.GeneralPage.Size = new System.Drawing.Size(1021, 652);
             this.GeneralPage.TabIndex = 2;
             this.GeneralPage.Text = "tabPage1";
             this.GeneralPage.UseVisualStyleBackColor = true;
@@ -372,9 +376,9 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 22);
+            this.addRecPage.Location = new System.Drawing.Point(4, 30);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
@@ -612,7 +616,7 @@
             // 
             this.rec_name.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rec_name.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rec_name.Font = new System.Drawing.Font("Bahnschrift Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rec_name.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rec_name.Location = new System.Drawing.Point(3, 20);
             this.rec_name.Multiline = true;
             this.rec_name.Name = "rec_name";
@@ -627,6 +631,7 @@
             this.DifficultyPanel.Controls.Add(this.DiffL, 0, 0);
             this.DifficultyPanel.Controls.Add(this.markDif, 0, 1);
             this.DifficultyPanel.Location = new System.Drawing.Point(338, 383);
+            this.DifficultyPanel.Margin = new System.Windows.Forms.Padding(0);
             this.DifficultyPanel.Name = "DifficultyPanel";
             this.DifficultyPanel.RowCount = 2;
             this.DifficultyPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
@@ -668,6 +673,7 @@
             this.TimePanel.Controls.Add(this.TimeL, 0, 0);
             this.TimePanel.Controls.Add(this.time_rec, 0, 1);
             this.TimePanel.Location = new System.Drawing.Point(339, 335);
+            this.TimePanel.Margin = new System.Windows.Forms.Padding(0);
             this.TimePanel.Name = "TimePanel";
             this.TimePanel.RowCount = 2;
             this.TimePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -704,6 +710,7 @@
             this.CategoryPanel.Controls.Add(this.CategoryL, 0, 0);
             this.CategoryPanel.Controls.Add(this.CategoryCB, 0, 1);
             this.CategoryPanel.Location = new System.Drawing.Point(338, 259);
+            this.CategoryPanel.Margin = new System.Windows.Forms.Padding(0);
             this.CategoryPanel.Name = "CategoryPanel";
             this.CategoryPanel.RowCount = 2;
             this.CategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
@@ -861,6 +868,32 @@
             this.helpL.Text = "Помощь";
             this.helpL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // fav_recipes_list
+            // 
+            this.fav_recipes_list.AutoScroll = true;
+            this.fav_recipes_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.fav_recipes_list.ColumnCount = 1;
+            this.fav_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.fav_recipes_list.Location = new System.Drawing.Point(410, 276);
+            this.fav_recipes_list.Name = "fav_recipes_list";
+            this.fav_recipes_list.RowCount = 1;
+            this.fav_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.fav_recipes_list.Size = new System.Drawing.Size(200, 100);
+            this.fav_recipes_list.TabIndex = 5;
+            // 
+            // general_recipes_list
+            // 
+            this.general_recipes_list.AutoScroll = true;
+            this.general_recipes_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.general_recipes_list.ColumnCount = 1;
+            this.general_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.general_recipes_list.Location = new System.Drawing.Point(410, 276);
+            this.general_recipes_list.Name = "general_recipes_list";
+            this.general_recipes_list.RowCount = 1;
+            this.general_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.general_recipes_list.Size = new System.Drawing.Size(200, 100);
+            this.general_recipes_list.TabIndex = 6;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -968,6 +1001,8 @@
         private System.Windows.Forms.MaskedTextBox time_rec;
         public System.Windows.Forms.Button myRecB;
         private System.Windows.Forms.TableLayoutPanel my_recipes_list;
+        private System.Windows.Forms.TableLayoutPanel fav_recipes_list;
+        private System.Windows.Forms.TableLayoutPanel general_recipes_list;
     }
 }
 

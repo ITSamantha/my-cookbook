@@ -70,8 +70,10 @@ namespace MainForm
         {
             checkButtonsColors((int)Buttons.My_Rec);
             tabContr.SelectedIndex = (int)Buttons.My_Rec;
+           /* ControllerForBD.StartSelectAllMyRecipes();
+            Thread thread = new Thread(showAllMyRecipes);
+            thread.Start();*/
 
-            
         }
 
         private void favB_Click(object sender, EventArgs e)
@@ -251,7 +253,7 @@ namespace MainForm
 
             Image img = (Image)converter.ConvertFrom(b);
 
-            if (ControllerForBD.InsertToInetRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text, b)){
+            if (ControllerForBD.InsertToMyRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text/*, b*/)){
                 MessageBox.Show("Рецепт успешно добавлен.");
             }
         }
@@ -343,7 +345,7 @@ namespace MainForm
 
             lab.BackColor = Instruments.myPurpleColor;
 
-            lab.Size = new Size(Instruments.formWidth, Instruments.heightOfLabels);
+            lab.Size = new Size(Instruments.formWidth, Instruments.heightOfLabels+5);
 
             tabContr.SetBounds(buttonPanel.Size.Width, Instruments.heightOfLabels-Instruments.tabControlOffset ,Instruments.formWidth - Instruments.buttonPanelWidth,Instruments.formHeight - Instruments.heightOfLabels);//TabControl размер
             //МЕНЯТЬ ШРИФТЫ?!(РАЗМЕР)
@@ -358,7 +360,7 @@ namespace MainForm
                 {
                     TitlePanel.BackColor = Instruments.myPurpleColor;
 
-                    TitlePanel.SetBounds(addRecPage.Bounds.X + Instruments.intervalX/4,AddLabel.Height+Instruments.intervalHeight/2, (int)(3.25*Instruments.intervalX),Instruments.intervalHeight);
+                    TitlePanel.SetBounds(addRecPage.Bounds.X + Instruments.intervalX/4,AddLabel.Height+Instruments.intervalHeight/4, (int)(3.25*Instruments.intervalX),Instruments.intervalHeight);
                 }
 
                 //"Фото"
@@ -404,7 +406,7 @@ namespace MainForm
                 {
                     IngrPanel.BackColor = Instruments.myPurpleColor;
 
-                    IngrPanel.SetBounds(TitlePanel.Bounds.X+TitlePanel.Width+Instruments.intervalX / 4, AddLabel.Height + Instruments.intervalHeight / 2, (int)(3.07 * Instruments.intervalX), 3 * Instruments.intervalHeight);
+                    IngrPanel.SetBounds(TitlePanel.Bounds.X+TitlePanel.Width+Instruments.intervalX / 4, AddLabel.Height + Instruments.intervalHeight / 4, (int)(3.07 * Instruments.intervalX), 3 * Instruments.intervalHeight);
                 }
 
                 //"Инструкция"
@@ -418,7 +420,7 @@ namespace MainForm
                 {
                     RecReadyB.BackColor = Instruments.myPurpleColor;
 
-                    RecReadyB.SetBounds((int)(2 * Instruments.intervalX), InstrPanel.Bounds.Y + InstrPanel.Height + Instruments.intervalHeight, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
+                    RecReadyB.SetBounds((int)(2 * Instruments.intervalX), InstrPanel.Bounds.Y + InstrPanel.Height + Instruments.intervalHeight/2, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
                 }
 
                 //Кнопка "очистить"
@@ -457,8 +459,14 @@ namespace MainForm
             {
                 //"Заголовок"
                 {
-                   // прелагаю интим
                     favL.SetBounds(FavPage.Bounds.X, FavPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
+                }
+                //Панель для избранных рецептов
+                {
+                    fav_recipes_list.SetBounds(FavPage.Bounds.X + (int)(Instruments.intervalX), myL.Bounds.Y + myL.Height , 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
+                    //ControllerForBD.StartSelectAllMyRecipes();
+                    //Thread thread = new Thread(showAllMyRecipes);
+                    //thread.Start();
                 }
             }
 
@@ -469,12 +477,12 @@ namespace MainForm
                     myL.SetBounds(MyRecPage.Bounds.X, MyRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
 
-                //Панель для рецептов
+                //Панель для моих рецептов
                 {
-                    my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height + Instruments.intervalHeight / 4, 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight));
-                    ControllerForBD.StartSelectAllMyRecipes();
-                    Thread thread = new Thread(showAllMyRecipes);
-                    thread.Start();
+                    my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height , 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight));
+                    //ControllerForBD.StartSelectAllMyRecipes();
+                    //Thread thread = new Thread(showAllMyRecipes);
+                    //thread.Start();
                 }
             }
 
@@ -483,6 +491,14 @@ namespace MainForm
                 //"Заголовок"
                 {
                     genL.SetBounds(MyRecPage.Bounds.X, MyRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
+                }
+
+                //Панель для общих рецептов
+                {
+                    general_recipes_list.SetBounds(FavPage.Bounds.X + (int)(Instruments.intervalX), myL.Bounds.Y + myL.Height , 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
+                    //ControllerForBD.StartSelectAllMyRecipes();
+                    //Thread thread = new Thread(showAllMyRecipes);
+                    //thread.Start();
                 }
             }
         }
@@ -634,7 +650,10 @@ namespace MainForm
                     if (ControllerForBD.myRecipes.Count != 0)
                     {
                         Recipe r = ControllerForBD.myRecipes.ElementAt(0);
-                        Console.WriteLine(r.Name);
+                        Label l = new Label();
+                        l.Text = r.Name;
+                        my_recipes_list.Controls.Add(l, 1, 0);
+                        //Console.WriteLine(r.Name);
                         ControllerForBD.myRecipes.Remove(r);
                     }
                     if ((ControllerForBD.myRecipes.Count == 0) && (ControllerForBD.isDoneMy))
@@ -652,7 +671,6 @@ namespace MainForm
                         l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
                         my_recipes_list.Controls.Add(l, 1, 0);
                     }
-                    
                 }
 
             }
