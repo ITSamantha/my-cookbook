@@ -47,7 +47,7 @@ namespace MainForm
             InitializeComponent();
 
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =xt7xxxxx ; Database = MyDatabase; ");
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
             //formChanges(1400,800);
