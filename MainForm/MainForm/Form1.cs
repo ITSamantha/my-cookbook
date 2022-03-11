@@ -42,34 +42,37 @@ namespace MainForm
         public bool isClicked4 = false;
 
         public bool isClicked5 = false; 
-        //НЕ ЗАБУДЬ ПРИ ПРЕЗЕНТАЦИИ ПРОЕКТА ПОМЕНЯТЬ!
+
         public string ImageFileNameOpacity = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\opacity_star.png";
 
         public string ImageFileNameFull = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\full_star.png";
-       
+
+        public Instruments Instruments;
 
         public MainForm()
         {
             InitializeComponent();
 
-            formChanges();
+
+
+
+            formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
+            //formChanges(1400,800);
+
+
+            LangCB.SelectedIndex = 0;//Начальный язык - русский
+
+            markDif.SelectedIndex = 0;//Начальная оценка сложности-1
 
             languageChanges();
             
             //Подключение БД
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = 01dr10kv; Database = MyDatabase; ");
-
-            categoryInit();
+           // ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = 01dr10kv; Database = MyDatabase; ");
             
         }//СДЕЛАТЬ НЕ КЛИКАБЕЛЬНЫМИ СТРАНИЧНЫЕ ТАБЫ
         //ИЗМЕНЕНИЕ ШРИФТА ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМ
         //ДОБАВИТЬ ТАБ ДЛЯ РЕЗУЛЬТАТА ПОИСКА?
-        //ПРИ ЗАКРЫТИИ ФОРМЫ ЗАКРЫТИЕ DB
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)//Отключение БД
-        {
-            //ControllerForBD.Disconnect();
-        }
-
+        
         private void myRecB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.My_Rec);
@@ -248,8 +251,24 @@ namespace MainForm
         
         private void RecReadyB_Click(object sender, EventArgs e)//Добавление в БД рецепта
         {
-            //Добавление в базу доделать!
+            ImageConverter converter = new ImageConverter();
+            Byte[] b = (byte[])converter.ConvertTo(this.RecPhoto.Image, typeof(byte[]));
+             Image img = (Image)converter.ConvertFrom(b);
+            if (ControllerForBD.InsertToInetRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, "1", markDif.Text, time_rec.Text, b)){
+                MessageBox.Show("Рецепт успешно добавлен.");
+            }
         }
+
+        /*
+        Метод добавления данных для пользователя:
+        параметрами являются следующие данные в виде строк: 
+        название, категория, ингридиенты, инструкция, оценка, цена , время(особенность см. ниже)
+        оценку и цену перед переводом в строку ОКРУГЛИТЬ ДО ДВУХ ЗНАКОВ ПОСЛЕ ЗАПЯТОЙ!!!
+        Временно добавление не включает в себя картинки
+        Использовать только после подключения!
+        Время требуется передавать в виде строки в след. формате: "12:00:00"
+        Возвращает тру - если добавил, фолс - если нет.
+        */
 
         private void LangCB_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -268,110 +287,148 @@ namespace MainForm
         private void CancelB_Click(object sender, EventArgs e)//Очистка формы рецепта
         {
             cleanAddRecForm();//ДОБАВИТЬ в другие места закрытия!!!!!!!!!
+
+            markDif.SelectedIndex = 0;
+
+            CategoryCB.SelectedIndex = 0;
+
+        }
+
+        private void RecPhoto_Click(object sender, EventArgs e)//Добавление фото в рецепт
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == DialogResult.Cancel) return;
+
+            string filename = openFileDialog.FileName;
+
+            RecPhoto.Image = Image.FromFile(filename);
+
+            //RecPhoto.Size = new Size(Height/3, Height / 3);//ПОДУМАТЬ над фото(размер, основное) и т.п.
+            
+        }
+
+        private void MainForm_SizeChanged(object sender, EventArgs e)//Изменение размеров формы
+        {
+           
+            if (Size.Width <= 1560||Size.Height<=746)
+            {
+                myRecB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
+                favB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
+                generalB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
+                addRecB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
+                settingsB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
+                helpB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
+            }
+            else
+            {
+                myRecB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
+                favB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
+                generalB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
+                addRecB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
+                settingsB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
+                helpB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
+            }
+            formChanges(Size.Width, Size.Height);
         }
 
         //Функции
 
-        public void formChanges()
-        {
-            //Получение информации о разрешении экрана пользователя
-            Width = (int)System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-            //ИЗМЕНЕНИЕ ФОРМЫ-ИЗМЕНЕНИЕ РАЗМЕРОВ ДОДЕЛАЙ!
-            Height = (int)System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+        public void formChanges(int x,int y)//ДОДЕЛАЙ ОТРИСОВКУ КАК СУММУ ЭЛЕМЕНТОВ !!!!!!!!!!!!!!!!!!!!!!!!!!
+        {//ШРИФТЫ?!
+            Instruments = new Instruments(x,y);
 
-            buttonPanel.Size = new Size((int)(Width / 10), Height);//Размер панели кнопок
-
-            lab.BackColor = Color.FromArgb(126, 124, 232);
-
-            lab.Size = new Size(Width, Height / 16);
-
-            tabContr.SetBounds(buttonPanel.Size.Width - 5, Height / 16 - 30, (int)((Width) - (Width / 10)), Height - Height / 16);//TabControl размер
+            Width =x;//ИЗМЕНЕНИЕ ФОРМЫ-ИЗМЕНЕНИЕ РАЗМЕРОВ ДОДЕЛАЙ!Про класс Instruments не забудь
             
-            LangCB.SelectedIndex = 0;//Начальный язык - русский
+            Height =y;
 
-            markDif.SelectedIndex = 0;
+            buttonPanel.Size = new Size(Instruments.buttonPanelWidth, Instruments.formHeight);//Размер панели кнопок
 
+            lab.BackColor = Instruments.myPurpleColor;
+
+            lab.Size = new Size(Instruments.formWidth, Instruments.heightOfLabels);
+
+            tabContr.SetBounds(buttonPanel.Size.Width, Instruments.heightOfLabels-Instruments.tabControlOffset ,Instruments.formWidth - Instruments.buttonPanelWidth,Instruments.formHeight - Instruments.heightOfLabels);//TabControl размер
+            //МЕНЯТЬ ШРИФТЫ?!(РАЗМЕР)
             //AddRecPage changes 
             {
-                int pieces = 12;
-
-                float eps = 6.65f;
-
                 //"Заголовок"
                 {
-                    AddLabel.SetBounds(addRecPage.Bounds.X, addRecPage.Bounds.Y - 30, (int)((Width) - (Width / 10)), Height / 16);
+                    AddLabel.SetBounds(addRecPage.Bounds.X, addRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
                 
                 //"Название"
                 {
-                    TitlePanel.BackColor = Color.FromArgb(126, 124, 232);
+                    TitlePanel.BackColor = Instruments.myPurpleColor;
 
-                    TitlePanel.SetBounds(addRecPage.Bounds.X + Instruments.intervalX, addRecPage.Bounds.Y + Instruments.intervalY / 2, (int)(Height / 1.4), Height / pieces);
-                }
-
-                //"Оценка рецепта"
-                {
-                    RatingPanel.BackColor = Color.FromArgb(126, 124, 232);
-
-                    RatingPanel.SetBounds(PhotoPanel.Width + 2 * Instruments.intervalX + 9, addRecPage.Bounds.Y + (int)(4 * Instruments.intervalY / 2.6), (int)(Width / eps), Height / pieces);
+                    TitlePanel.SetBounds(addRecPage.Bounds.X + Instruments.intervalX/4,AddLabel.Height+Instruments.intervalHeight/2, (int)(3.25*Instruments.intervalX),Instruments.intervalHeight);
                 }
 
                 //"Фото"
                 {
-                    PhotoPanel.BackColor = Color.FromArgb(126, 124, 232);
+                    PhotoPanel.BackColor = Instruments.myPurpleColor;
 
-                    PhotoPanel.SetBounds(TitlePanel.Bounds.X, TitlePanel.Bounds.Y + Instruments.intervalY, (int)(Height / 2.5), (int)(Height / 2.4));
+                    PhotoPanel.SetBounds(TitlePanel.Bounds.X, TitlePanel.Bounds.Y+TitlePanel.Height+Instruments.intervalHeight/2, 2*Instruments.intervalX/*5 * Instruments.intervalHeight*/,  5*Instruments.intervalHeight);
 
                     RecPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
 
+                //"Оценка рецепта"
+                {
+                    RatingPanel.BackColor = Instruments.myPurpleColor;
+
+                    RatingPanel.SetBounds(PhotoPanel.Bounds.X+PhotoPanel.Width+Instruments.intervalX/8, TitlePanel.Bounds.Y + TitlePanel.Height + Instruments.intervalHeight/2,Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
+                }
+                
                 //"Категория"
                 {
-                    CategoryPanel.BackColor = Color.FromArgb(126, 124, 232);
+                    CategoryPanel.BackColor = Instruments.myPurpleColor;
 
-                    CategoryPanel.SetBounds(TitlePanel.Bounds.X + (int)(4 * Instruments.intervalX), TitlePanel.Bounds.Y + 2 * Instruments.intervalY, (int)(Width / eps), Height / pieces);
+                    CategoryPanel.SetBounds(RatingPanel.Bounds.X, RatingPanel.Bounds.Y+RatingPanel.Height+Instruments.intervalHeight/3,Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
                 }
 
                 //"Время приготовления"
-                {
-                    TimePanel.BackColor = Color.FromArgb(126, 124, 232);
+                {//ДОБАВИТЬ ПЛЕЙСХОЛДЕР
+                    TimePanel.BackColor = Instruments.myPurpleColor;
 
-                    TimePanel.SetBounds(TitlePanel.Bounds.X + (int)(4 * Instruments.intervalX), CategoryPanel.Bounds.Y + Instruments.intervalY, (int)(Width / eps), Height / pieces);
+                    TimePanel.SetBounds(RatingPanel.Bounds.X, CategoryPanel.Bounds.Y + CategoryPanel.Height + Instruments.intervalHeight / 3, Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
+
+                    //В МАСКУ ДОПИСЫВАТЬ ":00"!!!!!!!!!!!!!!!!!!!!
                 }
 
                 //"Сложность"
                 {
-                    DifficultyPanel.BackColor = Color.FromArgb(126, 124, 232);
+                    DifficultyPanel.BackColor = Instruments.myPurpleColor;
 
-                    DifficultyPanel.SetBounds(TimePanel.Bounds.X, TimePanel.Bounds.Y + Instruments.intervalY, (int)(Width / eps), Height / pieces);
+                    DifficultyPanel.SetBounds(RatingPanel.Bounds.X, TimePanel.Bounds.Y+TimePanel.Height + Instruments.intervalHeight / 3, Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
                 }
                 
                 //"Ингредиенты"
                 {
-                    IngrPanel.BackColor = Color.FromArgb(126, 124, 232);
+                    IngrPanel.BackColor = Instruments.myPurpleColor;
 
-                    IngrPanel.SetBounds(TitlePanel.Bounds.X + 7 * Instruments.intervalX, TitlePanel.Bounds.Y, (int)(Height / 1.7), (int)(Height / 4));
+                    IngrPanel.SetBounds(TitlePanel.Bounds.X+TitlePanel.Width+Instruments.intervalX / 4, AddLabel.Height + Instruments.intervalHeight / 2, (int)(3.07 * Instruments.intervalX), 3 * Instruments.intervalHeight);
                 }
 
                 //"Инструкция"
                 {
-                    InstrPanel.BackColor = Color.FromArgb(126, 124, 232);
+                    InstrPanel.BackColor = Instruments.myPurpleColor;
 
-                    InstrPanel.SetBounds(IngrPanel.Bounds.X, TitlePanel.Bounds.Y + 2 * Instruments.intervalX + 35, (int)(Height / 1.7), (int)(Height / 3.76));
+                    InstrPanel.SetBounds(IngrPanel.Bounds.X, IngrPanel.Bounds.Y + IngrPanel.Height + Instruments.intervalHeight/2, (int)(3.07 * Instruments.intervalX), 3 * Instruments.intervalHeight);
                 }
 
                 //Кнопка "добавить"
                 {
-                    RecReadyB.BackColor = Color.FromArgb(126, 124, 232);//ДОБАВИТЬ СМЕНУ ЯЗЫКА КНОПОК
+                    RecReadyB.BackColor = Instruments.myPurpleColor;
 
-                    RecReadyB.SetBounds(TimePanel.Bounds.X - Instruments.intervalX, addRecPage.Bounds.Y + TimePanel.Bounds.Y + (int)(2 * Instruments.intervalY), (int)(Width / eps), Height / 16);
+                    RecReadyB.SetBounds((int)(2 * Instruments.intervalX), InstrPanel.Bounds.Y + InstrPanel.Height + Instruments.intervalHeight, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
                 }
 
                 //Кнопка "очистить"
                 {
-                    CancelB.BackColor = Color.FromArgb(126, 124, 232);
+                    CancelB.BackColor = Instruments.myPurpleColor;
 
-                    CancelB.SetBounds(TimePanel.Bounds.X + 2 * Instruments.intervalX, addRecPage.Bounds.Y + TimePanel.Bounds.Y + (int)(2 * Instruments.intervalY), (int)(Width / eps), Height / 16);
+                    CancelB.SetBounds((int)(3.5*Instruments.intervalX), RecReadyB.Bounds.Y, Instruments.intervalX, (int)(0.75*Instruments.intervalHeight));
                 }
             }
 
@@ -379,14 +436,14 @@ namespace MainForm
             {
                 //"Заголовок"
                 {
-                    SettingsL.SetBounds(settingsPage.Bounds.X, settingsPage.Bounds.Y - 30, (int)((Width) - (Width / 10)), Height / 16);
+                    SettingsL.SetBounds(settingsPage.Bounds.X, settingsPage.Bounds.Y -Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
 
                 //"Смена языка"
                 {
-                    LanguagePanel.BackColor = Color.FromArgb(126, 124, 232);
+                    LanguagePanel.BackColor = Instruments.myPurpleColor;
 
-                    LanguagePanel.SetBounds(settingsPage.Bounds.X + Instruments.intervalX, Instruments.intervalY, (int)(Height / 1.7), (int)(Height / 13));
+                    LanguagePanel.SetBounds(settingsPage.Bounds.X + Instruments.intervalX/2, SettingsL.Bounds.X+SettingsL.Height+Instruments.intervalY, 3*Instruments.intervalX, Instruments.intervalHeight);
                 }
 
             }
@@ -395,7 +452,7 @@ namespace MainForm
             {
                 //"Заголовок"
                 {
-                    helpL.SetBounds(helpPage.Bounds.X, helpPage.Bounds.Y - 30, (int)((Width) - (Width / 10)), Height / 16);
+                    helpL.SetBounds(helpPage.Bounds.X, helpPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
             }
 
@@ -403,7 +460,7 @@ namespace MainForm
             {
                 //"Заголовок"
                 {
-                    favL.SetBounds(FavPage.Bounds.X, FavPage.Bounds.Y - 30, (int)((Width) - (Width / 10)), Height / 16);
+                    favL.SetBounds(FavPage.Bounds.X, FavPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
             }
 
@@ -411,7 +468,7 @@ namespace MainForm
             {
                 //"Заголовок"
                 {
-                    myL.SetBounds(MyRecPage.Bounds.X, MyRecPage.Bounds.Y - 30, (int)((Width) - (Width / 10)), Height / 16);
+                    myL.SetBounds(MyRecPage.Bounds.X, MyRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
             }
 
@@ -419,7 +476,7 @@ namespace MainForm
             {
                 //"Заголовок"
                 {
-                    genL.SetBounds(MyRecPage.Bounds.X, MyRecPage.Bounds.Y - 30, (int)((Width) - (Width / 10)), Height / 16);
+                    genL.SetBounds(MyRecPage.Bounds.X, MyRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
             }
         }
@@ -427,7 +484,7 @@ namespace MainForm
         public void languageChanges()
         {
             categoryInit();
-
+            
             myRecB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.myRecRu : LanguagesForAddingRecipe.myRecEn;
 
             generalB.Text = LanguagesForAddingRecipe.isRu == true ? LanguagesForAddingRecipe.generalRu : LanguagesForAddingRecipe.generalEn;
@@ -493,6 +550,7 @@ namespace MainForm
                     CategoryCB.Items.Add(item);
                 }
             }
+            CategoryCB.SelectedIndex = 0;
         }
 
         private void allStarsOpacityNull()
@@ -511,16 +569,13 @@ namespace MainForm
         {
             rec_name.Clear();
             //RecPhoto.Image= Image.FromFile(??);
-            CategoryCB.Text = "";
+            markDif.SelectedIndex = 0;
             time_rec.Clear();
-            markDif.Text = "";
+            CategoryCB.SelectedIndex = 0;
             Ingr_rec.Clear();
             Instr_rec.Clear();
-            pictureBox1.Image = Image.FromFile(ImageFileNameOpacity);
-            pictureBox2.Image = Image.FromFile(ImageFileNameOpacity);
-            pictureBox3.Image = Image.FromFile(ImageFileNameOpacity);
-            pictureBox4.Image = Image.FromFile(ImageFileNameOpacity);
-            pictureBox5.Image = Image.FromFile(ImageFileNameOpacity);
+            isClicked1 = isClicked2 = isClicked3 = isClicked4 = isClicked5 = false;
+            allStarsOpacityNull();
         }
 
         //Функция для проверки активности кнопок
@@ -561,21 +616,6 @@ namespace MainForm
                 if (helpB.BackColor != Color.LightGray) { helpB.BackColor = Color.LightGray; }
             }
             else { helpB.BackColor = Color.Transparent; }
-        }
-
-        private void RecPhoto_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            if (openFileDialog.ShowDialog() == DialogResult.Cancel)return;
-
-            string filename = openFileDialog.FileName;
-
-            RecPhoto.Image = Image.FromFile(filename);
-
-            //RecPhoto.Size = new Size(Height/3, Height / 3);//ПОДУМАТЬ над фото(размер, основное) и т.п.
-
-            
         }
     }
 }

@@ -12,9 +12,9 @@ namespace MainForm
         static public bool isRu = true;
 
         //Page "AddRec"
-        static public string[] categoriesRu = new string[] { "Закуски", "Салаты", "Первые блюда", "Вторые блюда", "Соусы", "Выпечка", "Напитки", "Десерты" };
+        static public string[] categoriesRu = new string[] { "Другое","Закуски", "Салаты", "Первые блюда", "Вторые блюда", "Соусы", "Выпечка", "Напитки", "Десерты" };
 
-        static public string[] categoriesEn = new string[] { "Snacks", "Salads", "First courses", "Main courses", "Sauces", "Pastries", "Drinks", "Desserts" };
+        static public string[] categoriesEn = new string[] { "Other", "Snacks", "Salads", "First courses", "Main courses", "Sauces", "Pastries", "Drinks", "Desserts"};
 
         static public string addRu = "Добавить рецепт";
 
@@ -32,9 +32,9 @@ namespace MainForm
 
         static public string categoryEn = "Category";
 
-        static public string timeRu = "Время приготовления";
+        static public string timeRu = "Время приготовления(ч:м:с)";
 
-        static public string timeEn = "Cooking time";
+        static public string timeEn = "Cooking time(h:m:s)";
 
         static public string rateRu = "Оценка рецепта";
 
