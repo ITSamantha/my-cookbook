@@ -46,7 +46,7 @@ namespace MainForm
             InitializeComponent();
 
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = 01dr10kv; Database = MyDatabase; ");
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
             //formChanges(1400,800);
@@ -622,8 +622,6 @@ namespace MainForm
 
         public void showAllMyRecipes()
         {
-            //ControllerForBD.StartSelectAllMyRecipes();
-
             ControllerForBD.StartSelectAllMyRecipes();
 
             bool isAll = false;
@@ -641,7 +639,29 @@ namespace MainForm
                     {
                         isAll = true;
                     }
+                }else
+                {
+                    Label l = new Label();
+
+                    l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
+
+                    l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
+
+                    my_recipes_list.Controls.Add(l, 1, 0);
+                    if ((ControllerForBD.isDoneMy))
+                    {
+                        isAll = true;
+                    }
+                   
                 }
+
+               /* Label l = new Label();
+
+                l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
+
+                l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
+
+                my_recipes_list.Controls.Add(l, 1, 0);*/
 
             }
         }

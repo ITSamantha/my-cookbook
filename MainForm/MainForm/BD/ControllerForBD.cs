@@ -271,6 +271,7 @@ namespace bd
                       !!!  Console.WriteLine(r.Name); !!!
                         ControllerForBD.inetRecipes.Remove(r);
                     }
+
                     if ((ControllerForBD.inetRecipes.Count == 0) && (ControllerForBD.isDoneInet))
                     {
                         isAll = true;

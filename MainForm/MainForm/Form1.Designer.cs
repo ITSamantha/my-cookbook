@@ -372,9 +372,9 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 30);
+            this.addRecPage.Location = new System.Drawing.Point(4, 22);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
