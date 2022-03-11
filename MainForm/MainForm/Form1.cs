@@ -33,7 +33,7 @@ namespace MainForm
             Mark4=4,
             Mark5=5
         }
-
+   
         public int whatClicked = 0;
 
         public string ImageFileNameOpacity = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\opacity_star.png";
@@ -47,7 +47,7 @@ namespace MainForm
             InitializeComponent();
 
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =xt7xxxxx ; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
             //formChanges(1400,800);
@@ -75,6 +75,7 @@ namespace MainForm
             ControllerForBD.StartSelectAllMyRecipes();
             Thread thread = new Thread(showAllMyRecipes);
             thread.Start();
+          
             /* ControllerForBD.StartSelectAllMyRecipes();
              Thread thread = new Thread(showAllMyRecipes);
              thread.Start();*/
@@ -643,7 +644,7 @@ namespace MainForm
             }
             else { helpB.BackColor = Color.Transparent; }
         }
-
+    
         public void showAllMyRecipes()
         {
             bool isAll = false;
@@ -656,7 +657,7 @@ namespace MainForm
                         Recipe r = ControllerForBD.myRecipes.ElementAt(0);
                         Label l = new Label();
                         l.Text = r.Name;
-                        my_recipes_list.Controls.Add(l, 1, 0);
+                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
                         //Console.WriteLine(r.Name);
                         ControllerForBD.myRecipes.Remove(r);
                     }
@@ -673,7 +674,9 @@ namespace MainForm
                         Label l = new Label();
                         l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
                         l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
-                        my_recipes_list.Controls.Add(l, 1, 0);
+                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
+                       
+                        //my_recipes_list.Controls.Add(l, 1, 0);
                     }
                 }
 
