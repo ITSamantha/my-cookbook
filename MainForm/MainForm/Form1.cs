@@ -456,6 +456,7 @@ namespace MainForm
             {
                 //"Заголовок"
                 {
+                   // прелагаю интим
                     favL.SetBounds(FavPage.Bounds.X, FavPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
             }
