@@ -18,6 +18,10 @@ namespace bd
         public static List<Recipe> inetRecipes;
         public static List<Recipe> starRecipes;
         public static List<Recipe> searchRecipes;
+        public static Boolean isStartMy;
+        public static Boolean isStartInet;
+        public static Boolean isStartStar;
+        public static Boolean isStartSearch;
         public static Boolean isDone;
         public static Boolean isDoneMy;
         public static Boolean isDoneInet;
@@ -209,16 +213,19 @@ namespace bd
         private static void SelectAllMyRecipes()
         {
             myRecipes = new List<Recipe>();
-            
+            isDoneMy = false;
+            isStartMy = false;
             try
             {
                 NpgsqlConnection connection = new NpgsqlConnection(configConnection);
                 connection.Open();
+                myRecipes = new List<Recipe>();
                 Recipe r = null;
                 string textCommand = "Select id, name ,  category, time, marklike, markdif, star from myrecipes";
                 var command = new NpgsqlCommand(textCommand, connection);
                 var reader = command.ExecuteReader();
                 isDoneMy = false;
+                isStartMy = true;
                 while (reader.Read())
                 {
                     r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
@@ -227,11 +234,12 @@ namespace bd
                 isDoneMy = true;
                 reader.Close();
                 connection.Close();
+                
 
             }
             catch (Exception e)
             {
-
+                isStartMy = false;
                 Console.WriteLine("Error of select all from MyRecipes : \n" + e);
                 myRecipes = null;
                 isDoneMy = true;
@@ -241,6 +249,7 @@ namespace bd
         {
             try
             {
+
                 Thread th = new Thread(SelectAllMyRecipes);
                 th.Start();
             }

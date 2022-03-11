@@ -47,7 +47,7 @@ namespace MainForm
             InitializeComponent();
 
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = ; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
             //formChanges(1400,800);
@@ -629,7 +629,7 @@ namespace MainForm
             bool isAll = false;
             while (!isAll)
             {
-                if (ControllerForBD.myRecipes != null)
+                if (ControllerForBD.isStartMy)
                 {
                     if (ControllerForBD.myRecipes.Count != 0)
                     {
