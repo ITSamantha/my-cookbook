@@ -47,7 +47,7 @@ namespace MainForm
             InitializeComponent();
 
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = ; Database = MyDatabase; ");
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
             //formChanges(1400,800);
@@ -56,6 +56,8 @@ namespace MainForm
             LangCB.SelectedIndex = 0;//Начальный язык - русский
 
             markDif.SelectedIndex = 0;//Начальная оценка сложности-1
+
+            tabContr.SelectedIndex = 3;
 
             languageChanges();
             
@@ -70,9 +72,12 @@ namespace MainForm
         {
             checkButtonsColors((int)Buttons.My_Rec);
             tabContr.SelectedIndex = (int)Buttons.My_Rec;
-           /* ControllerForBD.StartSelectAllMyRecipes();
+            ControllerForBD.StartSelectAllMyRecipes();
             Thread thread = new Thread(showAllMyRecipes);
-            thread.Start();*/
+            thread.Start();
+            /* ControllerForBD.StartSelectAllMyRecipes();
+             Thread thread = new Thread(showAllMyRecipes);
+             thread.Start();*/
 
         }
 
@@ -480,10 +485,8 @@ namespace MainForm
 
                 //Панель для моих рецептов
                 {
-                    my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height , 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight));
-                    //ControllerForBD.StartSelectAllMyRecipes();
-                    //Thread thread = new Thread(showAllMyRecipes);
-                    //thread.Start();
+                    whatClicked = 1;
+                    my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height , 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight)); 
                 }
             }
 
