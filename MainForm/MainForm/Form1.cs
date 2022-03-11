@@ -242,7 +242,7 @@ namespace MainForm
             allStarsOpacityNull();
         }
         
-        private void RecReadyB_Click(object sender, EventArgs e)//Добавление в БД рецепта
+        private void RecReadyB_Click(object sender, EventArgs e)//Insert recipe into DB
         {
             ImageConverter converter = new ImageConverter();//Конвертация фото в bytea
 
@@ -250,7 +250,7 @@ namespace MainForm
 
             Image img = (Image)converter.ConvertFrom(b);
 
-            if (ControllerForBD.InsertToInetRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, "1", markDif.Text, time_rec.Text, b)){
+            if (ControllerForBD.InsertToInetRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text, b)){
                 MessageBox.Show("Рецепт успешно добавлен.");
             }
         }
@@ -470,7 +470,7 @@ namespace MainForm
                 //Панель для рецептов
                 {
                     my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height + Instruments.intervalHeight / 4, 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight));
-                    //showAllMyRecipes();
+                    showAllMyRecipes();
                 }
             }
 
