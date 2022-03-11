@@ -657,7 +657,7 @@ namespace MainForm
                         Recipe r = ControllerForBD.myRecipes.ElementAt(0);
                         Label l = new Label();
                         l.Text = r.Name;
-                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
+                       my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
                         //Console.WriteLine(r.Name);
                         ControllerForBD.myRecipes.Remove(r);
                     }
