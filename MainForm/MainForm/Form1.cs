@@ -648,18 +648,42 @@ namespace MainForm
         public void showAllMyRecipes()//Показать все мои рецепты
         {
             bool isAll = false;
+
+            int intervalX = my_recipes_list.Width / 20;
+
+            int intervalY = Instruments.intervalY;
+
+            int partsForPanel = 18;
+
+            int i = 0;
+
+            List<TableLayoutPanel> myList = new List<TableLayoutPanel>();
+
             while (!isAll)
             {
                 if (ControllerForBD.isStartMy)
                 {
                     if (ControllerForBD.myRecipes.Count != 0)
                     {
-                        Recipe r = ControllerForBD.myRecipes.ElementAt(0);
-                        Label l = new Label();
-                        l.Text = r.Name;
-                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
-                        //Console.WriteLine(r.Name);
-                        ControllerForBD.myRecipes.Remove(r);
+                       Recipe r = ControllerForBD.myRecipes.ElementAt(0);
+
+                       TableLayoutPanel t = new TableLayoutPanel();//Закругленные углы на панели?
+ 
+                       t.SetBounds(intervalX, (i) , partsForPanel*intervalX,InstrPanel.Height);
+
+                       SetRoundedShape(t, 20);
+                        //ИЗМЕНЕНИЕ РАЗМЕРОВ ПАНЕЛИ ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМЫ ДОДЕЛАТЬ
+                       t.ColumnCount = 2;
+
+                       i += t.Height+intervalY;
+
+                        // t.BackColor = Instruments.myPurpleColor;
+                        t.BackColor = Color.FromArgb(235, 232, 232);
+                        myList.Add(t);
+                       
+                       my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(t)));
+                        
+                       ControllerForBD.myRecipes.Remove(r);
                     }
                     if ((ControllerForBD.myRecipes.Count == 0) && (ControllerForBD.isDoneMy))
                     {
@@ -674,13 +698,37 @@ namespace MainForm
                         Label l = new Label();
                         l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
                         l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
-                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
+                        //my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
                        
                         //my_recipes_list.Controls.Add(l, 1, 0);
                     }
                 }
 
             }
+        }
+        //А КАК ЛУЧШЕ СДЕЛАТЬ СЧЕТ?g КООРДИНАТАМ!!!
+        /*Обработчик для нескольких кнопок
+         foreach (var item in this.Controls) //обходим все элементы формы
+    {
+        if (item is Button) // проверяем, что это кнопка
+        {
+            ((Button)item).Click += CommonBtn_Click; //приводим к типу и устанавливаем обработчик события  
+        }
+    } 
+             */
+
+        public static void SetRoundedShape(Control control, int radius)
+        {
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+            path.AddLine(radius, 0, control.Width - radius, 0);
+            path.AddArc(control.Width - radius, 0, radius, radius, 270, 90);
+            path.AddLine(control.Width, radius, control.Width, control.Height - radius);
+            path.AddArc(control.Width - radius, control.Height - radius, radius, radius, 0, 90);
+            path.AddLine(control.Width - radius, control.Height, radius, control.Height);
+            path.AddArc(0, control.Height - radius, radius, radius, 90, 90);
+            path.AddLine(0, control.Height - radius, 0, radius);
+            path.AddArc(0, 0, radius, radius, 180, 90);
+            control.Region = new Region(path);
         }
     }
 }

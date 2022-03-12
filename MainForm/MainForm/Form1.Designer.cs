@@ -39,11 +39,12 @@
             this.lab = new System.Windows.Forms.Label();
             this.tabContr = new System.Windows.Forms.TabControl();
             this.MyRecPage = new System.Windows.Forms.TabPage();
-            this.my_recipes_list = new System.Windows.Forms.TableLayoutPanel();
             this.myL = new System.Windows.Forms.Label();
             this.FavPage = new System.Windows.Forms.TabPage();
+            this.fav_recipes_list = new System.Windows.Forms.TableLayoutPanel();
             this.favL = new System.Windows.Forms.Label();
             this.GeneralPage = new System.Windows.Forms.TabPage();
+            this.general_recipes_list = new System.Windows.Forms.TableLayoutPanel();
             this.genL = new System.Windows.Forms.Label();
             this.addRecPage = new System.Windows.Forms.TabPage();
             this.CancelB = new System.Windows.Forms.Button();
@@ -85,8 +86,7 @@
             this.SettingsL = new System.Windows.Forms.Label();
             this.helpPage = new System.Windows.Forms.TabPage();
             this.helpL = new System.Windows.Forms.Label();
-            this.fav_recipes_list = new System.Windows.Forms.TableLayoutPanel();
-            this.general_recipes_list = new System.Windows.Forms.TableLayoutPanel();
+            this.my_recipes_list = new System.Windows.Forms.Panel();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -296,19 +296,6 @@
             this.MyRecPage.Text = "tabPage1";
             this.MyRecPage.UseVisualStyleBackColor = true;
             // 
-            // my_recipes_list
-            // 
-            this.my_recipes_list.AutoScroll = true;
-            this.my_recipes_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.my_recipes_list.ColumnCount = 1;
-            this.my_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.my_recipes_list.Location = new System.Drawing.Point(294, 179);
-            this.my_recipes_list.Name = "my_recipes_list";
-            this.my_recipes_list.RowCount = 1;
-            this.my_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.my_recipes_list.Size = new System.Drawing.Size(200, 100);
-            this.my_recipes_list.TabIndex = 4;
-            // 
             // myL
             // 
             this.myL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -323,13 +310,26 @@
             // 
             this.FavPage.Controls.Add(this.fav_recipes_list);
             this.FavPage.Controls.Add(this.favL);
-            this.FavPage.Location = new System.Drawing.Point(4, 30);
+            this.FavPage.Location = new System.Drawing.Point(4, 22);
             this.FavPage.Name = "FavPage";
             this.FavPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FavPage.Size = new System.Drawing.Size(1021, 652);
+            this.FavPage.Size = new System.Drawing.Size(1021, 660);
             this.FavPage.TabIndex = 1;
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
+            // 
+            // fav_recipes_list
+            // 
+            this.fav_recipes_list.AutoScroll = true;
+            this.fav_recipes_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.fav_recipes_list.ColumnCount = 1;
+            this.fav_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.fav_recipes_list.Location = new System.Drawing.Point(410, 276);
+            this.fav_recipes_list.Name = "fav_recipes_list";
+            this.fav_recipes_list.RowCount = 1;
+            this.fav_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.fav_recipes_list.Size = new System.Drawing.Size(200, 100);
+            this.fav_recipes_list.TabIndex = 5;
             // 
             // favL
             // 
@@ -345,12 +345,25 @@
             // 
             this.GeneralPage.Controls.Add(this.general_recipes_list);
             this.GeneralPage.Controls.Add(this.genL);
-            this.GeneralPage.Location = new System.Drawing.Point(4, 30);
+            this.GeneralPage.Location = new System.Drawing.Point(4, 22);
             this.GeneralPage.Name = "GeneralPage";
-            this.GeneralPage.Size = new System.Drawing.Size(1021, 652);
+            this.GeneralPage.Size = new System.Drawing.Size(1021, 660);
             this.GeneralPage.TabIndex = 2;
             this.GeneralPage.Text = "tabPage1";
             this.GeneralPage.UseVisualStyleBackColor = true;
+            // 
+            // general_recipes_list
+            // 
+            this.general_recipes_list.AutoScroll = true;
+            this.general_recipes_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.general_recipes_list.ColumnCount = 1;
+            this.general_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.general_recipes_list.Location = new System.Drawing.Point(410, 276);
+            this.general_recipes_list.Name = "general_recipes_list";
+            this.general_recipes_list.RowCount = 1;
+            this.general_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.general_recipes_list.Size = new System.Drawing.Size(200, 100);
+            this.general_recipes_list.TabIndex = 6;
             // 
             // genL
             // 
@@ -376,9 +389,9 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 30);
+            this.addRecPage.Location = new System.Drawing.Point(4, 22);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
@@ -868,31 +881,13 @@
             this.helpL.Text = "Помощь";
             this.helpL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // fav_recipes_list
+            // my_recipes_list
             // 
-            this.fav_recipes_list.AutoScroll = true;
-            this.fav_recipes_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.fav_recipes_list.ColumnCount = 1;
-            this.fav_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.fav_recipes_list.Location = new System.Drawing.Point(410, 276);
-            this.fav_recipes_list.Name = "fav_recipes_list";
-            this.fav_recipes_list.RowCount = 1;
-            this.fav_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.fav_recipes_list.Size = new System.Drawing.Size(200, 100);
-            this.fav_recipes_list.TabIndex = 5;
-            // 
-            // general_recipes_list
-            // 
-            this.general_recipes_list.AutoScroll = true;
-            this.general_recipes_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.general_recipes_list.ColumnCount = 1;
-            this.general_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.general_recipes_list.Location = new System.Drawing.Point(410, 276);
-            this.general_recipes_list.Name = "general_recipes_list";
-            this.general_recipes_list.RowCount = 1;
-            this.general_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.general_recipes_list.Size = new System.Drawing.Size(200, 100);
-            this.general_recipes_list.TabIndex = 6;
+            this.my_recipes_list.AutoScroll = true;
+            this.my_recipes_list.Location = new System.Drawing.Point(242, 94);
+            this.my_recipes_list.Name = "my_recipes_list";
+            this.my_recipes_list.Size = new System.Drawing.Size(200, 100);
+            this.my_recipes_list.TabIndex = 5;
             // 
             // MainForm
             // 
@@ -1000,9 +995,9 @@
         public System.Windows.Forms.TabControl tabContr;
         private System.Windows.Forms.MaskedTextBox time_rec;
         public System.Windows.Forms.Button myRecB;
-        private System.Windows.Forms.TableLayoutPanel my_recipes_list;
         private System.Windows.Forms.TableLayoutPanel fav_recipes_list;
         private System.Windows.Forms.TableLayoutPanel general_recipes_list;
+        private System.Windows.Forms.Panel my_recipes_list;
     }
 }
 
