@@ -234,8 +234,6 @@ namespace bd
                 isDoneMy = true;
                 reader.Close();
                 connection.Close();
-                
-
             }
             catch (Exception e)
             {

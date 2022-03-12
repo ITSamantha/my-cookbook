@@ -46,8 +46,8 @@ namespace MainForm
         {
             InitializeComponent();
 
-
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");
+            //Подключение БД
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
             //formChanges(1400,800);
@@ -61,7 +61,7 @@ namespace MainForm
 
             languageChanges();
             
-            //Подключение БД
+            
            
             
         }//СДЕЛАТЬ НЕ КЛИКАБЕЛЬНЫМИ СТРАНИЧНЫЕ ТАБЫ
@@ -645,7 +645,7 @@ namespace MainForm
             else { helpB.BackColor = Color.Transparent; }
         }
     
-        public void showAllMyRecipes()
+        public void showAllMyRecipes()//Показать все мои рецепты
         {
             bool isAll = false;
             while (!isAll)
@@ -657,7 +657,7 @@ namespace MainForm
                         Recipe r = ControllerForBD.myRecipes.ElementAt(0);
                         Label l = new Label();
                         l.Text = r.Name;
-                       my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
+                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
                         //Console.WriteLine(r.Name);
                         ControllerForBD.myRecipes.Remove(r);
                     }
