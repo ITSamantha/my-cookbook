@@ -306,7 +306,8 @@ namespace bd
         private static void SelectAllInetRecipes()
         {
             inetRecipes = new List<Recipe>();
-
+            isDoneInet = false;
+            isStartInet = false;
 
             try
             {
@@ -317,6 +318,7 @@ namespace bd
                 var command = new NpgsqlCommand(textCommand, connection);
                 var reader = command.ExecuteReader();
                 isDoneInet = false;
+                isStartInet = true;
                 while (reader.Read())
                 {
                     r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(8).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
@@ -333,6 +335,7 @@ namespace bd
                 Console.WriteLine("Error of select all from inetRecipes : \n" + e);
                 inetRecipes = null;
                 isDoneInet = true;
+                isStartInet = false;
             }
         }
 
@@ -352,9 +355,13 @@ namespace bd
 
 
 
+        /* Поиск:
+           Создается объект PairSearch в котором параметры фильтр и текст поиска
+            фильтр создается с моим участием
+            потоки работают также
 
 
-
+        */
 
 
 
@@ -375,6 +382,9 @@ namespace bd
 
         private static void SelectForSearch(object pair)
         {
+            searchRecipes = new List<Recipe>();
+            isStartSearch = false;
+            isDoneSearch = false;
             try
             {
                 NpgsqlConnection connection = new NpgsqlConnection(configConnection);
@@ -387,7 +397,7 @@ namespace bd
                 if (p is PairSearch)
                 {
                    
-                    isDoneSearch = false;
+                    
                    textCommand = "Select id, name  from recipes";
                     f = p.filter;
                     text = p.textSearch;
@@ -408,6 +418,8 @@ namespace bd
 
                     var command = new NpgsqlCommand(textCommand, connection);
                     var reader = command.ExecuteReader();
+                    isDoneSearch = false;
+                    isStartSearch = true;
                     while (reader.Read())
                     {
                         Recipe r;
@@ -449,6 +461,8 @@ namespace bd
             {
                 Console.WriteLine(e);
                 searchRecipes = null;
+                isDoneSearch = true;
+                isStartSearch = false;
 
             }
 
