@@ -23,7 +23,7 @@ namespace MainForm
             
             heightOfTabControlWithoutLabels = formHeight - 2* heightOfLabels;
 
-            buttonPanelWidth = (int)(formWidth / 10);
+            buttonPanelWidth = (int)(formWidth /9);
             
             intervalHeight = heightOfTabControlWithoutLabels / 10;
 
@@ -47,7 +47,7 @@ namespace MainForm
         public  int buttonPanelWidth;
 
         public  Color myPurpleColor = Color.FromArgb(126, 124, 232);
-
+        
         public  int piecesOfScreenForLabel = 16;
 
         public  int piecesOfScreenForElements = 12;

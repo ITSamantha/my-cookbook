@@ -79,9 +79,9 @@ namespace MainForm
         static public string generalEn = "General recipes";
 
         //Page "Favourite Rec"
-        static public string favRu = "Избранные рецепты";
+        static public string favRu = "Избранные";
 
-        static public string favEn = "Favourite recipes";
+        static public string favEn = "Favourite";
 
         //Page "My Rec"
         static public string myRecRu = "Мои рецепты";
@@ -96,6 +96,12 @@ namespace MainForm
         static public string helpRu = "Помощь";
 
         static public string helpEn = "Help";
+
+
+        //Page "Start"
+        static public string startRu = "Храните все рецепты в одном месте";
+
+        static public string startEn = "Store all recipes in one place";
 
 
     }

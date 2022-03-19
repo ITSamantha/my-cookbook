@@ -33,8 +33,10 @@ namespace MainForm
             Mark4=4,
             Mark5=5
         }
-   
+            //ПРОВЕРЬ СООТВЕТСТВИЕ ВСЕХ КНОПОК
         public int whatClicked = 0;
+
+        public int whatButtonClicked = -1;
 
         public string ImageFileNameOpacity = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\opacity_star.png";
 
@@ -50,19 +52,14 @@ namespace MainForm
             ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv; Database = MyDatabase; ");
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
-            //formChanges(1400,800);
 
+            languageChanges();
 
             LangCB.SelectedIndex = 0;//Начальный язык - русский
 
             markDif.SelectedIndex = 0;//Начальная оценка сложности-1
 
-            tabContr.SelectedIndex = 3;
-
-            languageChanges();
-            
-            
-           
+            tabContr.SelectedIndex = 6;
             
         }//СДЕЛАТЬ НЕ КЛИКАБЕЛЬНЫМИ СТРАНИЧНЫЕ ТАБЫ
         //ИЗМЕНЕНИЕ ШРИФТА ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМ
@@ -72,44 +69,46 @@ namespace MainForm
         {
             checkButtonsColors((int)Buttons.My_Rec);
             tabContr.SelectedIndex = (int)Buttons.My_Rec;
-            ControllerForBD.StartSelectAllMyRecipes();
+            whatButtonClicked=(int)Buttons.My_Rec;
+            /*ControllerForBD.StartSelectAllMyRecipes();
             Thread thread = new Thread(showAllMyRecipes);
-            thread.Start();
-          
-            /* ControllerForBD.StartSelectAllMyRecipes();
-             Thread thread = new Thread(showAllMyRecipes);
-             thread.Start();*/
-
+            thread.Start();*/
+        
         }
 
         private void favB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.Fav_Rec);
             tabContr.SelectedIndex = (int)Buttons.Fav_Rec;
+            whatButtonClicked = (int)Buttons.Fav_Rec;
         }
 
         private void generalB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.General_Rec);
             tabContr.SelectedIndex = (int)Buttons.General_Rec;
+            whatButtonClicked = (int)Buttons.General_Rec;
         }
 
         private void addRecB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.Add_Rec);
             tabContr.SelectedIndex = (int)Buttons.Add_Rec;
+            whatButtonClicked = (int)Buttons.Add_Rec;
         }
         
         private void settingsB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.Settings);
             tabContr.SelectedIndex = (int)Buttons.Settings;
+            whatButtonClicked = (int)Buttons.Settings;
         }
 
         private void helpB_Click(object sender, EventArgs e)
         {
             checkButtonsColors((int)Buttons.Help);
             tabContr.SelectedIndex = (int)Buttons.Help;
+            whatButtonClicked = (int)Buttons.Help;
         }
         
         //Обработка событий с оценкой рецепта
@@ -318,28 +317,30 @@ namespace MainForm
            
             if (Size.Width <= 1560||Size.Height<=746)
             {
-                myRecB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
-                favB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
-                generalB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
-                addRecB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
-                settingsB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
-                helpB.Font = new Font(myRecB.Font.FontFamily, 13, myRecB.Font.Style);
+                myRecB.Font = new Font(myRecB.Font.FontFamily, 14.5f, myRecB.Font.Style);
+                favB.Font = new Font(myRecB.Font.FontFamily, 14.5f, myRecB.Font.Style);
+                generalB.Font = new Font(myRecB.Font.FontFamily, 14.5f, myRecB.Font.Style);
+                settingsB.Font = new Font(myRecB.Font.FontFamily, 14.5f, myRecB.Font.Style);
+                helpB.Font = new Font(myRecB.Font.FontFamily, 14.5f, myRecB.Font.Style);
+                addRecB.Font = new Font(myRecB.Font.FontFamily, 14.5f, myRecB.Font.Style);
+                startLabel.Font= new Font(startLabel.Font.FontFamily, 40f, startLabel.Font.Style);
             }
             else
             {
-                myRecB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
-                favB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
-                generalB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
-                addRecB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
-                settingsB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
-                helpB.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
+                myRecB.Font = new Font(myRecB.Font.FontFamily, 16.5f, myRecB.Font.Style);
+                favB.Font = new Font(myRecB.Font.FontFamily, 16.5f, myRecB.Font.Style);
+                generalB.Font = new Font(myRecB.Font.FontFamily, 16.5f, myRecB.Font.Style);
+                settingsB.Font = new Font(myRecB.Font.FontFamily, 16.5f, myRecB.Font.Style);
+                helpB.Font = new Font(myRecB.Font.FontFamily, 16.5f, myRecB.Font.Style);
+                addRecB.Font = new Font(myRecB.Font.FontFamily, 16.5f, myRecB.Font.Style);
+                startLabel.Font = new Font(startLabel.Font.FontFamily, 46f, startLabel.Font.Style);
             }
             formChanges(Size.Width, Size.Height);
         }
 
         //Функции
 
-        public void formChanges(int x,int y)//ДОДЕЛАЙ ОТРИСОВКУ КАК СУММУ ЭЛЕМЕНТОВ !!!!!!!!!!!!!!!!!!!!!!!!!!
+        public void formChanges(int x,int y)
         {//ШРИФТЫ?!
             Instruments = new Instruments(x,y);
 
@@ -349,12 +350,46 @@ namespace MainForm
 
             buttonPanel.Size = new Size(Instruments.buttonPanelWidth, Instruments.formHeight);//Размер панели кнопок
 
+            buttonPanel.BackColor = Color.FromArgb(242, 242, 242);
+
+            SetRoundedShape(myRecB, 10);
+
+            myRecB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+
+            favB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+
+            generalB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+
+            addRecB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+
+            settingsB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+
+            helpB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+
+            SetRoundedShape(favB, 15);
+
+            SetRoundedShape(generalB, 15);
+
+            SetRoundedShape(addRecB, 15);
+
+            SetRoundedShape(settingsB, 15);
+
+            SetRoundedShape(helpB, 15);
+
             lab.BackColor = Instruments.myPurpleColor;
 
             lab.Size = new Size(Instruments.formWidth, Instruments.heightOfLabels+5);
 
-            tabContr.SetBounds(buttonPanel.Size.Width, Instruments.heightOfLabels-Instruments.tabControlOffset ,Instruments.formWidth - Instruments.buttonPanelWidth,Instruments.formHeight - Instruments.heightOfLabels);//TabControl размер
-            //МЕНЯТЬ ШРИФТЫ?!(РАЗМЕР)
+            tabContr.SetBounds(buttonPanel.Size.Width-1, Instruments.heightOfLabels+5-Instruments.tabControlOffset ,Instruments.formWidth - Instruments.buttonPanelWidth,Instruments.formHeight - lab.Height+Instruments.tabControlOffset);//TabControl размер
+
+            startBox.SetBounds(Instruments.intervalX,0, (int)((Instruments.formWidth - Instruments.buttonPanelWidth)/1.5), 7*Instruments.intervalHeight);
+
+            startLabel.SetBounds(startBox.Bounds.X, startBox.Bounds.Y+startBox.Height, startBox.Width, Instruments.intervalHeight);
+
+            closeB.SetBounds(Instruments.formWidth-Instruments.heightOfLabels-20, 0, Instruments.heightOfLabels +5, Instruments.heightOfLabels + 5);
+
+            closeB.BackColor = Instruments.myPurpleColor;
+
             //AddRecPage changes 
             {
                 //"Заголовок"
@@ -511,19 +546,21 @@ namespace MainForm
         public void languageChanges()
         {
             categoryInit();
-            
+
+            startLabel.Text= LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.startRu : LanguagesForAddingRecipe.startEn;
+
             myRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.myRecRu : LanguagesForAddingRecipe.myRecEn;
-
-            generalB.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.generalRu : LanguagesForAddingRecipe.generalEn;
-
-            settingsB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.setLRu : LanguagesForAddingRecipe.setLEn;
-
-            helpB.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.helpRu : LanguagesForAddingRecipe.helpEn;
-
-            addRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
 
             favB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.favRu : LanguagesForAddingRecipe.favEn;
 
+            generalB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.generalRu : LanguagesForAddingRecipe.generalEn;
+
+            addRecB.Text = LanguagesForAddingRecipe.isRu  ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
+
+            settingsB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.setLRu : LanguagesForAddingRecipe.setLEn;
+
+            helpB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.helpRu : LanguagesForAddingRecipe.helpEn;
+            
             TitleL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.titleRu : LanguagesForAddingRecipe.titleEn;
 
             RateLable.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.rateRu : LanguagesForAddingRecipe.rateEn;
@@ -610,37 +647,37 @@ namespace MainForm
         {
             if (num == (int)Buttons.My_Rec)
             {
-                if (myRecB.BackColor != Color.LightGray) { myRecB.BackColor = Color.LightGray; }
+                if (myRecB.BackColor != Color.Gainsboro) { myRecB.BackColor = Color.Gainsboro; }
             }
             else { myRecB.BackColor = Color.Transparent; }
 
             if (num == (int)Buttons.Fav_Rec)
             {
-                if (favB.BackColor != Color.LightGray) { favB.BackColor = Color.LightGray; }
+                if (favB.BackColor != Color.Gainsboro) { favB.BackColor = Color.Gainsboro; }
             }
             else { favB.BackColor = Color.Transparent; }
 
             if (num == (int)Buttons.General_Rec)
             {
-                if (generalB.BackColor != Color.LightGray) { generalB.BackColor = Color.LightGray; }
+                if (generalB.BackColor != Color.Gainsboro) { generalB.BackColor = Color.Gainsboro; }
             }
             else { generalB.BackColor = Color.Transparent; }
 
             if (num == (int)Buttons.Add_Rec)
             {
-                if (addRecB.BackColor != Color.LightGray) { addRecB.BackColor = Color.LightGray; }
+                if (addRecB.BackColor != Color.Gainsboro) { addRecB.BackColor = Color.Gainsboro; }
             }
             else { addRecB.BackColor = Color.Transparent; }
 
             if (num == (int)Buttons.Settings)
             {
-                if (settingsB.BackColor != Color.LightGray) { settingsB.BackColor = Color.LightGray; }
+                if (settingsB.BackColor != Color.Gainsboro) { settingsB.BackColor = Color.Gainsboro; }
             }
             else { settingsB.BackColor = Color.Transparent; }
 
             if (num == (int)(int)Buttons.Help)
             {
-                if (helpB.BackColor != Color.LightGray) { helpB.BackColor = Color.LightGray; }
+                if (helpB.BackColor != Color.Gainsboro) {helpB.BackColor = Color.Gainsboro; }
             }
             else { helpB.BackColor = Color.Transparent; }
         }
@@ -669,7 +706,7 @@ namespace MainForm
 
                        TableLayoutPanel t = new TableLayoutPanel();//Закругленные углы на панели?
  
-                       t.SetBounds(intervalX, (i) , partsForPanel*intervalX,InstrPanel.Height);
+                       t.SetBounds(intervalX, (i) , partsForPanel*intervalX,InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
 
                        SetRoundedShape(t, 20);
                         //ИЗМЕНЕНИЕ РАЗМЕРОВ ПАНЕЛИ ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМЫ ДОДЕЛАТЬ
@@ -729,6 +766,11 @@ namespace MainForm
             path.AddLine(0, control.Height - radius, 0, radius);
             path.AddArc(0, 0, radius, radius, 180, 90);
             control.Region = new Region(path);
+        }
+
+        private void closeB_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
