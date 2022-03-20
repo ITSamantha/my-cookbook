@@ -1,6 +1,8 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -73,7 +75,7 @@ namespace bd
         Время требуется передавать в виде строки в след. формате: "12:00:00"
         Возвращает тру - если добавил, фолс - если нет.
         */
-        public static bool InsertToMyRecipes(string name, string category, string ingredients, string guide, string marklike, string markdif, string time)
+        public static bool InsertToMyRecipes(string name, string category, string ingredients, string guide, string marklike, string markdif, string time, byte[] image)
         {
             try
             {
@@ -84,7 +86,17 @@ namespace bd
                 textCommand += " returning id;";
                 NpgsqlCommand npgsqlCommand = new NpgsqlCommand(textCommand, connection);
                 int id = (int)npgsqlCommand.ExecuteScalar();
-                // Еще добавление изображения нужно!!!
+                npgsqlCommand = new NpgsqlCommand("Insert into images(id, pic) values (" + id + ", @Image )", connection);
+                NpgsqlParameter parameter = npgsqlCommand.CreateParameter();
+                parameter.ParameterName = "@Image";
+                parameter.NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Bytea;
+                parameter.Value = image;
+                npgsqlCommand.Parameters.Add(parameter);
+
+
+
+                npgsqlCommand.ExecuteNonQuery();
+        
                 Console.WriteLine($"Recipe is insert with id = {id}");
                 connection.Close();
                 return true;
@@ -115,10 +127,14 @@ namespace bd
                 NpgsqlCommand npgsqlCommand = new NpgsqlCommand(textCommand, connection);
 
                 int id = (int)npgsqlCommand.ExecuteScalar();
-                npgsqlCommand = new NpgsqlCommand("Insert into images (id, pic) values(id,:dataparam)", connection);
-                NpgsqlParameter parameter = new NpgsqlParameter("dataparam", NpgsqlTypes.NpgsqlDbType.Bytea);
+                npgsqlCommand = new NpgsqlCommand("Insert into images(id, pic) values (" + id + ", @Image )", connection);
+                NpgsqlParameter parameter = npgsqlCommand.CreateParameter();
+                parameter.ParameterName = "@Image";
+                parameter.NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Bytea;
                 parameter.Value = image;
                 npgsqlCommand.Parameters.Add(parameter);
+               
+               
                 
                 npgsqlCommand.ExecuteNonQuery();
 
@@ -209,6 +225,22 @@ namespace bd
                 }
 
 
+
+
+        Пример перевода из байт в картинку
+
+        if (picture != null)
+                    {
+                        using (MemoryStream productImageStream = new System.IO.MemoryStream(picture))
+                        {
+                            ImageConverter imageConverter = new System.Drawing.ImageConverter();
+                            pictureBox1.Image = imageConverter.ConvertFrom(productImageByte) as System.Drawing.Image;
+                        }
+                    }
+
+
+
+
          */
         private static void SelectAllMyRecipes()
         {
@@ -221,14 +253,17 @@ namespace bd
                 connection.Open();
                 myRecipes = new List<Recipe>();
                 Recipe r = null;
-                string textCommand = "Select id, name ,  category, time, marklike, markdif, star from myrecipes";
+                string textCommand = "Select myrecipes.id, name ,  category, time, marklike, markdif, star, pic from myrecipes left join Images on myrecipes.id = images.id;";
                 var command = new NpgsqlCommand(textCommand, connection);
                 var reader = command.ExecuteReader();
                 isDoneMy = false;
                 isStartMy = true;
                 while (reader.Read())
                 {
+                    byte[] picture = null;
                     r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
+                    picture = (byte[])reader[7];
+                    r.Pic = picture;
                     myRecipes.Add(r);
                 }
                 isDoneMy = true;
