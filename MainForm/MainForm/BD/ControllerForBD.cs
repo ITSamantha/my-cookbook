@@ -88,9 +88,9 @@ namespace bd
                 int id = (int)npgsqlCommand.ExecuteScalar();
                 npgsqlCommand = new NpgsqlCommand("Insert into images(id, pic) values (" + id + ", @Image )", connection);
                 NpgsqlParameter parameter = npgsqlCommand.CreateParameter();
-                parameter.ParameterName = "@Image";
+                /*parameter.ParameterName = "@Image";
                 parameter.NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Bytea;
-                parameter.Value = image;
+                parameter.Value = image;*/
                 npgsqlCommand.Parameters.Add(parameter);
 
 
@@ -262,7 +262,7 @@ namespace bd
                 {
                     byte[] picture = null;
                     r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
-                    picture = (byte[])reader[7];
+                    //picture = (byte[])reader[7];
                     r.Pic = picture;
                     myRecipes.Add(r);
                 }

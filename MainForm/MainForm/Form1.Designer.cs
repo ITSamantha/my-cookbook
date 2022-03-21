@@ -88,8 +88,8 @@
             this.helpPage = new System.Windows.Forms.TabPage();
             this.helpL = new System.Windows.Forms.Label();
             this.startPage = new System.Windows.Forms.TabPage();
-            this.startBox = new System.Windows.Forms.PictureBox();
             this.startLabel = new System.Windows.Forms.Label();
+            this.startBox = new System.Windows.Forms.PictureBox();
             this.closeB = new System.Windows.Forms.Button();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
@@ -134,14 +134,14 @@
             this.buttonPanel.Margin = new System.Windows.Forms.Padding(0);
             this.buttonPanel.Name = "buttonPanel";
             this.buttonPanel.RowCount = 8;
-            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.128006F));
-            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.00687F));
-            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.00687F));
-            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.00687F));
-            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.00687F));
-            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.00687F));
-            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.00687F));
-            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.830776F));
+            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.924368F));
+            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.01057F));
+            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.01057F));
+            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.01057F));
+            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.01057F));
+            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.01057F));
+            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.01057F));
+            this.buttonPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0122F));
             this.buttonPanel.Size = new System.Drawing.Size(301, 733);
             this.buttonPanel.TabIndex = 0;
             // 
@@ -154,10 +154,10 @@
             this.settingsB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.settingsB.Image = ((System.Drawing.Image)(resources.GetObject("settingsB.Image")));
             this.settingsB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.settingsB.Location = new System.Drawing.Point(5, 457);
+            this.settingsB.Location = new System.Drawing.Point(5, 435);
             this.settingsB.Margin = new System.Windows.Forms.Padding(5);
             this.settingsB.Name = "settingsB";
-            this.settingsB.Size = new System.Drawing.Size(291, 92);
+            this.settingsB.Size = new System.Drawing.Size(291, 85);
             this.settingsB.TabIndex = 8;
             this.settingsB.Text = "Настройки";
             this.settingsB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -173,10 +173,10 @@
             this.helpB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.helpB.Image = ((System.Drawing.Image)(resources.GetObject("helpB.Image")));
             this.helpB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.helpB.Location = new System.Drawing.Point(5, 559);
+            this.helpB.Location = new System.Drawing.Point(5, 530);
             this.helpB.Margin = new System.Windows.Forms.Padding(5);
             this.helpB.Name = "helpB";
-            this.helpB.Size = new System.Drawing.Size(291, 92);
+            this.helpB.Size = new System.Drawing.Size(291, 85);
             this.helpB.TabIndex = 7;
             this.helpB.Text = "Помощь";
             this.helpB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -192,10 +192,10 @@
             this.generalB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.generalB.Image = ((System.Drawing.Image)(resources.GetObject("generalB.Image")));
             this.generalB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.generalB.Location = new System.Drawing.Point(5, 253);
+            this.generalB.Location = new System.Drawing.Point(5, 245);
             this.generalB.Margin = new System.Windows.Forms.Padding(5);
             this.generalB.Name = "generalB";
-            this.generalB.Size = new System.Drawing.Size(291, 92);
+            this.generalB.Size = new System.Drawing.Size(291, 85);
             this.generalB.TabIndex = 5;
             this.generalB.Text = "Общие рецепты";
             this.generalB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -211,10 +211,10 @@
             this.favB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.favB.Image = ((System.Drawing.Image)(resources.GetObject("favB.Image")));
             this.favB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.favB.Location = new System.Drawing.Point(5, 151);
+            this.favB.Location = new System.Drawing.Point(5, 150);
             this.favB.Margin = new System.Windows.Forms.Padding(5);
             this.favB.Name = "favB";
-            this.favB.Size = new System.Drawing.Size(291, 92);
+            this.favB.Size = new System.Drawing.Size(291, 85);
             this.favB.TabIndex = 4;
             this.favB.Text = "Избранные ";
             this.favB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -231,10 +231,10 @@
             this.myRecB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.myRecB.Image = ((System.Drawing.Image)(resources.GetObject("myRecB.Image")));
             this.myRecB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.myRecB.Location = new System.Drawing.Point(5, 49);
+            this.myRecB.Location = new System.Drawing.Point(5, 55);
             this.myRecB.Margin = new System.Windows.Forms.Padding(5);
             this.myRecB.Name = "myRecB";
-            this.myRecB.Size = new System.Drawing.Size(291, 92);
+            this.myRecB.Size = new System.Drawing.Size(291, 85);
             this.myRecB.TabIndex = 3;
             this.myRecB.Text = "Мои рецепты";
             this.myRecB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -250,10 +250,10 @@
             this.addRecB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.addRecB.Image = ((System.Drawing.Image)(resources.GetObject("addRecB.Image")));
             this.addRecB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.addRecB.Location = new System.Drawing.Point(5, 355);
+            this.addRecB.Location = new System.Drawing.Point(5, 340);
             this.addRecB.Margin = new System.Windows.Forms.Padding(5);
             this.addRecB.Name = "addRecB";
-            this.addRecB.Size = new System.Drawing.Size(291, 92);
+            this.addRecB.Size = new System.Drawing.Size(291, 85);
             this.addRecB.TabIndex = 6;
             this.addRecB.Text = "Добавить рецепт";
             this.addRecB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -357,9 +357,9 @@
             // 
             this.GeneralPage.Controls.Add(this.general_recipes_list);
             this.GeneralPage.Controls.Add(this.genL);
-            this.GeneralPage.Location = new System.Drawing.Point(4, 22);
+            this.GeneralPage.Location = new System.Drawing.Point(4, 30);
             this.GeneralPage.Name = "GeneralPage";
-            this.GeneralPage.Size = new System.Drawing.Size(1021, 660);
+            this.GeneralPage.Size = new System.Drawing.Size(1021, 652);
             this.GeneralPage.TabIndex = 2;
             this.GeneralPage.Text = "tabPage1";
             this.GeneralPage.UseVisualStyleBackColor = true;
@@ -401,9 +401,9 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 22);
+            this.addRecPage.Location = new System.Drawing.Point(4, 30);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
@@ -486,7 +486,7 @@
             this.pictureBox5.TabIndex = 4;
             this.pictureBox5.TabStop = false;
             this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
-            this.pictureBox5.MouseLeave += new System.EventHandler(this.pictureBox5_MouseLeave);
+            this.pictureBox5.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pictureBox5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox5_MouseMove);
             // 
             // pictureBox4
@@ -498,7 +498,7 @@
             this.pictureBox4.TabIndex = 3;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
-            this.pictureBox4.MouseLeave += new System.EventHandler(this.pictureBox4_MouseLeave);
+            this.pictureBox4.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pictureBox4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox4_MouseMove);
             // 
             // pictureBox3
@@ -510,7 +510,7 @@
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            this.pictureBox3.MouseLeave += new System.EventHandler(this.pictureBox3_MouseLeave);
+            this.pictureBox3.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pictureBox3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseMove);
             // 
             // pictureBox2
@@ -522,7 +522,7 @@
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            this.pictureBox2.MouseLeave += new System.EventHandler(this.pictureBox2_MouseLeave_1);
+            this.pictureBox2.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseMove);
             // 
             // pictureBox1
@@ -534,7 +534,7 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
             // InstrPanel
@@ -640,13 +640,14 @@
             // rec_name
             // 
             this.rec_name.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rec_name.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rec_name.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rec_name.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rec_name.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rec_name.Location = new System.Drawing.Point(3, 20);
+            this.rec_name.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
             this.rec_name.Multiline = true;
             this.rec_name.Name = "rec_name";
             this.rec_name.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.rec_name.Size = new System.Drawing.Size(613, 27);
+            this.rec_name.Size = new System.Drawing.Size(613, 31);
             this.rec_name.TabIndex = 1;
             // 
             // DifficultyPanel
@@ -677,8 +678,8 @@
             // 
             // markDif
             // 
-            this.markDif.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.markDif.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.markDif.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.markDif.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.markDif.FormattingEnabled = true;
             this.markDif.Items.AddRange(new object[] {
             "1",
@@ -688,7 +689,7 @@
             "5"});
             this.markDif.Location = new System.Drawing.Point(3, 22);
             this.markDif.Name = "markDif";
-            this.markDif.Size = new System.Drawing.Size(305, 37);
+            this.markDif.Size = new System.Drawing.Size(305, 41);
             this.markDif.TabIndex = 1;
             // 
             // TimePanel
@@ -720,12 +721,13 @@
             // time_rec
             // 
             this.time_rec.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.time_rec.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.time_rec.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.time_rec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.time_rec.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.time_rec.Location = new System.Drawing.Point(3, 21);
+            this.time_rec.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.time_rec.Mask = "00:00:00";
             this.time_rec.Name = "time_rec";
-            this.time_rec.Size = new System.Drawing.Size(312, 29);
+            this.time_rec.Size = new System.Drawing.Size(312, 33);
             this.time_rec.TabIndex = 1;
             // 
             // CategoryPanel
@@ -757,12 +759,12 @@
             // CategoryCB
             // 
             this.CategoryCB.BackColor = System.Drawing.Color.White;
-            this.CategoryCB.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.CategoryCB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CategoryCB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CategoryCB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CategoryCB.FormattingEnabled = true;
-            this.CategoryCB.Location = new System.Drawing.Point(3, 30);
+            this.CategoryCB.Location = new System.Drawing.Point(3, 27);
             this.CategoryCB.Name = "CategoryCB";
-            this.CategoryCB.Size = new System.Drawing.Size(312, 37);
+            this.CategoryCB.Size = new System.Drawing.Size(312, 41);
             this.CategoryCB.TabIndex = 2;
             // 
             // PhotoPanel
@@ -897,22 +899,12 @@
             // 
             this.startPage.Controls.Add(this.startLabel);
             this.startPage.Controls.Add(this.startBox);
-            this.startPage.Location = new System.Drawing.Point(4, 30);
+            this.startPage.Location = new System.Drawing.Point(4, 22);
             this.startPage.Name = "startPage";
-            this.startPage.Size = new System.Drawing.Size(1021, 652);
+            this.startPage.Size = new System.Drawing.Size(1021, 660);
             this.startPage.TabIndex = 6;
             this.startPage.Text = "tabPage1";
             this.startPage.UseVisualStyleBackColor = true;
-            // 
-            // startBox
-            // 
-            this.startBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("startBox.BackgroundImage")));
-            this.startBox.Location = new System.Drawing.Point(106, 3);
-            this.startBox.Name = "startBox";
-            this.startBox.Size = new System.Drawing.Size(755, 403);
-            this.startBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.startBox.TabIndex = 0;
-            this.startBox.TabStop = false;
             // 
             // startLabel
             // 
@@ -923,6 +915,16 @@
             this.startLabel.TabIndex = 1;
             this.startLabel.Text = "label1";
             this.startLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // startBox
+            // 
+            this.startBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("startBox.BackgroundImage")));
+            this.startBox.Location = new System.Drawing.Point(106, 3);
+            this.startBox.Name = "startBox";
+            this.startBox.Size = new System.Drawing.Size(755, 403);
+            this.startBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.startBox.TabIndex = 0;
+            this.startBox.TabStop = false;
             // 
             // closeB
             // 
@@ -947,6 +949,7 @@
             this.Controls.Add(this.lab);
             this.Controls.Add(this.buttonPanel);
             this.Controls.Add(this.tabContr);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

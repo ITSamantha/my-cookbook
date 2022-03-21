@@ -22,11 +22,13 @@ namespace MainForm
             General_Rec=2,
             Add_Rec=3,
             Settings=4,
-            Help=5
+            Help=5,
+            Start_Page=6
         }
 
         public enum Star_Marks : int
         {
+            NoMark=0,
             Mark1=1,
             Mark2=2,
             Mark3=3,
@@ -34,7 +36,7 @@ namespace MainForm
             Mark5=5
         }
             //ПРОВЕРЬ СООТВЕТСТВИЕ ВСЕХ КНОПОК
-        public int whatClicked = 0;
+        public int whatClicked = (int)Star_Marks.NoMark;
 
         public int whatButtonClicked = -1;
 
@@ -44,12 +46,13 @@ namespace MainForm
 
         public Instruments Instruments;
 
+        List<TableLayoutPanel> myList ;
+
         public MainForm()
         {
             InitializeComponent();
-
-            //Подключение БД
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv; Database = MyDatabase; ");
+            
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv; Database = MyDatabase; ");//Подключение БД
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
 
@@ -57,66 +60,77 @@ namespace MainForm
 
             LangCB.SelectedIndex = 0;//Начальный язык - русский
 
-            markDif.SelectedIndex = 0;//Начальная оценка сложности-1
+            markDif.SelectedIndex = 0;//Начальная оценка сложности  - 1
 
-            tabContr.SelectedIndex = 6;
+            tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
             
-        }//СДЕЛАТЬ НЕ КЛИКАБЕЛЬНЫМИ СТРАНИЧНЫЕ ТАБЫ
-        //ИЗМЕНЕНИЕ ШРИФТА ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМ
-        //ДОБАВИТЬ ТАБ ДЛЯ РЕЗУЛЬТАТА ПОИСКА?
-        
+        }
+
+        private void closeB_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+
+        //Обработка нажатия кнопок меню
         private void myRecB_Click(object sender, EventArgs e)//Раздел "Мои рецепты"
         {
             checkButtonsColors((int)Buttons.My_Rec);
             tabContr.SelectedIndex = (int)Buttons.My_Rec;
             whatButtonClicked=(int)Buttons.My_Rec;
-            /*ControllerForBD.StartSelectAllMyRecipes();
+            ControllerForBD.StartSelectAllMyRecipes();
             Thread thread = new Thread(showAllMyRecipes);
-            thread.Start();*/
+            thread.Start();
         
         }
 
-        private void favB_Click(object sender, EventArgs e)
+        private void favB_Click(object sender, EventArgs e)//Раздел "Избранное"
         {
             checkButtonsColors((int)Buttons.Fav_Rec);
             tabContr.SelectedIndex = (int)Buttons.Fav_Rec;
             whatButtonClicked = (int)Buttons.Fav_Rec;
         }
 
-        private void generalB_Click(object sender, EventArgs e)
+        private void generalB_Click(object sender, EventArgs e)//Раздел "Общие рецепты"
         {
             checkButtonsColors((int)Buttons.General_Rec);
             tabContr.SelectedIndex = (int)Buttons.General_Rec;
             whatButtonClicked = (int)Buttons.General_Rec;
         }
 
-        private void addRecB_Click(object sender, EventArgs e)
+        private void addRecB_Click(object sender, EventArgs e)//Раздел "Добавление рецепта"
         {
             checkButtonsColors((int)Buttons.Add_Rec);
             tabContr.SelectedIndex = (int)Buttons.Add_Rec;
             whatButtonClicked = (int)Buttons.Add_Rec;
         }
         
-        private void settingsB_Click(object sender, EventArgs e)
+        private void settingsB_Click(object sender, EventArgs e)//Раздел "Настройки"
         {
             checkButtonsColors((int)Buttons.Settings);
             tabContr.SelectedIndex = (int)Buttons.Settings;
             whatButtonClicked = (int)Buttons.Settings;
         }
 
-        private void helpB_Click(object sender, EventArgs e)
+        private void helpB_Click(object sender, EventArgs e)//Раздел "Помощь"
         {
             checkButtonsColors((int)Buttons.Help);
             tabContr.SelectedIndex = (int)Buttons.Help;
             whatButtonClicked = (int)Buttons.Help;
         }
-        
+
         //Обработка событий с оценкой рецепта
         //ДОДЕЛАТЬ ЛОГИКУ С БД!
         // МБ ЧТО-ТО С НОМЕРАМИ ТИПА ЕСЛИ 4, ТО ПЕРЕД ЭТИМ ЕЩЕ 1,2,3,4??
+
+        private void pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            allStarsOpacityNull();
+        }
+
         private void pictureBox1_Click(object sender, EventArgs e)//Star1
         {
-            whatClicked = 1;
+            whatClicked = (int)Star_Marks.Mark1;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameOpacity);
             pictureBox3.Image = Image.FromFile(ImageFileNameOpacity);
@@ -126,9 +140,8 @@ namespace MainForm
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (whatClicked ==0)
+            if (whatClicked == (int)Star_Marks.NoMark)
             {
-
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox2.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox3.Image = Image.FromFile(ImageFileNameOpacity);
@@ -136,15 +149,10 @@ namespace MainForm
                 pictureBox5.Image = Image.FromFile(ImageFileNameOpacity);
             }
         }
-
-        private void pictureBox1_MouseLeave(object sender, EventArgs e)
-        {
-            allStarsOpacityNull();
-        }
-
+        
         private void pictureBox2_Click(object sender, EventArgs e)//Star2
         {
-            whatClicked = 2;
+            whatClicked = (int)Star_Marks.Mark2;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameFull);
             pictureBox3.Image = Image.FromFile(ImageFileNameOpacity);
@@ -154,7 +162,7 @@ namespace MainForm
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (whatClicked ==0)
+            if (whatClicked == (int)Star_Marks.NoMark)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox2.Image = Image.FromFile(ImageFileNameFull);
@@ -164,14 +172,9 @@ namespace MainForm
             }
         }
 
-        private void pictureBox2_MouseLeave_1(object sender, EventArgs e)
-        {
-            allStarsOpacityNull();
-        }
-
         private void pictureBox3_Click(object sender, EventArgs e)//Star3
         {
-            whatClicked = 3;
+            whatClicked = (int)Star_Marks.Mark3;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameFull);
             pictureBox3.Image = Image.FromFile(ImageFileNameFull);
@@ -181,7 +184,7 @@ namespace MainForm
 
         private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
         {
-            if (whatClicked ==0)
+            if (whatClicked == (int)Star_Marks.NoMark)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox2.Image = Image.FromFile(ImageFileNameFull);
@@ -190,15 +193,10 @@ namespace MainForm
                 pictureBox5.Image = Image.FromFile(ImageFileNameOpacity);
             }
         }
-
-        private void pictureBox3_MouseLeave(object sender, EventArgs e)
-        {
-            allStarsOpacityNull();
-        }
-
+        
         private void pictureBox4_Click(object sender, EventArgs e)//Star4
         {
-            whatClicked = 4;
+            whatClicked = (int)Star_Marks.Mark4;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameFull);
             pictureBox3.Image = Image.FromFile(ImageFileNameFull);
@@ -208,7 +206,7 @@ namespace MainForm
 
         private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
         {
-            if (whatClicked ==0)
+            if (whatClicked == (int)Star_Marks.NoMark)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox2.Image = Image.FromFile(ImageFileNameFull);
@@ -218,14 +216,9 @@ namespace MainForm
             }
         }
 
-        private void pictureBox4_MouseLeave(object sender, EventArgs e)
-        {
-            allStarsOpacityNull();
-        }
-
         private void pictureBox5_Click(object sender, EventArgs e)//Star5
         {
-            whatClicked = 5;
+            whatClicked = (int)Star_Marks.Mark5;
             pictureBox1.Image = Image.FromFile(ImageFileNameFull);
             pictureBox2.Image = Image.FromFile(ImageFileNameFull);
             pictureBox3.Image = Image.FromFile(ImageFileNameFull);
@@ -235,7 +228,7 @@ namespace MainForm
 
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
-            if (whatClicked ==0)
+            if (whatClicked == (int)Star_Marks.NoMark)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameFull);
                 pictureBox2.Image = Image.FromFile(ImageFileNameFull);
@@ -245,21 +238,10 @@ namespace MainForm
             }
         }
 
-        private void pictureBox5_MouseLeave(object sender, EventArgs e)
+        private void RecReadyB_Click(object sender, EventArgs e)//Добавление рецепта в таблицу "Мои рецепты"
         {
-            allStarsOpacityNull();
-        }
-        
-        private void RecReadyB_Click(object sender, EventArgs e)//Insert recipe into DB
-        {
-            ImageConverter converter = new ImageConverter();//Конвертация фото в bytea
-
-            Byte[] b = (byte[])converter.ConvertTo(this.RecPhoto.Image, typeof(byte[]));
-
-            Image img = (Image)converter.ConvertFrom(b);
-
-            if (ControllerForBD.InsertToMyRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text/*, b*/)){
-                MessageBox.Show("Рецепт успешно добавлен.","Оповещение");//МБ СДЕЛАТЬ СВОЮ ФОРМУ
+            if (ControllerForBD.InsertToMyRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text, Instruments.convertImageIntoB(this.RecPhoto.Image))){
+                MessageBox.Show("Рецепт успешно добавлен.","Добавление рецепта");//МБ СДЕЛАТЬ СВОЮ ФОРМУ
             }
         }
 
@@ -274,13 +256,13 @@ namespace MainForm
         Возвращает тру - если добавил, фолс - если нет.
         */
 
-        private void LangCB_SelectedIndexChanged(object sender, EventArgs e)
+        private void LangCB_SelectedIndexChanged(object sender, EventArgs e)//Смена языка в приложении
         {
-            if (LangCB.SelectedIndex == 0)//Ru
+            if (LangCB.SelectedIndex == 0)//Русский
             {
                 LanguagesForAddingRecipe.isRu = true;
             }
-            if (LangCB.SelectedIndex == 1)//En
+            if (LangCB.SelectedIndex == 1)//Английский
             {
                 LanguagesForAddingRecipe.isRu = false;
             }
@@ -298,7 +280,7 @@ namespace MainForm
 
         }
 
-        private void RecPhoto_Click(object sender, EventArgs e)//Добавление фото в рецепт
+        private void RecPhoto_Click(object sender, EventArgs e)//Добавление фото в рецепт ДОДЕЛАТЬ!??!?!?
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -312,9 +294,8 @@ namespace MainForm
             
         }
 
-        private void MainForm_SizeChanged(object sender, EventArgs e)//Изменение размеров формы
+        private void MainForm_SizeChanged(object sender, EventArgs e)//Изменение размеров элементов при изменении размеров формы
         {
-           
             if (Size.Width <= 1560||Size.Height<=746)
             {
                 myRecB.Font = new Font(myRecB.Font.FontFamily, 14.5f, myRecB.Font.Style);
@@ -337,55 +318,48 @@ namespace MainForm
             }
             formChanges(Size.Width, Size.Height);
         }
+        
 
-        //Функции
-
-        public void formChanges(int x,int y)
-        {//ШРИФТЫ?!
+        public void formChanges(int x,int y)//Изменения размеров элементов формы
+        {
             Instruments = new Instruments(x,y);
 
-            Width =x;//ИЗМЕНЕНИЕ ФОРМЫ-ИЗМЕНЕНИЕ РАЗМЕРОВ ДОДЕЛАЙ!Про класс Instruments не забудь
+            Width =x;
             
             Height =y;
 
-            buttonPanel.Size = new Size(Instruments.buttonPanelWidth, Instruments.formHeight);//Размер панели кнопок
+            buttonPanel.Size = new Size(Instruments.buttonPanelWidth, Instruments.formHeight);
 
-            buttonPanel.BackColor = Color.FromArgb(242, 242, 242);
+            buttonPanel.BackColor = Instruments.buttonPanelColor;
 
-            SetRoundedShape(myRecB, 10);
+            tabContr.SetBounds(buttonPanel.Size.Width - 1, Instruments.heightOfLabels + 5 - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth + 3, Instruments.formHeight - lab.Height + Instruments.tabControlOffset);
 
-            myRecB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+            myRecB.FlatAppearance.MouseOverBackColor= favB.FlatAppearance.MouseOverBackColor = generalB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
 
-            favB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+            addRecB.FlatAppearance.MouseOverBackColor= settingsB.FlatAppearance.MouseOverBackColor= helpB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
 
-            generalB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+            Instruments.SetRoundedShape(myRecB, Instruments.radius);
 
-            addRecB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+            Instruments.SetRoundedShape(favB, Instruments.radius);
 
-            settingsB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+            Instruments.SetRoundedShape(generalB, Instruments.radius);
 
-            helpB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+            Instruments.SetRoundedShape(addRecB, Instruments.radius);
 
-            SetRoundedShape(favB, 15);
+            Instruments.SetRoundedShape(settingsB, Instruments.radius);
 
-            SetRoundedShape(generalB, 15);
+            Instruments.SetRoundedShape(helpB, Instruments.radius);
 
-            SetRoundedShape(addRecB, 15);
+            Instruments.SetRoundedShape(startBox, Instruments.radius);
 
-            SetRoundedShape(settingsB, 15);
+            startBox.SetBounds(Instruments.intervalX + Instruments.intervalX / 6, Instruments.intervalHeight / 4, (int)((Instruments.formWidth - Instruments.buttonPanelWidth) / 1.5), 7 * Instruments.intervalHeight);
 
-            SetRoundedShape(helpB, 15);
-
-            lab.BackColor = Instruments.myPurpleColor;
+            startLabel.SetBounds(startBox.Bounds.X, startBox.Bounds.Y + startBox.Height, startBox.Width, Instruments.intervalHeight);
 
             lab.Size = new Size(Instruments.formWidth, Instruments.heightOfLabels+5);
 
-            tabContr.SetBounds(buttonPanel.Size.Width-1, Instruments.heightOfLabels+5-Instruments.tabControlOffset ,Instruments.formWidth - Instruments.buttonPanelWidth,Instruments.formHeight - lab.Height+Instruments.tabControlOffset);//TabControl размер
-
-            startBox.SetBounds(Instruments.intervalX,0, (int)((Instruments.formWidth - Instruments.buttonPanelWidth)/1.5), 7*Instruments.intervalHeight);
-
-            startLabel.SetBounds(startBox.Bounds.X, startBox.Bounds.Y+startBox.Height, startBox.Width, Instruments.intervalHeight);
-
+            lab.BackColor = Instruments.myPurpleColor;
+            
             closeB.SetBounds(Instruments.formWidth-Instruments.heightOfLabels-20, 0, Instruments.heightOfLabels +5, Instruments.heightOfLabels + 5);
 
             closeB.BackColor = Instruments.myPurpleColor;
@@ -399,6 +373,8 @@ namespace MainForm
                 
                 //"Название"
                 {
+                    Instruments.SetRoundedShape(TitlePanel, Instruments.radius);
+
                     TitlePanel.BackColor = Instruments.myPurpleColor;
 
                     TitlePanel.SetBounds(addRecPage.Bounds.X + Instruments.intervalX/4,AddLabel.Height+Instruments.intervalHeight/4, (int)(3.25*Instruments.intervalX),Instruments.intervalHeight);
@@ -406,6 +382,8 @@ namespace MainForm
 
                 //"Фото"
                 {
+                    Instruments.SetRoundedShape(PhotoPanel, Instruments.radius);
+
                     PhotoPanel.BackColor = Instruments.myPurpleColor;
 
                     PhotoPanel.SetBounds(TitlePanel.Bounds.X, TitlePanel.Bounds.Y+TitlePanel.Height+Instruments.intervalHeight/2, 2*Instruments.intervalX/*5 * Instruments.intervalHeight*/,  5*Instruments.intervalHeight);
@@ -415,6 +393,8 @@ namespace MainForm
 
                 //"Оценка рецепта"
                 {
+                    Instruments.SetRoundedShape(RatingPanel, Instruments.radius);
+
                     RatingPanel.BackColor = Instruments.myPurpleColor;
 
                     RatingPanel.SetBounds(PhotoPanel.Bounds.X+PhotoPanel.Width+Instruments.intervalX/8, TitlePanel.Bounds.Y + TitlePanel.Height + Instruments.intervalHeight/2,Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
@@ -422,13 +402,17 @@ namespace MainForm
                 
                 //"Категория"
                 {
+                    Instruments.SetRoundedShape(CategoryPanel, Instruments.radius);
+
                     CategoryPanel.BackColor = Instruments.myPurpleColor;
 
                     CategoryPanel.SetBounds(RatingPanel.Bounds.X, RatingPanel.Bounds.Y+RatingPanel.Height+Instruments.intervalHeight/3,Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
                 }
 
                 //"Время приготовления"
-                {//ДОБАВИТЬ ПЛЕЙСХОЛДЕР
+                {
+                    Instruments.SetRoundedShape(TimePanel, Instruments.radius);
+
                     TimePanel.BackColor = Instruments.myPurpleColor;
 
                     TimePanel.SetBounds(RatingPanel.Bounds.X, CategoryPanel.Bounds.Y + CategoryPanel.Height + Instruments.intervalHeight / 3, Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
@@ -438,6 +422,8 @@ namespace MainForm
 
                 //"Сложность"
                 {
+                    Instruments.SetRoundedShape(DifficultyPanel, Instruments.radius);
+
                     DifficultyPanel.BackColor = Instruments.myPurpleColor;
 
                     DifficultyPanel.SetBounds(RatingPanel.Bounds.X, TimePanel.Bounds.Y+TimePanel.Height + Instruments.intervalHeight / 3, Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
@@ -445,6 +431,8 @@ namespace MainForm
                 
                 //"Ингредиенты"
                 {
+                    Instruments.SetRoundedShape(IngrPanel, Instruments.radius);
+
                     IngrPanel.BackColor = Instruments.myPurpleColor;
 
                     IngrPanel.SetBounds(TitlePanel.Bounds.X+TitlePanel.Width+Instruments.intervalX / 4, AddLabel.Height + Instruments.intervalHeight / 4, (int)(3.07 * Instruments.intervalX), 3 * Instruments.intervalHeight);
@@ -452,6 +440,8 @@ namespace MainForm
 
                 //"Инструкция"
                 {
+                    Instruments.SetRoundedShape(InstrPanel, Instruments.radius);
+
                     InstrPanel.BackColor = Instruments.myPurpleColor;
 
                     InstrPanel.SetBounds(IngrPanel.Bounds.X, IngrPanel.Bounds.Y + IngrPanel.Height + Instruments.intervalHeight/2, (int)(3.07 * Instruments.intervalX), 3 * Instruments.intervalHeight);
@@ -481,6 +471,8 @@ namespace MainForm
 
                 //"Смена языка"
                 {
+                    Instruments.SetRoundedShape(LanguagePanel, Instruments.radius);
+
                     LanguagePanel.BackColor = Instruments.myPurpleColor;
 
                     LanguagePanel.SetBounds(settingsPage.Bounds.X + Instruments.intervalX/2, SettingsL.Bounds.X+SettingsL.Height+Instruments.intervalY, 3*Instruments.intervalX, Instruments.intervalHeight);
@@ -505,15 +497,11 @@ namespace MainForm
                 //Панель для избранных рецептов
                 {
                     fav_recipes_list.SetBounds(FavPage.Bounds.X + (int)(Instruments.intervalX), myL.Bounds.Y + myL.Height , 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
-                    //ControllerForBD.StartSelectAllMyRecipes();
-                    //Thread thread = new Thread(showAllMyRecipes);
-                    //thread.Start();
                 }
             }
 
             //MyRecPage changes
             {
-                whatClicked = 1;
                 //"Заголовок"
                 {
                     myL.SetBounds(MyRecPage.Bounds.X, MyRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
@@ -521,7 +509,6 @@ namespace MainForm
 
                 //Панель для моих рецептов
                 {
-                    whatClicked = 1;
                     my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height , 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight)); 
                 }
             }
@@ -597,29 +584,30 @@ namespace MainForm
 
         }
 
-        public void categoryInit()
+        public void categoryInit()//Инициализация категорий в соответствии с языком
         {
             CategoryCB.Items.Clear();
             if (LanguagesForAddingRecipe.isRu)
             {
-                foreach (var item in LanguagesForAddingRecipe.categoriesRu)//Инициализация категорий
+                foreach (var item in LanguagesForAddingRecipe.categoriesRu)
                 {
                     CategoryCB.Items.Add(item);
                 }
+                CategoryCB.SelectedIndex = 0;
             }
             else
             {
-                foreach (var item in LanguagesForAddingRecipe.categoriesEn)//Инициализация категорий
+                foreach (var item in LanguagesForAddingRecipe.categoriesEn)
                 {
                     CategoryCB.Items.Add(item);
                 }
+                CategoryCB.SelectedIndex = 1;
             }
-            CategoryCB.SelectedIndex = 0;
         }
 
         private void allStarsOpacityNull()
         {
-            if (whatClicked ==0)
+            if (whatClicked ==(int)Star_Marks.NoMark)
             {
                 pictureBox1.Image = Image.FromFile(ImageFileNameOpacity);
                 pictureBox2.Image = Image.FromFile(ImageFileNameOpacity);
@@ -632,14 +620,22 @@ namespace MainForm
         private void cleanAddRecForm()
         {
             rec_name.Clear();
-            //RecPhoto.Image= Image.FromFile(??);
+
             markDif.SelectedIndex = 0;
+
             time_rec.Clear();
+
             CategoryCB.SelectedIndex = 0;
+
             Ingr_rec.Clear();
+
             Instr_rec.Clear();
-            whatClicked = 0;
+
+            whatClicked = (int)Star_Marks.NoMark;
+
             allStarsOpacityNull();
+
+            //RecPhoto.Image = Image.FromFile();
         }
 
         //Функция для проверки активности кнопок
@@ -647,42 +643,42 @@ namespace MainForm
         {
             if (num == (int)Buttons.My_Rec)
             {
-                if (myRecB.BackColor != Color.Gainsboro) { myRecB.BackColor = Color.Gainsboro; }
+                if (myRecB.BackColor != Instruments.myButtonHighlightColor) { myRecB.BackColor = Instruments.myButtonHighlightColor; }
             }
             else { myRecB.BackColor = Color.Transparent; }
 
             if (num == (int)Buttons.Fav_Rec)
             {
-                if (favB.BackColor != Color.Gainsboro) { favB.BackColor = Color.Gainsboro; }
+                if (favB.BackColor != Instruments.myButtonHighlightColor) { favB.BackColor = Instruments.myButtonHighlightColor; }
             }
             else { favB.BackColor = Color.Transparent; }
 
             if (num == (int)Buttons.General_Rec)
             {
-                if (generalB.BackColor != Color.Gainsboro) { generalB.BackColor = Color.Gainsboro; }
+                if (generalB.BackColor != Instruments.myButtonHighlightColor) { generalB.BackColor = Instruments.myButtonHighlightColor; }
             }
             else { generalB.BackColor = Color.Transparent; }
 
             if (num == (int)Buttons.Add_Rec)
             {
-                if (addRecB.BackColor != Color.Gainsboro) { addRecB.BackColor = Color.Gainsboro; }
+                if (addRecB.BackColor != Instruments.myButtonHighlightColor) { addRecB.BackColor = Instruments.myButtonHighlightColor; }
             }
             else { addRecB.BackColor = Color.Transparent; }
 
             if (num == (int)Buttons.Settings)
             {
-                if (settingsB.BackColor != Color.Gainsboro) { settingsB.BackColor = Color.Gainsboro; }
+                if (settingsB.BackColor != Instruments.myButtonHighlightColor) { settingsB.BackColor = Instruments.myButtonHighlightColor; }
             }
             else { settingsB.BackColor = Color.Transparent; }
 
             if (num == (int)(int)Buttons.Help)
             {
-                if (helpB.BackColor != Color.Gainsboro) {helpB.BackColor = Color.Gainsboro; }
+                if (helpB.BackColor != Instruments.myButtonHighlightColor) {helpB.BackColor = Instruments.myButtonHighlightColor; }
             }
             else { helpB.BackColor = Color.Transparent; }
         }
     
-        public void showAllMyRecipes()//Показать все мои рецепты
+        public void showAllMyRecipes()//Вывести все "Мои рецепты"
         {
             bool isAll = false;
 
@@ -693,8 +689,10 @@ namespace MainForm
             int partsForPanel = 18;
 
             int i = 0;
-
-            List<TableLayoutPanel> myList = new List<TableLayoutPanel>();
+            
+            int counter = 0;
+            
+            myList = new List<TableLayoutPanel>();
 
             while (!isAll)
             {
@@ -704,18 +702,60 @@ namespace MainForm
                     {
                        Recipe r = ControllerForBD.myRecipes.ElementAt(0);
 
-                       TableLayoutPanel t = new TableLayoutPanel();//Закругленные углы на панели?
- 
-                       t.SetBounds(intervalX, (i) , partsForPanel*intervalX,InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+                       TableLayoutPanel t = new TableLayoutPanel();
 
-                       SetRoundedShape(t, 20);
+                       counter++;
+
+                       if (counter % 2 == 0)
+                       {
+                            t.SetBounds(intervalX+ (partsForPanel/2) * intervalX, i, (partsForPanel/2) * intervalX, 2*InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+
+                            i += t.Height + intervalY;
+                        }
+                       else
+                       {
+                            t.SetBounds(0, (i), (partsForPanel / 2) * intervalX, 2*InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+                       }
+                      
+                       Instruments.SetRoundedShape(t, 20);
                         //ИЗМЕНЕНИЕ РАЗМЕРОВ ПАНЕЛИ ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМЫ ДОДЕЛАТЬ
-                       t.ColumnCount = 2;
+                       t.ColumnCount = 1;
 
-                       i += t.Height+intervalY;
+                       t.RowCount = 10;
+     
+                       t.BackgroundImage = Image.FromFile("C: \\Users\\diana\\Desktop\\c.jpg");
 
-                        // t.BackColor = Instruments.myPurpleColor;
-                        t.BackColor = Color.FromArgb(235, 232, 232);
+                       t.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
+
+                       t.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
+
+                       Label l = new Label();
+
+                       l.Text = r.Name;
+
+                       l.Size = new Size(t.Width, t.Height / 6);//СДЕЛАТЬ ЗАВИСИМОСТЬ ОТ КОЛИЧЕСТВА СИМВОЛОВ?
+
+                       l.AutoSize = false;
+
+                       l.TextAlign = ContentAlignment.MiddleRight;
+
+                       l.Font= new Font(CategoryCB.Font.FontFamily, 20f, CategoryCB.Font.Style);//MYRECB!
+
+                       t.Controls.Add(l,1,9);
+                        
+                       t.SetRowSpan(t.Controls[0], 2);//С МЕРЦАНИЕМ РАЗОБРАТЬСЯ?ЧТО ДЕЛАТЬ С ОБНОВЛЕНИЕМ7!
+
+                        Label time = new Label();
+                       time.Font = l.Font;
+                        time.Size = new Size(t.Width, t.Height / 10);//ТОЖЕ ЗАВИСИМОСТЬ 
+                        time.TextAlign = ContentAlignment.MiddleRight;
+                        time.AutoSize = false;
+                        time.Text = "Время приготовления(ч:м:с):"+r.Time;
+
+                        t.Controls.Add(time, 1, 10);
+
+                        t.SetRowSpan(t.Controls[1], 2);//С МЕРЦАНИЕМ РАЗОБРАТЬСЯ?
+
                         myList.Add(t);
                        
                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(t)));
@@ -743,6 +783,28 @@ namespace MainForm
 
             }
         }
+
+        public static void SetDoubleBuffered(Control c)//Устранение мерцания
+        {
+            if (System.Windows.Forms.SystemInformation.TerminalServerSession)
+                return;
+            System.Reflection.PropertyInfo aProp = typeof(Control).GetProperty("DoubleBuffered",
+            System.Reflection.BindingFlags.NonPublic |
+            System.Reflection.BindingFlags.Instance);
+            aProp.SetValue(c, true, null);
+        }
+       
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
+
+
         //А КАК ЛУЧШЕ СДЕЛАТЬ СЧЕТ?g КООРДИНАТАМ!!!
         /*Обработчик для нескольких кнопок
          foreach (var item in this.Controls) //обходим все элементы формы
@@ -754,23 +816,6 @@ namespace MainForm
     } 
              */
 
-        public static void SetRoundedShape(Control control, int radius)
-        {
-            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
-            path.AddLine(radius, 0, control.Width - radius, 0);
-            path.AddArc(control.Width - radius, 0, radius, radius, 270, 90);
-            path.AddLine(control.Width, radius, control.Width, control.Height - radius);
-            path.AddArc(control.Width - radius, control.Height - radius, radius, radius, 0, 90);
-            path.AddLine(control.Width - radius, control.Height, radius, control.Height);
-            path.AddArc(0, control.Height - radius, radius, radius, 90, 90);
-            path.AddLine(0, control.Height - radius, 0, radius);
-            path.AddArc(0, 0, radius, radius, 180, 90);
-            control.Region = new Region(path);
-        }
 
-        private void closeB_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
     }
 }
