@@ -745,7 +745,7 @@ namespace MainForm
                         
                        t.SetRowSpan(t.Controls[0], 2);//С МЕРЦАНИЕМ РАЗОБРАТЬСЯ?ЧТО ДЕЛАТЬ С ОБНОВЛЕНИЕМ7!
 
-                        Label time = new Label();
+                        Label time = new Label();//ПЕРЕМЕСТИТЬ ЦВЕТ ИЗ FORMCHANGES
                        time.Font = l.Font;
                         time.Size = new Size(t.Width, t.Height / 10);//ТОЖЕ ЗАВИСИМОСТЬ 
                         time.TextAlign = ContentAlignment.MiddleRight;
