@@ -509,7 +509,7 @@ namespace MainForm
 
                 //Панель для моих рецептов
                 {
-                    my_recipes_list.SetBounds(MyRecPage.Bounds.X + (int)( Instruments.intervalX), myL.Bounds.Y + myL.Height , 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight)); 
+                    my_recipes_list.SetBounds(MyRecPage.Bounds.X +Instruments.intervalX/6, myL.Bounds.Y + myL.Height , Instruments.formWidth-Instruments.buttonPanelWidth, Instruments.heightOfTabControlWithoutLabels-(int)(1.5*Instruments.intervalHeight)); 
                 }
             }
 
@@ -708,53 +708,57 @@ namespace MainForm
 
                        if (counter % 2 == 0)
                        {
-                            t.SetBounds(intervalX+ (partsForPanel/2) * intervalX, i, (partsForPanel/2) * intervalX, 2*InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+                            t.SetBounds(intervalX+ (int)(partsForPanel/2) * intervalX, i, (int)(partsForPanel/2) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
 
                             i += t.Height + intervalY;
                         }
                        else
                        {
-                            t.SetBounds(0, (i), (partsForPanel / 2) * intervalX, 2*InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+                            t.SetBounds(0, (i), (int)(partsForPanel/2 ) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
                        }
-                      
-                       Instruments.SetRoundedShape(t, 20);
-                        //ИЗМЕНЕНИЕ РАЗМЕРОВ ПАНЕЛИ ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМЫ ДОДЕЛАТЬ
-                       t.ColumnCount = 1;
-
-                       t.RowCount = 10;
-     
-                       t.BackgroundImage = Image.FromFile("C: \\Users\\diana\\Desktop\\c.jpg");
-
-                       t.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
-
-                       t.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
-
+                        t.ColumnCount = 2;
+                        t.RowCount = 2;
+                       t.BackColor = Instruments.buttonPanelColor;
+                        t.ColumnCount = 2;
+                       Instruments.SetRoundedShape(t, 80);
+                       //ИЗМЕНЕНИЕ РАЗМЕРОВ ПАНЕЛИ ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМЫ ДОДЕЛАТЬ
+                       PictureBox pb = new PictureBox();
+                        //ТУТ ПРЕОБРАЗОВАНИЕ БАЙТОВ В КАРТИНКУ
+                        pb.SizeMode = PictureBoxSizeMode.Zoom;
+                        pb.BackgroundImage= Image.FromFile("C: \\Users\\diana\\Desktop\\c.jpg");
+                       
+                       t.Controls.Add(pb,0,1);
+                        
+                       t.Controls[0].SetBounds(t.Bounds.X, t.Bounds.Y, t.Size.Width / 2, t.Size.Height);
+                        
+                       Instruments.SetRoundedShape(t.Controls[0], 80);
+                        
                        Label l = new Label();
-
-                       l.Text = r.Name;
-
-                       l.Size = new Size(t.Width, t.Height / 6);//СДЕЛАТЬ ЗАВИСИМОСТЬ ОТ КОЛИЧЕСТВА СИМВОЛОВ?
-
+                        
                        l.AutoSize = false;
 
-                       l.TextAlign = ContentAlignment.MiddleRight;
+                       l.TextAlign = ContentAlignment.TopLeft;
 
-                       l.Font= new Font(CategoryCB.Font.FontFamily, 20f, CategoryCB.Font.Style);//MYRECB!
+                       l.Font= new Font(myRecB.Font.FontFamily, 23.5f, myRecB.Font.Style);
+                       
+                       t.Controls.Add(l,1,1);
 
-                       t.Controls.Add(l,1,9);
+                       t.Controls[1].SetBounds(0, t.Controls[0].Bounds.Y, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height );
                         
-                       t.SetRowSpan(t.Controls[0], 2);//С МЕРЦАНИЕМ РАЗОБРАТЬСЯ?ЧТО ДЕЛАТЬ С ОБНОВЛЕНИЕМ7!
+                        t.Controls[1].Text = r.Name+ Environment.NewLine +"Сложность: " + r.Markdif + " / 5" + Environment.NewLine + "Время приготовления: " + r.Time+"(ч:м:с)";
 
-                        Label time = new Label();//ПЕРЕМЕСТИТЬ ЦВЕТ ИЗ FORMCHANGES
-                       time.Font = l.Font;
-                        time.Size = new Size(t.Width, t.Height / 10);//ТОЖЕ ЗАВИСИМОСТЬ 
-                        time.TextAlign = ContentAlignment.MiddleRight;
-                        time.AutoSize = false;
-                        time.Text = "Время приготовления(ч:м:с):"+r.Time;
 
-                        t.Controls.Add(time, 1, 10);
+                        //t.Controls[2].SetBounds(0, t.Controls[0].Bounds.Y, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height /2);
+                        // Label time = new Label();//ПЕРЕМЕСТИТЬ ЦВЕТ ИЗ FORMCHANGES
+                        //time.Font = l.Font;
+                        //time.Size = new Size(t.Width, t.Height / 10);//ТОЖЕ ЗАВИСИМОСТЬ 
+                        //time.TextAlign = ContentAlignment.MiddleRight;
+                        //time.AutoSize = false;
+                        //time.Text = "Время приготовления(ч:м:с):"+r.Time;
 
-                        t.SetRowSpan(t.Controls[1], 2);//С МЕРЦАНИЕМ РАЗОБРАТЬСЯ?
+                        //t.Controls.Add(time, 1, 10);
+
+                        //t.SetRowSpan(t.Controls[1], 2);//С МЕРЦАНИЕМ РАЗОБРАТЬСЯ?
 
                         myList.Add(t);
                        

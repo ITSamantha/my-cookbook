@@ -268,7 +268,7 @@
             this.lab.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lab.Location = new System.Drawing.Point(0, 0);
             this.lab.Name = "lab";
-            this.lab.Size = new System.Drawing.Size(1404, 26);
+            this.lab.Size = new System.Drawing.Size(1300, 26);
             this.lab.TabIndex = 1;
             this.lab.Text = "My CookBook";
             // 
@@ -322,10 +322,10 @@
             // 
             this.FavPage.Controls.Add(this.fav_recipes_list);
             this.FavPage.Controls.Add(this.favL);
-            this.FavPage.Location = new System.Drawing.Point(4, 22);
+            this.FavPage.Location = new System.Drawing.Point(4, 30);
             this.FavPage.Name = "FavPage";
             this.FavPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FavPage.Size = new System.Drawing.Size(1021, 660);
+            this.FavPage.Size = new System.Drawing.Size(1021, 652);
             this.FavPage.TabIndex = 1;
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
@@ -647,7 +647,7 @@
             this.rec_name.Multiline = true;
             this.rec_name.Name = "rec_name";
             this.rec_name.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.rec_name.Size = new System.Drawing.Size(613, 31);
+            this.rec_name.Size = new System.Drawing.Size(613, 24);
             this.rec_name.TabIndex = 1;
             // 
             // DifficultyPanel
@@ -944,7 +944,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1404, 781);
+            this.ClientSize = new System.Drawing.Size(1300, 781);
             this.Controls.Add(this.closeB);
             this.Controls.Add(this.lab);
             this.Controls.Add(this.buttonPanel);
