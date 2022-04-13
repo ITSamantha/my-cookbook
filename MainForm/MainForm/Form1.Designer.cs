@@ -45,7 +45,6 @@
             this.fav_recipes_list = new System.Windows.Forms.TableLayoutPanel();
             this.favL = new System.Windows.Forms.Label();
             this.GeneralPage = new System.Windows.Forms.TabPage();
-            this.general_recipes_list = new System.Windows.Forms.TableLayoutPanel();
             this.genL = new System.Windows.Forms.Label();
             this.addRecPage = new System.Windows.Forms.TabPage();
             this.CancelB = new System.Windows.Forms.Button();
@@ -91,6 +90,7 @@
             this.startLabel = new System.Windows.Forms.Label();
             this.startBox = new System.Windows.Forms.PictureBox();
             this.closeB = new System.Windows.Forms.Button();
+            this.general_recipes_list = new System.Windows.Forms.Panel();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -364,19 +364,6 @@
             this.GeneralPage.Text = "tabPage1";
             this.GeneralPage.UseVisualStyleBackColor = true;
             // 
-            // general_recipes_list
-            // 
-            this.general_recipes_list.AutoScroll = true;
-            this.general_recipes_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.general_recipes_list.ColumnCount = 1;
-            this.general_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.general_recipes_list.Location = new System.Drawing.Point(410, 276);
-            this.general_recipes_list.Name = "general_recipes_list";
-            this.general_recipes_list.RowCount = 1;
-            this.general_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.general_recipes_list.Size = new System.Drawing.Size(200, 100);
-            this.general_recipes_list.TabIndex = 6;
-            // 
             // genL
             // 
             this.genL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -401,9 +388,9 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 30);
+            this.addRecPage.Location = new System.Drawing.Point(4, 22);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
@@ -940,6 +927,14 @@
             this.closeB.UseVisualStyleBackColor = false;
             this.closeB.Click += new System.EventHandler(this.closeB_Click);
             // 
+            // general_recipes_list
+            // 
+            this.general_recipes_list.AutoScroll = true;
+            this.general_recipes_list.Location = new System.Drawing.Point(263, 93);
+            this.general_recipes_list.Name = "general_recipes_list";
+            this.general_recipes_list.Size = new System.Drawing.Size(200, 100);
+            this.general_recipes_list.TabIndex = 2;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1050,7 +1045,6 @@
         private System.Windows.Forms.MaskedTextBox time_rec;
         public System.Windows.Forms.Button myRecB;
         private System.Windows.Forms.TableLayoutPanel fav_recipes_list;
-        private System.Windows.Forms.TableLayoutPanel general_recipes_list;
         private System.Windows.Forms.Panel my_recipes_list;
         private System.Windows.Forms.Button settingsB;
         private System.Windows.Forms.Button helpB;
@@ -1058,6 +1052,7 @@
         private System.Windows.Forms.PictureBox startBox;
         private System.Windows.Forms.Label startLabel;
         private System.Windows.Forms.Button closeB;
+        private System.Windows.Forms.Panel general_recipes_list;
     }
 }
 

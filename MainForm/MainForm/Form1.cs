@@ -48,6 +48,10 @@ namespace MainForm
 
         List<TableLayoutPanel> myList;
 
+        List<TableLayoutPanel> inetList;
+
+        List<TableLayoutPanel> favList;
+
         public Thread thread;
 
         public MainForm()
@@ -81,17 +85,23 @@ namespace MainForm
         {
             checkButtonsColors((int)Buttons.My_Rec);
             tabContr.SelectedIndex = (int)Buttons.My_Rec;
+            if(whatButtonClicked!= (int)Buttons.My_Rec)
+            {
+                ControllerForBD.StartSelectAllMyRecipes();
+                thread = new Thread(showAllMyRecipes);
+                thread.Start();
+            }
             whatButtonClicked = (int)Buttons.My_Rec;
-            ControllerForBD.StartSelectAllMyRecipes();
-            thread = new Thread(showAllMyRecipes);
-            thread.Start();
-
         }
 
         private void favB_Click(object sender, EventArgs e)//Раздел "Избранное"
         {
             checkButtonsColors((int)Buttons.Fav_Rec);
             tabContr.SelectedIndex = (int)Buttons.Fav_Rec;
+            if(whatButtonClicked!= (int)Buttons.Fav_Rec)
+            {
+
+            }
             whatButtonClicked = (int)Buttons.Fav_Rec;
         }
 
@@ -99,6 +109,12 @@ namespace MainForm
         {
             checkButtonsColors((int)Buttons.General_Rec);
             tabContr.SelectedIndex = (int)Buttons.General_Rec;
+            if(whatButtonClicked!= (int)Buttons.General_Rec)
+            {
+                ControllerForBD.StartSelectAllInetRecipes();
+                thread = new Thread(showAllInetRecipes);
+                thread.Start();
+            }
             whatButtonClicked = (int)Buttons.General_Rec;
         }
 
@@ -726,6 +742,10 @@ namespace MainForm
                     if ((ControllerForBD.myRecipes.Count == 0) && (ControllerForBD.isDoneMy))
                     {
                         isAll = true;
+
+                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
+
+                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
                     }
                 }
                 else
@@ -733,16 +753,102 @@ namespace MainForm
                     if ((ControllerForBD.isDoneMy))
                     {
                         isAll = true;
-                        Label l = new Label();
-                        l.Font = new Font(myL.Font.FontFamily, 14, myL.Font.Style);
-                        l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
-                        //my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(l, 1, 0)));
+                        
+                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
 
-                        //my_recipes_list.Controls.Add(l, 1, 0);
+                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
                     }
                 }
 
             }
+        }
+        
+        public void showAllInetRecipes()//Вывести все рецепты из Интернета
+        {
+            Action action = () => general_recipes_list.Controls.Clear();
+            if (InvokeRequired)
+                Invoke(action);
+            else
+                general_recipes_list.Controls.Clear();
+
+            i = 0;
+
+            counter = 0;
+
+            bool isAll = false;
+
+            inetList = new List<TableLayoutPanel>();
+
+            while (!isAll)
+            {
+                if (ControllerForBD.isStartInet)
+                {
+                    if (ControllerForBD.inetRecipes.Count != 0)
+                    {
+                        Recipe r = ControllerForBD.inetRecipes.ElementAt(0);
+
+                        var t = createTableForRecipes(r);
+
+                        inetList.Add(t);
+
+                        general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(t)));
+
+                        ControllerForBD.inetRecipes.Remove(r);
+                    }
+                    if ((ControllerForBD.inetRecipes.Count == 0) && (ControllerForBD.isDoneInet))
+                    {
+                        isAll = true;
+                        
+                        general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(pbForNoRec())));
+
+                        general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(labelForNoRec())));
+                        
+                    }
+                }
+                else
+                {
+                    if ((ControllerForBD.isDoneInet))
+                    {
+                        isAll = true;
+                        
+                        //general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(pbForNoRec())));
+
+                       // general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(labelForNoRec())));
+
+                    }
+                }
+
+            }
+
+        }
+
+        Label labelForNoRec()
+        {
+            Label l = new Label();
+
+            l.Font = new Font(startLabel.Font.FontFamily, 30, startLabel.Font.Style);
+
+            l.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.haveSomeRecRu : LanguagesForAddingRecipe.haveSomeRecEn;
+
+            l.TextAlign = ContentAlignment.MiddleCenter;
+
+            l.SetBounds(0, general_recipes_list.Height - 400, general_recipes_list.Width - 50, 300/*general_recipes_list.Height/2*/);
+
+            return l;
+        }
+
+        PictureBox pbForNoRec()
+        {
+            PictureBox pb = new PictureBox();
+            
+            pb.SizeMode = PictureBoxSizeMode.Zoom;
+
+            pb.SetBounds(general_recipes_list.Width/2-160,100, 256, 256/*general_recipes_list.Height/2*/);
+
+            pb.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\em.png");
+
+            return pb;
+            
         }
 
         public TableLayoutPanel createTableForRecipes(Recipe r)
