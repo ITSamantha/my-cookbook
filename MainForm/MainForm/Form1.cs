@@ -48,6 +48,8 @@ namespace MainForm
 
         List<TableLayoutPanel> myList;
 
+        public Thread thread;
+
         public MainForm()
         {
             InitializeComponent();
@@ -81,7 +83,7 @@ namespace MainForm
             tabContr.SelectedIndex = (int)Buttons.My_Rec;
             whatButtonClicked = (int)Buttons.My_Rec;
             ControllerForBD.StartSelectAllMyRecipes();
-            Thread thread = new Thread(showAllMyRecipes);
+            thread = new Thread(showAllMyRecipes);
             thread.Start();
 
         }
@@ -467,7 +469,7 @@ namespace MainForm
                 }
                 //Панель для избранных рецептов
                 {
-                    fav_recipes_list.SetBounds(FavPage.Bounds.X + (int)(Instruments.intervalX), myL.Bounds.Y + myL.Height, 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
+                    fav_recipes_list.SetBounds(MyRecPage.Bounds.X + Instruments.intervalX / 6, myL.Bounds.Y + myL.Height, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
                 }
             }
 
@@ -493,7 +495,7 @@ namespace MainForm
 
                 //Панель для общих рецептов
                 {
-                    general_recipes_list.SetBounds(FavPage.Bounds.X + (int)(Instruments.intervalX), myL.Bounds.Y + myL.Height, 5 * Instruments.intervalX, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
+                    general_recipes_list.SetBounds(MyRecPage.Bounds.X + Instruments.intervalX / 6, myL.Bounds.Y + myL.Height, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
                     //ControllerForBD.StartSelectAllMyRecipes();
                     //Thread thread = new Thread(showAllMyRecipes);
                     //thread.Start();
@@ -691,8 +693,12 @@ namespace MainForm
 
         public void showAllMyRecipes()//Вывести все "Мои рецепты"
         {
-            my_recipes_list.Controls.Clear();
-
+            Action action = () => my_recipes_list.Controls.Clear();
+            if (InvokeRequired)
+                Invoke(action);
+            else
+                my_recipes_list.Controls.Clear();
+            
             i = 0;
 
             counter = 0;
