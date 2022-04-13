@@ -685,22 +685,22 @@ namespace MainForm
             else { helpB.BackColor = Color.Transparent; }
         }
 
+        int i = 0;
+
+        int counter = 0;
+
         public void showAllMyRecipes()//Вывести все "Мои рецепты"
         {
+            my_recipes_list.Controls.Clear();
+
+            i = 0;
+
+            counter = 0;
+
             bool isAll = false;
-
-            int intervalX = my_recipes_list.Width / 20;
-
-            int intervalY = Instruments.intervalY;
-
-            int partsForPanel = 18;
-
-            int i = 0;
-
-            int counter = 0;
-
+            
             myList = new List<TableLayoutPanel>();
-
+            
             while (!isAll)
             {
                 if (ControllerForBD.isStartMy)
@@ -709,107 +709,7 @@ namespace MainForm
                     {
                         Recipe r = ControllerForBD.myRecipes.ElementAt(0);
 
-                        TableLayoutPanel t = new TableLayoutPanel();
-
-                        counter++;
-
-                        if (counter % 2 == 0)
-                        {
-                            t.SetBounds(intervalX + (int)(partsForPanel / 2) * intervalX, i, (int)(partsForPanel / 2) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
-
-                            i += t.Height + intervalY;
-                        }
-                        else
-                        {
-                            t.SetBounds(0, (i), (int)(partsForPanel / 2) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
-                        }
-                        t.BackColor = Instruments.buttonPanelColor;
-
-
-                        Instruments.SetRoundedShape(t, 80);
-                        //ИЗМЕНЕНИЕ РАЗМЕРОВ ПАНЕЛИ ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМЫ ДОДЕЛАТЬ
-                        PictureBox pb = new PictureBox();
-                        //ТУТ ПРЕОБРАЗОВАНИЕ БАЙТОВ В КАРТИНКУ
-                        pb.SizeMode = PictureBoxSizeMode.Zoom;
-
-                        pb.BackgroundImage = Image.FromFile("C: \\Users\\diana\\Desktop\\c.jpg");
-
-                        t.Controls.Add(pb, 0, 0);
-
-                        t.Controls[0].SetBounds(t.Bounds.X, t.Bounds.Y, t.Size.Width / 2, t.Size.Height);
-
-                        Instruments.SetRoundedShape(t.Controls[0], 80);
-
-                        TableLayoutPanel panel = new TableLayoutPanel();
-                        
-                        panel.Dock = DockStyle.Fill;
-                        
-                        panel.ColumnCount = 1;
-
-                        panel.RowCount = 3;
-                        
-                        Label l = new Label();
-
-                        l.AutoSize = false;
-
-                        l.TextAlign = ContentAlignment.TopLeft;
-
-                        l.Font = new Font(myRecB.Font.FontFamily, 23.5f, myRecB.Font.Style);
-
-                        panel.Controls.Add(l);
-
-                        panel.Controls[0].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 3);
-
-                        panel.Controls[0].Text = r.Name;
-
-                        Label l1 = new Label();
-
-                        l1.AutoSize = false;
-
-                        l1.TextAlign = ContentAlignment.TopLeft;
-
-                        l1.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
-                        
-                        panel.Controls.Add(l1, 1, 0);
-
-                        panel.Controls[1].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 3);
-
-                        panel.Controls[1].Text = DiffL.Text+": " + r.Markdif + " / 5" + Environment.NewLine + TimeL.Text+": " + r.Time+ Environment.NewLine+CategoryL.Text+": "+r.Category;
-
-                        TableLayoutPanel stars = new TableLayoutPanel();
-
-                        stars.ColumnCount = 5;
-
-                        stars.RowCount = 1;
-
-                        int mark = int.Parse(r.Marklike);
-
-                        for (int j = 0; j < 5; j++)
-                        {
-                            
-                            PictureBox p = new PictureBox();
-
-                            p.SizeMode = PictureBoxSizeMode.Zoom;
-                            if (mark > 0)
-                            {
-                                p.BackgroundImage = Image.FromFile(ImageFileNameFull);
-                            }
-                            else
-                            {
-                                p.BackgroundImage = Image.FromFile(ImageFileNameOpacity);
-                            }
-                            p.Size = new Size(32, 32);
-
-                            stars.Controls.Add(p, j, 0);
-
-                            mark--;
-                        }
-
-                        panel.Controls.Add(stars, 0, 2);
-
-                        panel.Controls[2].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 3);
-
-                        t.Controls.Add(panel,1,0);
+                        var t = createTableForRecipes(r);
                         
                         myList.Add(t);
 
@@ -839,6 +739,119 @@ namespace MainForm
             }
         }
 
+        public TableLayoutPanel createTableForRecipes(Recipe r)
+        {
+            int intervalX = my_recipes_list.Width / 20;
+
+            int intervalY = Instruments.intervalY;
+
+            int partsForPanel = 18;
+
+            TableLayoutPanel t = new TableLayoutPanel();
+
+            counter++;
+
+            if (counter % 2 == 0)
+            {
+                t.SetBounds(intervalX + (int)(partsForPanel / 2) * intervalX, i, (int)(partsForPanel / 2) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+
+                i += t.Height + intervalY;
+            }
+            else
+            {
+                t.SetBounds(0, (i), (int)(partsForPanel / 2) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+            }
+            t.BackColor = Instruments.buttonPanelColor;
+
+
+            Instruments.SetRoundedShape(t, 80);
+            //ИЗМЕНЕНИЕ РАЗМЕРОВ ПАНЕЛИ ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМЫ ДОДЕЛАТЬ
+            PictureBox pb = new PictureBox();
+            //ТУТ ПРЕОБРАЗОВАНИЕ БАЙТОВ В КАРТИНКУ
+            pb.SizeMode = PictureBoxSizeMode.Zoom;
+
+            pb.BackgroundImage = Image.FromFile("C: \\Users\\diana\\Desktop\\c.jpg");
+
+            t.Controls.Add(pb, 0, 0);
+
+            t.Controls[0].SetBounds(t.Bounds.X, t.Bounds.Y, t.Size.Width / 2, t.Size.Height);
+
+            Instruments.SetRoundedShape(t.Controls[0], 80);
+
+            TableLayoutPanel panel = new TableLayoutPanel();
+
+            panel.Dock = DockStyle.Fill;
+
+            panel.ColumnCount = 1;
+
+            panel.RowCount = 3;
+
+            Label l = new Label();
+
+            l.AutoSize = false;
+
+            l.TextAlign = ContentAlignment.TopLeft;
+
+            l.Font = new Font(myRecB.Font.FontFamily, 23.5f, myRecB.Font.Style);
+
+            panel.Controls.Add(l);
+
+            panel.Controls[0].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 3);
+
+            panel.Controls[0].Text = r.Name;
+
+            Label l1 = new Label();
+
+            l1.AutoSize = false;
+
+            l1.TextAlign = ContentAlignment.TopLeft;
+
+            l1.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
+
+            panel.Controls.Add(l1, 1, 0);
+
+            panel.Controls[1].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 3);
+
+            panel.Controls[1].Text = DiffL.Text + ": " + r.Markdif + " / 5" + Environment.NewLine + TimeL.Text + ": " + r.Time + Environment.NewLine + CategoryL.Text + ": " + r.Category;
+
+            TableLayoutPanel stars = new TableLayoutPanel();
+
+            stars.ColumnCount = 5;
+
+            stars.RowCount = 1;
+
+            int mark = int.Parse(r.Marklike);
+
+            for (int j = 0; j < 5; j++)
+            {
+
+                PictureBox p = new PictureBox();
+
+                p.SizeMode = PictureBoxSizeMode.Zoom;
+                if (mark > 0)
+                {
+                    p.BackgroundImage = Image.FromFile(ImageFileNameFull);
+                }
+                else
+                {
+                    p.BackgroundImage = Image.FromFile(ImageFileNameOpacity);
+                }
+                p.Size = new Size(32, 32);
+
+                stars.Controls.Add(p, j, 0);
+
+                mark--;
+            }
+
+            panel.Controls.Add(stars, 0, 2);
+
+            panel.Controls[2].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 3);
+
+            t.Controls.Add(panel, 1, 0);
+
+            return t;
+        }
+
         public static void SetDoubleBuffered(Control c)//Устранение мерцания
         {
             if (System.Windows.Forms.SystemInformation.TerminalServerSession)
@@ -858,6 +871,8 @@ namespace MainForm
                 return cp;
             }
         }
+
+        
 
 
         //А КАК ЛУЧШЕ СДЕЛАТЬ СЧЕТ?g КООРДИНАТАМ!!!

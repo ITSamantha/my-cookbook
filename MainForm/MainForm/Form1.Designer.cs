@@ -264,7 +264,7 @@
             // 
             this.lab.Dock = System.Windows.Forms.DockStyle.Top;
             this.lab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lab.Font = new System.Drawing.Font("Brush Script MT", 30F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lab.Font = new System.Drawing.Font("Brush Script MT", 27.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lab.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lab.Location = new System.Drawing.Point(0, 0);
             this.lab.Name = "lab";
