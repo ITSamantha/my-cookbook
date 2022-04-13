@@ -56,6 +56,8 @@ namespace MainForm
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
 
+            setColors();
+
             languageChanges();
 
             LangCB.SelectedIndex = 0;//Начальный язык - русский
@@ -330,15 +332,9 @@ namespace MainForm
             Height = y;
 
             buttonPanel.Size = new Size(Instruments.buttonPanelWidth, Instruments.formHeight);
-
-            buttonPanel.BackColor = Instruments.buttonPanelColor;
-
+            
             tabContr.SetBounds(buttonPanel.Size.Width - 1, Instruments.heightOfLabels + 5 - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth + 3, Instruments.formHeight - lab.Height + Instruments.tabControlOffset);
-
-            myRecB.FlatAppearance.MouseOverBackColor = favB.FlatAppearance.MouseOverBackColor = generalB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
-
-            addRecB.FlatAppearance.MouseOverBackColor = settingsB.FlatAppearance.MouseOverBackColor = helpB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
-
+            
             Instruments.SetRoundedShape(myRecB, Instruments.radius);
 
             Instruments.SetRoundedShape(favB, Instruments.radius);
@@ -358,13 +354,9 @@ namespace MainForm
             startLabel.SetBounds(startBox.Bounds.X, startBox.Bounds.Y + startBox.Height, startBox.Width, Instruments.intervalHeight);
 
             lab.Size = new Size(Instruments.formWidth, Instruments.heightOfLabels + 5);
-
-            lab.BackColor = Instruments.myPurpleColor;
-
+            
             closeB.SetBounds(Instruments.formWidth - Instruments.heightOfLabels - 20, 0, Instruments.heightOfLabels + 5, Instruments.heightOfLabels + 5);
-
-            closeB.BackColor = Instruments.myPurpleColor;
-
+            
             //AddRecPage changes 
             {
                 //"Заголовок"
@@ -376,17 +368,13 @@ namespace MainForm
                 {
                     Instruments.SetRoundedShape(TitlePanel, Instruments.radius);
 
-                    TitlePanel.BackColor = Instruments.myPurpleColor;
-
                     TitlePanel.SetBounds(addRecPage.Bounds.X + Instruments.intervalX / 4, AddLabel.Height + Instruments.intervalHeight / 4, (int)(3.25 * Instruments.intervalX), Instruments.intervalHeight);
                 }
 
                 //"Фото"
                 {
                     Instruments.SetRoundedShape(PhotoPanel, Instruments.radius);
-
-                    PhotoPanel.BackColor = Instruments.myPurpleColor;
-
+                    
                     PhotoPanel.SetBounds(TitlePanel.Bounds.X, TitlePanel.Bounds.Y + TitlePanel.Height + Instruments.intervalHeight / 2, 2 * Instruments.intervalX/*5 * Instruments.intervalHeight*/, 5 * Instruments.intervalHeight);
 
                     RecPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -396,8 +384,6 @@ namespace MainForm
                 {
                     Instruments.SetRoundedShape(RatingPanel, Instruments.radius);
 
-                    RatingPanel.BackColor = Instruments.myPurpleColor;
-
                     RatingPanel.SetBounds(PhotoPanel.Bounds.X + PhotoPanel.Width + Instruments.intervalX / 8, TitlePanel.Bounds.Y + TitlePanel.Height + Instruments.intervalHeight / 2, Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
                 }
 
@@ -405,16 +391,12 @@ namespace MainForm
                 {
                     Instruments.SetRoundedShape(CategoryPanel, Instruments.radius);
 
-                    CategoryPanel.BackColor = Instruments.myPurpleColor;
-
                     CategoryPanel.SetBounds(RatingPanel.Bounds.X, RatingPanel.Bounds.Y + RatingPanel.Height + Instruments.intervalHeight / 3, Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
                 }
 
                 //"Время приготовления"
                 {
                     Instruments.SetRoundedShape(TimePanel, Instruments.radius);
-
-                    TimePanel.BackColor = Instruments.myPurpleColor;
 
                     TimePanel.SetBounds(RatingPanel.Bounds.X, CategoryPanel.Bounds.Y + CategoryPanel.Height + Instruments.intervalHeight / 3, Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
 
@@ -425,8 +407,6 @@ namespace MainForm
                 {
                     Instruments.SetRoundedShape(DifficultyPanel, Instruments.radius);
 
-                    DifficultyPanel.BackColor = Instruments.myPurpleColor;
-
                     DifficultyPanel.SetBounds(RatingPanel.Bounds.X, TimePanel.Bounds.Y + TimePanel.Height + Instruments.intervalHeight / 3, Instruments.intervalX + Instruments.intervalX / 8, Instruments.intervalHeight);
                 }
 
@@ -434,31 +414,23 @@ namespace MainForm
                 {
                     Instruments.SetRoundedShape(IngrPanel, Instruments.radius);
 
-                    IngrPanel.BackColor = Instruments.myPurpleColor;
-
                     IngrPanel.SetBounds(TitlePanel.Bounds.X + TitlePanel.Width + Instruments.intervalX / 4, AddLabel.Height + Instruments.intervalHeight / 4, (int)(3.07 * Instruments.intervalX), 3 * Instruments.intervalHeight);
                 }
 
                 //"Инструкция"
                 {
                     Instruments.SetRoundedShape(InstrPanel, Instruments.radius);
-
-                    InstrPanel.BackColor = Instruments.myPurpleColor;
-
+                    
                     InstrPanel.SetBounds(IngrPanel.Bounds.X, IngrPanel.Bounds.Y + IngrPanel.Height + Instruments.intervalHeight / 2, (int)(3.07 * Instruments.intervalX), 3 * Instruments.intervalHeight);
                 }
 
                 //Кнопка "добавить"
                 {
-                    RecReadyB.BackColor = Instruments.myPurpleColor;
-
                     RecReadyB.SetBounds((int)(2 * Instruments.intervalX), InstrPanel.Bounds.Y + InstrPanel.Height + Instruments.intervalHeight / 2, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
                 }
 
                 //Кнопка "очистить"
                 {
-                    CancelB.BackColor = Instruments.myPurpleColor;
-
                     CancelB.SetBounds((int)(3.5 * Instruments.intervalX), RecReadyB.Bounds.Y, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
                 }
             }
@@ -473,9 +445,7 @@ namespace MainForm
                 //"Смена языка"
                 {
                     Instruments.SetRoundedShape(LanguagePanel, Instruments.radius);
-
-                    LanguagePanel.BackColor = Instruments.myPurpleColor;
-
+                    
                     LanguagePanel.SetBounds(settingsPage.Bounds.X + Instruments.intervalX / 2, SettingsL.Bounds.X + SettingsL.Height + Instruments.intervalY, 3 * Instruments.intervalX, Instruments.intervalHeight);
                 }
 
@@ -529,6 +499,42 @@ namespace MainForm
                     //thread.Start();
                 }
             }
+        }
+
+        public void setColors()
+        {
+            LanguagePanel.BackColor = Instruments.myPurpleColor;
+
+            CancelB.BackColor = Instruments.myPurpleColor;
+            
+            RecReadyB.BackColor = Instruments.myPurpleColor;
+
+            InstrPanel.BackColor = Instruments.myPurpleColor;
+
+            IngrPanel.BackColor = Instruments.myPurpleColor;
+
+            DifficultyPanel.BackColor = Instruments.myPurpleColor;
+            
+            TimePanel.BackColor = Instruments.myPurpleColor;
+            
+            CategoryPanel.BackColor = Instruments.myPurpleColor;
+            
+            RatingPanel.BackColor = Instruments.myPurpleColor;
+            
+            PhotoPanel.BackColor = Instruments.myPurpleColor;
+            
+            TitlePanel.BackColor = Instruments.myPurpleColor;
+
+            closeB.BackColor = Instruments.myPurpleColor;
+
+            myRecB.FlatAppearance.MouseOverBackColor = favB.FlatAppearance.MouseOverBackColor = generalB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+
+            addRecB.FlatAppearance.MouseOverBackColor = settingsB.FlatAppearance.MouseOverBackColor = helpB.FlatAppearance.MouseOverBackColor = Color.FromArgb(248, 248, 248);
+
+            buttonPanel.BackColor = Instruments.buttonPanelColor;
+
+            lab.BackColor = Instruments.myPurpleColor;
+
         }
 
         public void languageChanges()
@@ -740,7 +746,7 @@ namespace MainForm
                         
                         panel.ColumnCount = 1;
 
-                        panel.RowCount = 2;
+                        panel.RowCount = 3;
                         
                         Label l = new Label();
 
@@ -752,7 +758,7 @@ namespace MainForm
 
                         panel.Controls.Add(l);
 
-                        panel.Controls[0].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 2);
+                        panel.Controls[0].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 3);
 
                         panel.Controls[0].Text = r.Name;
 
@@ -762,29 +768,49 @@ namespace MainForm
 
                         l1.TextAlign = ContentAlignment.TopLeft;
 
-                        l1.Font = new Font(myRecB.Font.FontFamily, 18f, myRecB.Font.Style);
+                        l1.Font = new Font(myRecB.Font.FontFamily, 15.5f, myRecB.Font.Style);
                         
                         panel.Controls.Add(l1, 1, 0);
 
-                        panel.Controls[1].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 2);
+                        panel.Controls[1].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 3);
 
-                        panel.Controls[1].Text = "Сложность: " + r.Markdif + " / 5" + Environment.NewLine + "Время приготовления: " + r.Time + "(ч:м:с)";
+                        panel.Controls[1].Text = DiffL.Text+": " + r.Markdif + " / 5" + Environment.NewLine + TimeL.Text+": " + r.Time+ Environment.NewLine+CategoryL.Text+": "+r.Category;
+
+                        TableLayoutPanel stars = new TableLayoutPanel();
+
+                        stars.ColumnCount = 5;
+
+                        stars.RowCount = 1;
+
+                        int mark = int.Parse(r.Marklike);
+
+                        for (int j = 0; j < 5; j++)
+                        {
+                            
+                            PictureBox p = new PictureBox();
+
+                            p.SizeMode = PictureBoxSizeMode.Zoom;
+                            if (mark > 0)
+                            {
+                                p.BackgroundImage = Image.FromFile(ImageFileNameFull);
+                            }
+                            else
+                            {
+                                p.BackgroundImage = Image.FromFile(ImageFileNameOpacity);
+                            }
+                            p.Size = new Size(32, 32);
+
+                            stars.Controls.Add(p, j, 0);
+
+                            mark--;
+                        }
+
+                        panel.Controls.Add(stars, 0, 2);
+
+                        panel.Controls[2].SetBounds(0, 0, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height / 3);
 
                         t.Controls.Add(panel,1,0);
-
-
-                        //t.Controls[2].SetBounds(0, t.Controls[0].Bounds.Y, t.Size.Width - t.Controls[0].Size.Width - 3, t.Height /2);
-                        // Label time = new Label();//ПЕРЕМЕСТИТЬ ЦВЕТ ИЗ FORMCHANGES
-                        //time.Font = l.Font;
-                        //time.Size = new Size(t.Width, t.Height / 10);//ТОЖЕ ЗАВИСИМОСТЬ 
-                        //time.TextAlign = ContentAlignment.MiddleRight;
-                        //time.AutoSize = false;
-                        //time.Text = "Время приготовления(ч:м:с):"+r.Time;
-
-                        //t.Controls.Add(time, 1, 10);
-
-                        //t.SetRowSpan(t.Controls[1], 2);//С МЕРЦАНИЕМ РАЗОБРАТЬСЯ?
-
+                        
                         myList.Add(t);
 
                         my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(t)));

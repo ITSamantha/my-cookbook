@@ -322,10 +322,10 @@
             // 
             this.FavPage.Controls.Add(this.fav_recipes_list);
             this.FavPage.Controls.Add(this.favL);
-            this.FavPage.Location = new System.Drawing.Point(4, 30);
+            this.FavPage.Location = new System.Drawing.Point(4, 22);
             this.FavPage.Name = "FavPage";
             this.FavPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FavPage.Size = new System.Drawing.Size(1021, 652);
+            this.FavPage.Size = new System.Drawing.Size(1021, 660);
             this.FavPage.TabIndex = 1;
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
@@ -819,9 +819,9 @@
             // 
             this.settingsPage.Controls.Add(this.LanguagePanel);
             this.settingsPage.Controls.Add(this.SettingsL);
-            this.settingsPage.Location = new System.Drawing.Point(4, 30);
+            this.settingsPage.Location = new System.Drawing.Point(4, 22);
             this.settingsPage.Name = "settingsPage";
-            this.settingsPage.Size = new System.Drawing.Size(1021, 652);
+            this.settingsPage.Size = new System.Drawing.Size(1021, 660);
             this.settingsPage.TabIndex = 4;
             this.settingsPage.Text = "Настройки";
             this.settingsPage.UseVisualStyleBackColor = true;
@@ -878,9 +878,9 @@
             // helpPage
             // 
             this.helpPage.Controls.Add(this.helpL);
-            this.helpPage.Location = new System.Drawing.Point(4, 30);
+            this.helpPage.Location = new System.Drawing.Point(4, 22);
             this.helpPage.Name = "helpPage";
-            this.helpPage.Size = new System.Drawing.Size(1021, 652);
+            this.helpPage.Size = new System.Drawing.Size(1021, 660);
             this.helpPage.TabIndex = 5;
             this.helpPage.Text = "tabPage1";
             this.helpPage.UseVisualStyleBackColor = true;

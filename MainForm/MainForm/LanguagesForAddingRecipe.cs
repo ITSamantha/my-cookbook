@@ -40,9 +40,9 @@ namespace MainForm
 
         static public string rateEn = "Prescription evaluation";
 
-        static public string diffRu = "Оценка сложности рецепта(1-5)";//По-другому?
+        static public string diffRu = "Оценка сложности рецепта";
 
-        static public string diffEn = "Recipe Difficulty Score(1-5)";
+        static public string diffEn = "Recipe Difficulty Score";
 
         static public string ingRu = "Ингредиенты";
 
