@@ -45,6 +45,7 @@
             this.fav_recipes_list = new System.Windows.Forms.TableLayoutPanel();
             this.favL = new System.Windows.Forms.Label();
             this.GeneralPage = new System.Windows.Forms.TabPage();
+            this.general_recipes_list = new System.Windows.Forms.Panel();
             this.genL = new System.Windows.Forms.Label();
             this.addRecPage = new System.Windows.Forms.TabPage();
             this.CancelB = new System.Windows.Forms.Button();
@@ -90,7 +91,6 @@
             this.startLabel = new System.Windows.Forms.Label();
             this.startBox = new System.Windows.Forms.PictureBox();
             this.closeB = new System.Windows.Forms.Button();
-            this.general_recipes_list = new System.Windows.Forms.Panel();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -322,10 +322,10 @@
             // 
             this.FavPage.Controls.Add(this.fav_recipes_list);
             this.FavPage.Controls.Add(this.favL);
-            this.FavPage.Location = new System.Drawing.Point(4, 22);
+            this.FavPage.Location = new System.Drawing.Point(4, 30);
             this.FavPage.Name = "FavPage";
             this.FavPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FavPage.Size = new System.Drawing.Size(1021, 660);
+            this.FavPage.Size = new System.Drawing.Size(1021, 652);
             this.FavPage.TabIndex = 1;
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
@@ -357,12 +357,20 @@
             // 
             this.GeneralPage.Controls.Add(this.general_recipes_list);
             this.GeneralPage.Controls.Add(this.genL);
-            this.GeneralPage.Location = new System.Drawing.Point(4, 30);
+            this.GeneralPage.Location = new System.Drawing.Point(4, 22);
             this.GeneralPage.Name = "GeneralPage";
-            this.GeneralPage.Size = new System.Drawing.Size(1021, 652);
+            this.GeneralPage.Size = new System.Drawing.Size(1021, 660);
             this.GeneralPage.TabIndex = 2;
             this.GeneralPage.Text = "tabPage1";
             this.GeneralPage.UseVisualStyleBackColor = true;
+            // 
+            // general_recipes_list
+            // 
+            this.general_recipes_list.AutoScroll = true;
+            this.general_recipes_list.Location = new System.Drawing.Point(263, 93);
+            this.general_recipes_list.Name = "general_recipes_list";
+            this.general_recipes_list.Size = new System.Drawing.Size(200, 100);
+            this.general_recipes_list.TabIndex = 2;
             // 
             // genL
             // 
@@ -388,9 +396,9 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 22);
+            this.addRecPage.Location = new System.Drawing.Point(4, 30);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
@@ -926,14 +934,6 @@
             this.closeB.TabIndex = 3;
             this.closeB.UseVisualStyleBackColor = false;
             this.closeB.Click += new System.EventHandler(this.closeB_Click);
-            // 
-            // general_recipes_list
-            // 
-            this.general_recipes_list.AutoScroll = true;
-            this.general_recipes_list.Location = new System.Drawing.Point(263, 93);
-            this.general_recipes_list.Name = "general_recipes_list";
-            this.general_recipes_list.Size = new System.Drawing.Size(200, 100);
-            this.general_recipes_list.TabIndex = 2;
             // 
             // MainForm
             // 

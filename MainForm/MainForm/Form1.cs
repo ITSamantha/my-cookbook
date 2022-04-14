@@ -92,6 +92,7 @@ namespace MainForm
                 thread.Start();
             }
             whatButtonClicked = (int)Buttons.My_Rec;
+            
         }
 
         private void favB_Click(object sender, EventArgs e)//Раздел "Избранное"
@@ -120,6 +121,7 @@ namespace MainForm
 
         private void addRecB_Click(object sender, EventArgs e)//Раздел "Добавление рецепта"
         {
+            AddLabel.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
             checkButtonsColors((int)Buttons.Add_Rec);
             tabContr.SelectedIndex = (int)Buttons.Add_Rec;
             whatButtonClicked = (int)Buttons.Add_Rec;
@@ -305,6 +307,7 @@ namespace MainForm
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
+           
             if (openFileDialog.ShowDialog() == DialogResult.Cancel) return;
 
             string filename = openFileDialog.FileName;
@@ -600,9 +603,7 @@ namespace MainForm
             CancelB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.cancelRu : LanguagesForAddingRecipe.cancelEn;
 
             RecReadyB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addBRu : LanguagesForAddingRecipe.addBEn;
-
-            AddLabel.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
-
+            
             InstrL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.guideRu : LanguagesForAddingRecipe.guideEn;
 
             DiffL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
@@ -706,7 +707,7 @@ namespace MainForm
         int i = 0;
 
         int counter = 0;
-
+        
         public void showAllMyRecipes()//Вывести все "Мои рецепты"
         {
             Action action = () => my_recipes_list.Controls.Clear();
@@ -733,19 +734,20 @@ namespace MainForm
 
                         var t = createTableForRecipes(r);
                         
-                        myList.Add(t);
-
                         my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(t)));
 
+                        myList.Add(t);
+
                         ControllerForBD.myRecipes.Remove(r);
+                        
                     }
                     if ((ControllerForBD.myRecipes.Count == 0) && (ControllerForBD.isDoneMy))
                     {
                         isAll = true;
 
-                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
+                       // my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
 
-                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
+                        //my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
                     }
                 }
                 else
@@ -754,14 +756,15 @@ namespace MainForm
                     {
                         isAll = true;
                         
-                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
+                        //my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
 
-                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
+                        //my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
                     }
                 }
 
             }
         }
+       
         
         public void showAllInetRecipes()//Вывести все рецепты из Интернета
         {
@@ -788,7 +791,7 @@ namespace MainForm
                         Recipe r = ControllerForBD.inetRecipes.ElementAt(0);
 
                         var t = createTableForRecipes(r);
-
+                        //ПЕРЕДЕЛАТЬ С ДОБАВЛЕНИЕМ КНОПКИ
                         inetList.Add(t);
 
                         general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(t)));
@@ -799,9 +802,9 @@ namespace MainForm
                     {
                         isAll = true;
                         
-                        general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(pbForNoRec())));
+                        //general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(pbForNoRec())));
 
-                        general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(labelForNoRec())));
+                       // general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(labelForNoRec())));
                         
                     }
                 }
@@ -821,6 +824,7 @@ namespace MainForm
             }
 
         }
+       
 
         Label labelForNoRec()
         {
@@ -860,7 +864,7 @@ namespace MainForm
             int partsForPanel = 18;
 
             TableLayoutPanel t = new TableLayoutPanel();
-
+            
             counter++;
 
             if (counter % 2 == 0)
@@ -872,13 +876,17 @@ namespace MainForm
             else
             {
                 t.SetBounds(0, (i), (int)(partsForPanel / 2) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+                
             }
+            
+
             t.BackColor = Instruments.buttonPanelColor;
-
-
+            
             Instruments.SetRoundedShape(t, 80);
             //ИЗМЕНЕНИЕ РАЗМЕРОВ ПАНЕЛИ ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМЫ ДОДЕЛАТЬ
             PictureBox pb = new PictureBox();
+            
+
             //ТУТ ПРЕОБРАЗОВАНИЕ БАЙТОВ В КАРТИНКУ
             pb.SizeMode = PictureBoxSizeMode.Zoom;
 
@@ -891,6 +899,7 @@ namespace MainForm
             Instruments.SetRoundedShape(t.Controls[0], 80);
 
             TableLayoutPanel panel = new TableLayoutPanel();
+            
 
             panel.Dock = DockStyle.Fill;
 
@@ -899,6 +908,14 @@ namespace MainForm
             panel.RowCount = 3;
 
             Label l = new Label();
+            //ДИАНА, ДОБАВЬ КАКОЕ-ТО СОБЫТИЕ ПРИ НАВЕДЕНИИ НА НАЗВАНИЕ РЕЦЕПТА
+            EventHandler handler=
+                delegate 
+                {
+                    fullRecipe(r.Id);
+                };
+
+            l.Click += handler;
 
             l.AutoSize = false;
 
@@ -913,6 +930,7 @@ namespace MainForm
             panel.Controls[0].Text = r.Name;
 
             Label l1 = new Label();
+            
 
             l1.AutoSize = false;
 
@@ -927,6 +945,7 @@ namespace MainForm
             panel.Controls[1].Text = DiffL.Text + ": " + r.Markdif + " / 5" + Environment.NewLine + TimeL.Text + ": " + r.Time + Environment.NewLine + CategoryL.Text + ": " + r.Category;
 
             TableLayoutPanel stars = new TableLayoutPanel();
+            
 
             stars.ColumnCount = 5;
 
@@ -964,6 +983,44 @@ namespace MainForm
             return t;
         }
 
+        public void fullRecipe(int id)//Заполнение рецепта при нажатии
+        {
+            Recipe r = ControllerForBD.SelectById(id, "myrecipes");//ДОДЕЛАТЬ ВСЕ ТАБЛИЦЫ
+
+            tabContr.SelectedIndex = (int)Buttons.Add_Rec;
+
+            AddLabel.Text = "";
+            //мб инвоук нужен
+            cleanAddRecForm();
+
+            rec_name.Text = r.Name;
+
+            CategoryCB.Text = r.Category;
+
+            time_rec.Text = r.Time;
+
+            markDif.Text = r.Markdif;
+
+            if (r.Ingredients != null)
+            {
+                Ingr_rec.Text = r.Ingredients;
+            }
+            else
+            {
+                Ingr_rec.Text = "-";
+            }
+            
+            if (r.Guide != null)
+            {
+                Instr_rec.Text = r.Guide;
+            }
+            else
+            {
+                Instr_rec.Text = "-";
+            }
+            
+        }
+
         public static void SetDoubleBuffered(Control c)//Устранение мерцания
         {
             if (System.Windows.Forms.SystemInformation.TerminalServerSession)
@@ -985,6 +1042,8 @@ namespace MainForm
         }
 
         
+
+
 
 
         //А КАК ЛУЧШЕ СДЕЛАТЬ СЧЕТ?g КООРДИНАТАМ!!!
