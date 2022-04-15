@@ -44,6 +44,14 @@ namespace MainForm
 
         static public string diffEn = "Recipe Difficulty Score";
 
+        static public string delBRu = "Удалить";
+
+        static public string delBEn = "Delete";
+
+        static public string updBRu = "Редактировать";
+
+        static public string updBEn = "Update";
+
         static public string ingRu = "Ингредиенты";
 
         static public string ingEn = "Ingredients";

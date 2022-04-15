@@ -91,6 +91,8 @@
             this.startLabel = new System.Windows.Forms.Label();
             this.startBox = new System.Windows.Forms.PictureBox();
             this.closeB = new System.Windows.Forms.Button();
+            this.deleteRecB = new System.Windows.Forms.Button();
+            this.updateRecB = new System.Windows.Forms.Button();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -322,10 +324,10 @@
             // 
             this.FavPage.Controls.Add(this.fav_recipes_list);
             this.FavPage.Controls.Add(this.favL);
-            this.FavPage.Location = new System.Drawing.Point(4, 30);
+            this.FavPage.Location = new System.Drawing.Point(4, 22);
             this.FavPage.Name = "FavPage";
             this.FavPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FavPage.Size = new System.Drawing.Size(1021, 652);
+            this.FavPage.Size = new System.Drawing.Size(1021, 660);
             this.FavPage.TabIndex = 1;
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
@@ -385,6 +387,8 @@
             // addRecPage
             // 
             this.addRecPage.BackColor = System.Drawing.Color.White;
+            this.addRecPage.Controls.Add(this.updateRecB);
+            this.addRecPage.Controls.Add(this.deleteRecB);
             this.addRecPage.Controls.Add(this.CancelB);
             this.addRecPage.Controls.Add(this.RecReadyB);
             this.addRecPage.Controls.Add(this.RatingPanel);
@@ -935,6 +939,30 @@
             this.closeB.UseVisualStyleBackColor = false;
             this.closeB.Click += new System.EventHandler(this.closeB_Click);
             // 
+            // deleteRecB
+            // 
+            this.deleteRecB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteRecB.Location = new System.Drawing.Point(874, 562);
+            this.deleteRecB.Name = "deleteRecB";
+            this.deleteRecB.Size = new System.Drawing.Size(75, 23);
+            this.deleteRecB.TabIndex = 17;
+            this.deleteRecB.Text = "button1";
+            this.deleteRecB.UseVisualStyleBackColor = true;
+            this.deleteRecB.Visible = false;
+            this.deleteRecB.Click += new System.EventHandler(this.deleteRecB_Click);
+            // 
+            // updateRecB
+            // 
+            this.updateRecB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.updateRecB.Location = new System.Drawing.Point(874, 510);
+            this.updateRecB.Name = "updateRecB";
+            this.updateRecB.Size = new System.Drawing.Size(75, 23);
+            this.updateRecB.TabIndex = 18;
+            this.updateRecB.Text = "button1";
+            this.updateRecB.UseVisualStyleBackColor = true;
+            this.updateRecB.Visible = false;
+            this.updateRecB.Click += new System.EventHandler(this.updateRecB_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1053,6 +1081,8 @@
         private System.Windows.Forms.Label startLabel;
         private System.Windows.Forms.Button closeB;
         private System.Windows.Forms.Panel general_recipes_list;
+        private System.Windows.Forms.Button updateRecB;
+        private System.Windows.Forms.Button deleteRecB;
     }
 }
 

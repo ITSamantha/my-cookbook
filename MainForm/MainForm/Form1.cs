@@ -54,6 +54,8 @@ namespace MainForm
 
         public Thread thread;
 
+        Recipe main_recipe;
+
         public MainForm()
         {
             InitializeComponent();
@@ -92,7 +94,7 @@ namespace MainForm
                 thread.Start();
             }
             whatButtonClicked = (int)Buttons.My_Rec;
-            
+
         }
 
         private void favB_Click(object sender, EventArgs e)//Раздел "Избранное"
@@ -121,6 +123,11 @@ namespace MainForm
 
         private void addRecB_Click(object sender, EventArgs e)//Раздел "Добавление рецепта"
         {
+            cleanAddRecForm();
+            RecReadyB.Show();
+            CancelB.Show();
+            updateRecB.Hide();
+            deleteRecB.Hide();
             AddLabel.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
             checkButtonsColors((int)Buttons.Add_Rec);
             tabContr.SelectedIndex = (int)Buttons.Add_Rec;
@@ -363,7 +370,7 @@ namespace MainForm
             Instruments.SetRoundedShape(generalB, Instruments.radius);
 
             Instruments.SetRoundedShape(addRecB, Instruments.radius);
-
+            
             Instruments.SetRoundedShape(settingsB, Instruments.radius);
 
             Instruments.SetRoundedShape(helpB, Instruments.radius);
@@ -450,6 +457,16 @@ namespace MainForm
                     RecReadyB.SetBounds((int)(2 * Instruments.intervalX), InstrPanel.Bounds.Y + InstrPanel.Height + Instruments.intervalHeight / 2, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
                 }
 
+                //Кнопка "удалить"
+                {
+                   deleteRecB.SetBounds((int)(3.5 * Instruments.intervalX), RecReadyB.Bounds.Y, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
+                }
+
+                //Кнопка "редактировать"
+                {
+                    updateRecB.SetBounds((int)(2 * Instruments.intervalX), InstrPanel.Bounds.Y + InstrPanel.Height + Instruments.intervalHeight / 2, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
+                }
+
                 //Кнопка "очистить"
                 {
                     CancelB.SetBounds((int)(3.5 * Instruments.intervalX), RecReadyB.Bounds.Y, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
@@ -530,6 +547,10 @@ namespace MainForm
             
             RecReadyB.BackColor = Instruments.myPurpleColor;
 
+            deleteRecB.BackColor = Instruments.myPurpleColor;
+
+            updateRecB.BackColor = Instruments.myPurpleColor;
+
             InstrPanel.BackColor = Instruments.myPurpleColor;
 
             IngrPanel.BackColor = Instruments.myPurpleColor;
@@ -603,7 +624,11 @@ namespace MainForm
             CancelB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.cancelRu : LanguagesForAddingRecipe.cancelEn;
 
             RecReadyB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addBRu : LanguagesForAddingRecipe.addBEn;
-            
+
+            deleteRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.delBRu : LanguagesForAddingRecipe.delBEn;
+
+            updateRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.updBRu : LanguagesForAddingRecipe.updBEn;
+
             InstrL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.guideRu : LanguagesForAddingRecipe.guideEn;
 
             DiffL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
@@ -912,7 +937,7 @@ namespace MainForm
             EventHandler handler=
                 delegate 
                 {
-                    fullRecipe(r.Id);
+                    fullRecipe(r.Id,whatButtonClicked);
                 };
 
             l.Click += handler;
@@ -983,36 +1008,56 @@ namespace MainForm
             return t;
         }
 
-        public void fullRecipe(int id)//Заполнение рецепта при нажатии
+        public void fullRecipe(int id,int whatBu)//Заполнение рецепта при нажатии
         {
-            Recipe r = ControllerForBD.SelectById(id, "myrecipes");//ДОДЕЛАТЬ ВСЕ ТАБЛИЦЫ
+            if (whatBu == (int)Buttons.My_Rec)
+            {
+                main_recipe = ControllerForBD.SelectById(id, "myrecipes");
+            }
+            if (whatBu == (int)Buttons.Fav_Rec)
+            {
+                main_recipe = ControllerForBD.SelectById(id, "starrecipes");
+            }
+            if (whatBu == (int)Buttons.General_Rec)
+            {
+                main_recipe = ControllerForBD.SelectById(id, "inetrecipes");
+            }
+            //ДОДЕЛАТЬ ВСЕ ТАБЛИЦЫ
 
-            tabContr.SelectedIndex = (int)Buttons.Add_Rec;
+            RecReadyB.Hide();
+            //НЕ ЗАБУДЬ СДЕЛАТЬ ОТРИСОВКУ ЗВЕЗДОЧЕК И КАРТИНКИ РЕЦЕПТА
+            CancelB.Hide();
+
+            updateRecB.Show();
+
+            deleteRecB.Show();
+
+            tabContr.SelectedIndex = (int)Buttons.Add_Rec;//НЕ ЗАБУДЬ ДОДЕЛАТЬ ИЗБРАННЫЕ
 
             AddLabel.Text = "";
             //мб инвоук нужен
             cleanAddRecForm();
 
-            rec_name.Text = r.Name;
+            rec_name.Text = main_recipe.Name;
 
-            CategoryCB.Text = r.Category;
+            CategoryCB.Text = main_recipe.Category;
 
-            time_rec.Text = r.Time;
+            time_rec.Text = main_recipe.Time;
 
-            markDif.Text = r.Markdif;
+            markDif.Text = main_recipe.Markdif;
 
-            if (r.Ingredients != null)
+            if (main_recipe.Ingredients != null)
             {
-                Ingr_rec.Text = r.Ingredients;
+                Ingr_rec.Text = main_recipe.Ingredients;
             }
             else
             {
                 Ingr_rec.Text = "-";
             }
             
-            if (r.Guide != null)
+            if (main_recipe.Guide != null)
             {
-                Instr_rec.Text = r.Guide;
+                Instr_rec.Text = main_recipe.Guide;
             }
             else
             {
@@ -1041,7 +1086,23 @@ namespace MainForm
             }
         }
 
-        
+        private void deleteRecB_Click(object sender, EventArgs e)
+        {
+            if (main_recipe != null)
+            {
+                ControllerForBD.deleteById(main_recipe.Id);//ДЛЯ РЕЦЕПТОВ ИЗ ИНТЕРНЕТА ТАКОЕ НЕ ДЕЛАЕМ
+                tabContr.SelectedIndex = (int)Buttons.Start_Page;
+                whatButtonClicked = -1;
+                checkButtonsColors(-1);
+            }
+        }
+
+        private void updateRecB_Click(object sender, EventArgs e)//Редактировать рецепт
+        {
+            //ДОДЕЛАТЬ UPDATE
+        }
+
+
 
 
 
