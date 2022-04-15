@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MainForm
-{//ДОДЕЛАТЬ ВРЕМЯ ПРИГОТОВЛЕНИЯ В ФОРМАТЕ час : мин : сек
+{
+        //РЕШИТЬ ПРОБЛЕМУ С ОТРИСОВКОЙ РЕЦЕПТОВ, КОГДА ИХ МНОГО!!!!!!!!!!!!
     public partial class MainForm : Form
     {
         public enum Buttons : int//Перечисление номера кнопок
@@ -26,7 +27,7 @@ namespace MainForm
             Start_Page = 6
         }
 
-        public enum Star_Marks : int
+        public enum Star_Marks : int//Перечисление оценки
         {
             NoMark = 0,
             Mark1 = 1,
@@ -149,8 +150,6 @@ namespace MainForm
         }
 
         //Обработка событий с оценкой рецепта
-        //ДОДЕЛАТЬ ЛОГИКУ С БД!
-        // МБ ЧТО-ТО С НОМЕРАМИ ТИПА ЕСЛИ 4, ТО ПЕРЕД ЭТИМ ЕЩЕ 1,2,3,4??
 
         private void pictureBox_MouseLeave(object sender, EventArgs e)
         {
@@ -274,18 +273,7 @@ namespace MainForm
                 MessageBox.Show("Рецепт успешно добавлен.", "Добавление рецепта");//МБ СДЕЛАТЬ СВОЮ ФОРМУ
             }
         }
-
-        /*
-        Метод добавления данных для пользователя:
-        параметрами являются следующие данные в виде строк: 
-        название, категория, ингридиенты, инструкция, оценка, цена , время(особенность см. ниже)
-        оценку и цену перед переводом в строку ОКРУГЛИТЬ ДО ДВУХ ЗНАКОВ ПОСЛЕ ЗАПЯТОЙ!!!
-        Временно добавление не включает в себя картинки
-        Использовать только после подключения!
-        Время требуется передавать в виде строки в след. формате: "12:00:00"
-        Возвращает тру - если добавил, фолс - если нет.
-        */
-
+        
         private void LangCB_SelectedIndexChanged(object sender, EventArgs e)//Смена языка в приложении
         {
             if (LangCB.SelectedIndex == 0)//Русский
@@ -310,7 +298,7 @@ namespace MainForm
 
         }
 
-        private void RecPhoto_Click(object sender, EventArgs e)//Добавление фото в рецепт ДОДЕЛАТЬ!??!?!?
+        private void RecPhoto_Click(object sender, EventArgs e)//ДОБАВЛЕНИЕ ФОТО В РЕЦЕПТ ДОДЕЛАТЬ!??!?!?
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -325,7 +313,7 @@ namespace MainForm
 
         }
 
-        private void MainForm_SizeChanged(object sender, EventArgs e)//Изменение размеров элементов при изменении размеров формы
+         private void MainForm_SizeChanged(object sender, EventArgs e)//Изменение размеров элементов при изменении размеров формы
         {
             if (Size.Width <= 1560 || Size.Height <= 746)
             {
@@ -532,9 +520,6 @@ namespace MainForm
                 //Панель для общих рецептов
                 {
                     general_recipes_list.SetBounds(MyRecPage.Bounds.X + Instruments.intervalX / 6, myL.Bounds.Y + myL.Height, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
-                    //ControllerForBD.StartSelectAllMyRecipes();
-                    //Thread thread = new Thread(showAllMyRecipes);
-                    //thread.Start();
                 }
             }
         }
@@ -686,11 +671,11 @@ namespace MainForm
 
             allStarsOpacityNull();
 
-            //RecPhoto.Image = Image.FromFile();
+            //RecPhoto.Image = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\.png");  ДОДЕЛАТЬ!!!!!!!!!!!!!!!!!!!
         }
 
         //Функция для проверки активности кнопок
-        public void checkButtonsColors(int num)//ОПТИМАЛЬНЕЕ??
+        public void checkButtonsColors(int num)
         {
             if (num == (int)Buttons.My_Rec)
             {
@@ -736,15 +721,13 @@ namespace MainForm
         public void showAllMyRecipes()//Вывести все "Мои рецепты"
         {
             Action action = () => my_recipes_list.Controls.Clear();
-            if (InvokeRequired)
-                Invoke(action);
-            else
-                my_recipes_list.Controls.Clear();
+
+            if (InvokeRequired) { Invoke(action); }
+
+            else { my_recipes_list.Controls.Clear(); }
             
-            i = 0;
-
-            counter = 0;
-
+            i=counter = 0;
+            
             bool isAll = false;
             
             myList = new List<TableLayoutPanel>();
@@ -772,7 +755,7 @@ namespace MainForm
 
                        // my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
 
-                        //my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
+                       // my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
                     }
                 }
                 else
@@ -786,7 +769,6 @@ namespace MainForm
                         //my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
                     }
                 }
-
             }
         }
        
@@ -794,15 +776,13 @@ namespace MainForm
         public void showAllInetRecipes()//Вывести все рецепты из Интернета
         {
             Action action = () => general_recipes_list.Controls.Clear();
-            if (InvokeRequired)
-                Invoke(action);
-            else
-                general_recipes_list.Controls.Clear();
 
-            i = 0;
+            if (InvokeRequired) { Invoke(action); }
 
-            counter = 0;
+            else { general_recipes_list.Controls.Clear(); }
 
+            i = counter= 0;
+            
             bool isAll = false;
 
             inetList = new List<TableLayoutPanel>();
@@ -816,7 +796,7 @@ namespace MainForm
                         Recipe r = ControllerForBD.inetRecipes.ElementAt(0);
 
                         var t = createTableForRecipes(r);
-                        //ПЕРЕДЕЛАТЬ С ДОБАВЛЕНИЕМ КНОПКИ
+
                         inetList.Add(t);
 
                         general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(t)));
@@ -829,7 +809,7 @@ namespace MainForm
                         
                         //general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(pbForNoRec())));
 
-                       // general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(labelForNoRec())));
+                        //general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(labelForNoRec())));
                         
                     }
                 }
@@ -839,15 +819,13 @@ namespace MainForm
                     {
                         isAll = true;
                         
-                        //general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(pbForNoRec())));
+                        general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(pbForNoRec())));
 
-                       // general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(labelForNoRec())));
+                        general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(labelForNoRec())));
 
                     }
                 }
-
             }
-
         }
        
 
@@ -901,17 +879,13 @@ namespace MainForm
             else
             {
                 t.SetBounds(0, (i), (int)(partsForPanel / 2) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
-                
             }
-            
-
             t.BackColor = Instruments.buttonPanelColor;
             
             Instruments.SetRoundedShape(t, 80);
-            //ИЗМЕНЕНИЕ РАЗМЕРОВ ПАНЕЛИ ПРИ ИЗМЕНЕНИИ РАЗМЕРОВ ФОРМЫ ДОДЕЛАТЬ
+
             PictureBox pb = new PictureBox();
             
-
             //ТУТ ПРЕОБРАЗОВАНИЕ БАЙТОВ В КАРТИНКУ
             pb.SizeMode = PictureBoxSizeMode.Zoom;
 
@@ -925,7 +899,6 @@ namespace MainForm
 
             TableLayoutPanel panel = new TableLayoutPanel();
             
-
             panel.Dock = DockStyle.Fill;
 
             panel.ColumnCount = 1;
@@ -956,7 +929,6 @@ namespace MainForm
 
             Label l1 = new Label();
             
-
             l1.AutoSize = false;
 
             l1.TextAlign = ContentAlignment.TopLeft;
@@ -971,7 +943,6 @@ namespace MainForm
 
             TableLayoutPanel stars = new TableLayoutPanel();
             
-
             stars.ColumnCount = 5;
 
             stars.RowCount = 1;
@@ -980,7 +951,6 @@ namespace MainForm
 
             for (int j = 0; j < 5; j++)
             {
-
                 PictureBox p = new PictureBox();
 
                 p.SizeMode = PictureBoxSizeMode.Zoom;
@@ -1022,7 +992,6 @@ namespace MainForm
             {
                 main_recipe = ControllerForBD.SelectById(id, "inetrecipes");
             }
-            //ДОДЕЛАТЬ ВСЕ ТАБЛИЦЫ
 
             RecReadyB.Hide();
             //НЕ ЗАБУДЬ СДЕЛАТЬ ОТРИСОВКУ ЗВЕЗДОЧЕК И КАРТИНКИ РЕЦЕПТА
@@ -1035,7 +1004,7 @@ namespace MainForm
             tabContr.SelectedIndex = (int)Buttons.Add_Rec;//НЕ ЗАБУДЬ ДОДЕЛАТЬ ИЗБРАННЫЕ
 
             AddLabel.Text = "";
-            //мб инвоук нужен
+            //МБ ИНВОУК СДЕЛАТЬ
             cleanAddRecForm();
 
             rec_name.Text = main_recipe.Name;
@@ -1063,10 +1032,9 @@ namespace MainForm
             {
                 Instr_rec.Text = "-";
             }
-            
         }
 
-        public static void SetDoubleBuffered(Control c)//Устранение мерцания
+       /* public static void SetDoubleBuffered(Control c)//Устранение мерцания
         {
             if (System.Windows.Forms.SystemInformation.TerminalServerSession)
                 return;
@@ -1084,7 +1052,7 @@ namespace MainForm
                 cp.ExStyle |= 0x02000000;
                 return cp;
             }
-        }
+        }*/
 
         private void deleteRecB_Click(object sender, EventArgs e)
         {

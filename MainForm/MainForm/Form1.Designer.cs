@@ -48,6 +48,8 @@
             this.general_recipes_list = new System.Windows.Forms.Panel();
             this.genL = new System.Windows.Forms.Label();
             this.addRecPage = new System.Windows.Forms.TabPage();
+            this.updateRecB = new System.Windows.Forms.Button();
+            this.deleteRecB = new System.Windows.Forms.Button();
             this.CancelB = new System.Windows.Forms.Button();
             this.RecReadyB = new System.Windows.Forms.Button();
             this.RatingPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -91,8 +93,6 @@
             this.startLabel = new System.Windows.Forms.Label();
             this.startBox = new System.Windows.Forms.PictureBox();
             this.closeB = new System.Windows.Forms.Button();
-            this.deleteRecB = new System.Windows.Forms.Button();
-            this.updateRecB = new System.Windows.Forms.Button();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -400,11 +400,35 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 30);
+            this.addRecPage.Location = new System.Drawing.Point(4, 22);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
+            // 
+            // updateRecB
+            // 
+            this.updateRecB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.updateRecB.Location = new System.Drawing.Point(874, 510);
+            this.updateRecB.Name = "updateRecB";
+            this.updateRecB.Size = new System.Drawing.Size(75, 23);
+            this.updateRecB.TabIndex = 18;
+            this.updateRecB.Text = "button1";
+            this.updateRecB.UseVisualStyleBackColor = true;
+            this.updateRecB.Visible = false;
+            this.updateRecB.Click += new System.EventHandler(this.updateRecB_Click);
+            // 
+            // deleteRecB
+            // 
+            this.deleteRecB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteRecB.Location = new System.Drawing.Point(874, 562);
+            this.deleteRecB.Name = "deleteRecB";
+            this.deleteRecB.Size = new System.Drawing.Size(75, 23);
+            this.deleteRecB.TabIndex = 17;
+            this.deleteRecB.Text = "button1";
+            this.deleteRecB.UseVisualStyleBackColor = true;
+            this.deleteRecB.Visible = false;
+            this.deleteRecB.Click += new System.EventHandler(this.deleteRecB_Click);
             // 
             // CancelB
             // 
@@ -938,30 +962,6 @@
             this.closeB.TabIndex = 3;
             this.closeB.UseVisualStyleBackColor = false;
             this.closeB.Click += new System.EventHandler(this.closeB_Click);
-            // 
-            // deleteRecB
-            // 
-            this.deleteRecB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deleteRecB.Location = new System.Drawing.Point(874, 562);
-            this.deleteRecB.Name = "deleteRecB";
-            this.deleteRecB.Size = new System.Drawing.Size(75, 23);
-            this.deleteRecB.TabIndex = 17;
-            this.deleteRecB.Text = "button1";
-            this.deleteRecB.UseVisualStyleBackColor = true;
-            this.deleteRecB.Visible = false;
-            this.deleteRecB.Click += new System.EventHandler(this.deleteRecB_Click);
-            // 
-            // updateRecB
-            // 
-            this.updateRecB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.updateRecB.Location = new System.Drawing.Point(874, 510);
-            this.updateRecB.Name = "updateRecB";
-            this.updateRecB.Size = new System.Drawing.Size(75, 23);
-            this.updateRecB.TabIndex = 18;
-            this.updateRecB.Text = "button1";
-            this.updateRecB.UseVisualStyleBackColor = true;
-            this.updateRecB.Visible = false;
-            this.updateRecB.Click += new System.EventHandler(this.updateRecB_Click);
             // 
             // MainForm
             // 
