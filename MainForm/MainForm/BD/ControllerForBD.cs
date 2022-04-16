@@ -397,11 +397,57 @@ namespace bd
 
 
      */
+        private static void SelectAllInetRecipes()
+        {
+            inetRecipes = new List<Recipe>();
+            isDoneInet = false;
+            isStartInet = false;
+            try
+            {
+                NpgsqlConnection connection = new NpgsqlConnection(configConnection);
+                connection.Open();
+                inetRecipes = new List<Recipe>();
+                Recipe r = null;
 
+
+                //ВОЗМОЖНА ОШИБКА!
+
+
+                string textCommand = "Select recipes.id, name ,  category, time, marklike, markdif, star, pic from recipes left join Images on recipes.id = images.id  where type = 1;";
+
+
+
+
+
+                var command = new NpgsqlCommand(textCommand, connection);
+                var reader = command.ExecuteReader();
+                isDoneInet = false;
+                isStartInet = true;
+                while (reader.Read())
+                {
+                    byte[] picture = null;
+                    r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
+                    picture = (byte[])reader[7];
+                    r.Pic = picture;
+                    inetRecipes.Add(r);
+                }
+                isDoneInet = true;
+                reader.Close();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                isStartInet = false;
+                Console.WriteLine("Error of select all from InetRecipes : \n" + e);
+                inetRecipes = null;
+                isDoneInet = true;
+            }
+        }
         public static void StartSelectAllInetRecipes()
         {
             try
             {
+
                 Thread th = new Thread(SelectAllInetRecipes);
                 th.Start();
             }
@@ -410,42 +456,68 @@ namespace bd
                 Console.WriteLine(e);
             }
         }
-
-        private static void SelectAllInetRecipes()
+        private static void SelectAllStarRecipes()
         {
-            inetRecipes = new List<Recipe>();
-            isDoneInet = false;
-            isStartInet = false;
-
+            starRecipes = new List<Recipe>();
+            isDoneStar = false;
+            isStartStar = false;
             try
             {
                 NpgsqlConnection connection = new NpgsqlConnection(configConnection);
                 connection.Open();
+                starRecipes = new List<Recipe>();
                 Recipe r = null;
-                string textCommand = "Select id, name ,  category, time, marklike, markdif, star from recipes where type = 1";
+
+
+                //ВОЗМОЖНА ОШИБКА!
+
+
+                string textCommand = "Select recipes.id, name ,  category, time, marklike, markdif, star, pic from recipes left join Images on recipes.id = images.id  where star = true;";
+
+
+
+
+
                 var command = new NpgsqlCommand(textCommand, connection);
                 var reader = command.ExecuteReader();
-                isDoneInet = false;
-                isStartInet = true;
+                isDoneStar = false;
+                isStartStar = true;
                 while (reader.Read())
                 {
+                    byte[] picture = null;
                     r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
-                    inetRecipes.Add(r);
+                    picture = (byte[])reader[7];
+                    r.Pic = picture;
+                    starRecipes.Add(r);
                 }
-                isDoneInet = true;
+                isDoneStar = true;
                 reader.Close();
                 connection.Close();
-
             }
             catch (Exception e)
             {
-
-                Console.WriteLine("Error of select all from inetRecipes : \n" + e);
-                inetRecipes = null;
-                isDoneInet = true;
-                isStartInet = false;
+                isStartStar = false;
+                Console.WriteLine("Error of select all from MyRecipes : \n" + e);
+                starRecipes = null;
+                isDoneStar = true;
             }
         }
+        public static void StartSelectAllStarRecipes()
+        {
+            try
+            {
+
+                Thread th = new Thread(SelectAllStarRecipes);
+                th.Start();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+
+
 
         public static void deleteById(int id)
         {
