@@ -399,55 +399,6 @@ namespace bd
             }
         }
 
-
-        private static void SelectAllStarRecipes()
-        {
-            starRecipes = new List<Recipe>();
-            isDoneStar = false;
-            isStartStar = false;
-
-            try
-            {
-                NpgsqlConnection connection = new NpgsqlConnection(configConnection);
-                connection.Open();
-                Recipe r = null;
-                string textCommand = "Select id, name ,  category, time, marklike, markdif, star from recipes where star = true";
-                var command = new NpgsqlCommand(textCommand, connection);
-                var reader = command.ExecuteReader();
-                isDoneStar = false;
-                isStartStar = true;
-                while (reader.Read())
-                {
-                    r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
-                    starRecipes.Add(r);
-                }
-                isDoneStar = true;
-                reader.Close();
-                connection.Close();
-
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine("Error of select all from StarRecipes : \n" + e);
-                starRecipes = null;
-                isDoneStar = true;
-                isStartStar = false;
-            }
-        }
-        public static void StartSelectAllStarRecipes()
-        {
-            try
-            {
-                Thread th = new Thread(SelectAllStarRecipes);
-                th.Start();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
         public static void deleteById(int id)
         {
             string textCommand = $"delete from recipes where(id = {id})";
