@@ -253,8 +253,56 @@ namespace bd
                         }
                     }
 
+        // ------------------------------------------------------------------------------------------------------------------------------------------------
+
+        
+        // Объект ImageConverter, используемый для преобразования массивов байтов, содержащих изображения файлов JPEG или PNG, в объекты Bitmap. 
+
+        private static readonly ImageConverter _imageConverter = new ImageConverter();
+
+        // Image to byte array:
+
+        // Метод для «преобразования» объекта изображения в массив байтов, отформатированный в формате файла PNG, который
+        // обеспечивает сжатие без потерь. Можно использовать вместе с GetImageFromByteArray().
+  
+
+          public static byte[] CopyImageToByteArray(Image theImage)
+                  {
+                   using (MemoryStream memoryStream = new MemoryStream())
+                       {
+                          theImage.Save(memoryStream, ImageFormat.Png);
+                          return memoryStream.ToArray();
+                       }
+                  } 
+         
+       // Byte to image:
+
+       public static Bitmap GetImageFromByteArray(byte[] byteArray)
+          {
+             Bitmap bm = (Bitmap)_imageConverter.ConvertFrom(byteArray);
+          
+                  if (bm != null && (bm.HorizontalResolution != (int)bm.HorizontalResolution ||
+                                     bm.VerticalResolution != (int)bm.VerticalResolution))
+                  {
+                     // Correct a strange glitch that has been observed in the test program when converting 
+                     //  from a PNG file image created by CopyImageToByteArray() - the dpi value "drifts" 
+                     //  slightly away from the nominal integer value
+                     bm.SetResolution((int)(bm.HorizontalResolution + 0.5f), 
+                                      (int)(bm.VerticalResolution + 0.5f));
+                  }
+          
+             return bm;
+          }
 
 
+         // Чтобы получить изображение из файла jpg или png, вы должны прочитать файл в массив байтов, используя File.ReadAllBytes():
+
+          Bitmap newBitmap = GetImageFromByteArray(File.ReadAllBytes(fileName));
+
+         //Это позволяет избежать проблем, связанных с тем, что Bitmap хочет, чтобы его исходный поток оставался открытым, и
+         //некоторых предлагаемых обходных путей для этой проблемы, которые приводят к тому, что исходный файл остается заблокированным.
+
+        // ------------------------------------------------------------------------------------------------------------------------------------------------
 
          */
         private static void SelectAllMyRecipes()
