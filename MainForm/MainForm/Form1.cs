@@ -61,7 +61,7 @@ namespace MainForm
         {
             InitializeComponent();
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");//Подключение БД
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = ; Database = MyDatabase; ");//Подключение БД
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
 
@@ -671,7 +671,7 @@ namespace MainForm
 
             allStarsOpacityNull();
 
-            RecPhoto.Image = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\.png"); // ДОДЕЛАТЬ!!!!!!!!!!!!!!!!!!!
+        //    RecPhoto.Image = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\.png"); // ДОДЕЛАТЬ!!!!!!!!!!!!!!!!!!!
         }
 
         //Функция для проверки активности кнопок
@@ -764,9 +764,9 @@ namespace MainForm
                     {
                         isAll = true;
                         
-                        //my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
+                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
 
-                        //my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
+                        my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(labelForNoRec())));
                     }
                 }
             }
@@ -888,8 +888,22 @@ namespace MainForm
             
             //ТУТ ПРЕОБРАЗОВАНИЕ БАЙТОВ В КАРТИНКУ
             pb.SizeMode = PictureBoxSizeMode.Zoom;
+            if (r.Pic != null)
+            {
+                using (MemoryStream productImageStream = new System.IO.MemoryStream(r.Pic))
+                {
+                    ImageConverter imageConverter = new System.Drawing.ImageConverter();
+                    pb.BackgroundImage = imageConverter.ConvertFrom(r.Pic) as System.Drawing.Image;
+                    pb.SizeMode = PictureBoxSizeMode.CenterImage;
+                    pb.BackgroundImageLayout = ImageLayout.Zoom; // выбери нужный
 
-          //  pb.BackgroundImage = Image.FromFile("C: \\Users\\diana\\Desktop\\c.jpg");
+                }
+            }
+            else
+            {
+                //по умолчанию картинка
+            }
+          //  pb.BackgroundImage = Image.FromFile();
 
             t.Controls.Add(pb, 0, 0);
 
