@@ -61,7 +61,7 @@ namespace MainForm
         {
             InitializeComponent();
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv; Database = MyDatabase; ");//Подключение БД
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");//Подключение БД
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
 
@@ -671,7 +671,7 @@ namespace MainForm
 
             allStarsOpacityNull();
 
-            //RecPhoto.Image = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\.png");  ДОДЕЛАТЬ!!!!!!!!!!!!!!!!!!!
+            RecPhoto.Image = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\.png"); // ДОДЕЛАТЬ!!!!!!!!!!!!!!!!!!!
         }
 
         //Функция для проверки активности кнопок
@@ -889,7 +889,7 @@ namespace MainForm
             //ТУТ ПРЕОБРАЗОВАНИЕ БАЙТОВ В КАРТИНКУ
             pb.SizeMode = PictureBoxSizeMode.Zoom;
 
-            pb.BackgroundImage = Image.FromFile("C: \\Users\\diana\\Desktop\\c.jpg");
+          //  pb.BackgroundImage = Image.FromFile("C: \\Users\\diana\\Desktop\\c.jpg");
 
             t.Controls.Add(pb, 0, 0);
 

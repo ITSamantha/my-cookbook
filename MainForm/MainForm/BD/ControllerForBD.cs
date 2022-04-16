@@ -81,22 +81,28 @@ namespace bd
             {
                 NpgsqlConnection connection = new NpgsqlConnection(configConnection);
                 connection.Open();
-                string textCommand = "Insert into myrecipes(name, category, ingredients, guide, time, marklike, markdif )";
-                textCommand += $"values ('{name}','{category}','{ingredients}','{guide}','{time}',{marklike},{markdif})";
+                string textCommand = "Insert into recipes(name, category, ingredients, guide, time, marklike, markdif, type )";
+                textCommand += $"values ('{name}','{category}','{ingredients}','{guide}','{time}',{marklike},{markdif}, 0)";
                 textCommand += " returning id;";
                 NpgsqlCommand npgsqlCommand = new NpgsqlCommand(textCommand, connection);
                 int id = (int)npgsqlCommand.ExecuteScalar();
                 npgsqlCommand = new NpgsqlCommand("Insert into images(id, pic) values (" + id + ", @Image )", connection);
                 NpgsqlParameter parameter = npgsqlCommand.CreateParameter();
-                /*parameter.ParameterName = "@Image";
+                parameter.ParameterName = "@Image";
                 parameter.NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Bytea;
-                parameter.Value = image;*/
+                parameter.Value = image;
+
+
                 npgsqlCommand.Parameters.Add(parameter);
 
 
-
-                npgsqlCommand.ExecuteNonQuery();
-        
+                try
+                {
+                    npgsqlCommand.ExecuteNonQuery();
+                }catch(Exception e)
+                {
+                    
+                }
                 Console.WriteLine($"Recipe is insert with id = {id}");
                 connection.Close();
                 return true;
@@ -104,6 +110,7 @@ namespace bd
             catch (Exception e)
             {
                 Console.WriteLine($"Insert error: \n {e} ");
+              
                 return false;
             }
         }
@@ -121,8 +128,8 @@ namespace bd
             {
                 NpgsqlConnection connection = new NpgsqlConnection(configConnection);
                 connection.Open();
-                string textCommand = "Insert into inetrecipes(name, category, ingredients, guide, time, marklike, markdif )";
-                textCommand += $"values ('{name}','{category}','{ingredients}','{guide}','{time}',{marklike},{markdif})";
+                string textCommand = "Insert into recipes(name, category, ingredients, guide, time, marklike, markdif, type )";
+                textCommand += $"values ('{name}','{category}','{ingredients}','{guide}','{time}',{marklike},{markdif}, 1)";
                 textCommand += " returning id;";
                 NpgsqlCommand npgsqlCommand = new NpgsqlCommand(textCommand, connection);
 
@@ -155,6 +162,7 @@ namespace bd
         Метод получения по айди:
         При выводе списков рецептов дается не вся информация о рецептах,
         поэтому при выборе пользователем определенного рецепта, через айди дается полная информация
+
         параметр TABLE - из какой таблицы беруться данные: избранные = starrecipes, пользовательские = myrecipes, с интернета = inetrecipes, все рецепты = recipes
          */
 
@@ -173,11 +181,18 @@ namespace bd
                 {
                     textCommand = $"Select * from recipes where ((id = {id}) and (star = true))";
                 }
+                else if (table.Equals("myrecipes"))
+                {
+                    textCommand = $"Select * from recipes where ((id = {id}) and (type = 0))";
+                }else if (table.Equals("inetrecipes"))
+                {
+                    textCommand = $"Select * from recipes where ((id = {id}) and (type = 1))";
+                }
                 else
                 {
-                    textCommand = $"Select * from {table} where id = {id}";
+                    textCommand = $"Select * from recipes where ((id = {id}))";
                 }
-                Recipe r = null;
+                    Recipe r = null;
 
                 var command = new NpgsqlCommand(textCommand, connection);
                 var reader = command.ExecuteReader();
@@ -253,7 +268,17 @@ namespace bd
                 connection.Open();
                 myRecipes = new List<Recipe>();
                 Recipe r = null;
-                string textCommand = "Select myrecipes.id, name ,  category, time, marklike, markdif, star, pic from myrecipes left join Images on myrecipes.id = images.id;";
+
+
+                //ВОЗМОЖНА ОШИБКА!
+
+                
+                string textCommand = "Select recipes.id, name ,  category, time, marklike, markdif, star, pic from recipes left join Images on recipes.id = images.id  where type = 0;";
+                
+                
+                
+                
+                
                 var command = new NpgsqlCommand(textCommand, connection);
                 var reader = command.ExecuteReader();
                 isDoneMy = false;
@@ -349,7 +374,7 @@ namespace bd
                 NpgsqlConnection connection = new NpgsqlConnection(configConnection);
                 connection.Open();
                 Recipe r = null;
-                string textCommand = "Select id, name ,  category, time, marklike, markdif, star from inetrecipes";
+                string textCommand = "Select id, name ,  category, time, marklike, markdif, star from recipes where type = 1";
                 var command = new NpgsqlCommand(textCommand, connection);
                 var reader = command.ExecuteReader();
                 isDoneInet = false;
