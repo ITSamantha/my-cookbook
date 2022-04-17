@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using MainForm.BD;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace bd
 {
@@ -653,6 +655,111 @@ namespace bd
 
             }
 
+
+
+        }
+
+        public static void alterSearch(PairSearch p)
+        {
+            searchRecipes = new List<Recipe>();
+            isStartSearch = false;
+            isDoneSearch = false;
+            try
+            {
+                NpgsqlConnection connection = new NpgsqlConnection(configConnection);
+                connection.Open();
+                searchRecipes = new List<Recipe>();
+
+                string f, text = "";
+                string textCommand = "";
+                
+                if (p is PairSearch)
+                {
+
+
+                    textCommand = "Select id, name  from recipes";
+                    f = p.filter;
+                    text = p.textSearch;
+                    if (!f.Equals(""))
+                    {
+                        textCommand += "where";
+                        textCommand += f;
+                    }
+
+
+
+
+
+
+
+
+
+
+                    var command = new NpgsqlCommand(textCommand, connection);
+                    var reader = command.ExecuteReader();
+                    isDoneSearch = false;
+                    isStartSearch = true;
+                    List<PairForList> pairlist = new List<PairForList>();
+                    while (reader.Read())
+                    {
+                        Recipe r;
+                        double index;
+                        int id;
+                        string name;
+                        name = reader.GetString(1);
+                        id = reader.GetInt32(0);
+                        /*
+                               ДЛЯ БОЛЕЕ ТОЧНЫХ РЕЗУЛЬТАТОВ - СДЕЛАТЬ СОРТИРОВКУ = МЕДЛЕНЕЕ, НО ТОЧНЕЕ (НУЖНО БУДЕТ СОЗДАТЬ СПИСОК ПАР: ID , INDEX)
+                               Если результаты достаточно точны будут, сделать многопоток
+                         */
+                        if (text.Equals(""))
+                        {
+                            r = SelectById(id, "recipes");
+                            searchRecipes.Add(r);
+                        }
+                        else
+                        {
+                            
+                            PairForList pair = new PairForList(id, name, Search.indexEquals(text, name));
+                            if (pair.index >= 49) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                            {
+                                // r = SelectById(id, "recipes");
+                                // searchRecipes.Add(r);
+                                pairlist.Add(pair);
+                            }
+                        }
+
+                    }
+                    isDoneSearch = true;
+
+                    pairlist.Sort((x, y) =>(
+                        y.index.CompareTo(x.index)
+                    ));
+                    if (!text.Equals("")){
+                        foreach (PairForList pair in pairlist)
+                        {
+                            Recipe r;
+                            r = SelectById((int)pair.id, "recipes");
+                            searchRecipes.Add(r);
+                        } 
+                    }
+
+                    reader.Close();
+                    connection.Close();
+                }
+                else
+                {
+                    isDoneSearch = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                searchRecipes = null;
+                isDoneSearch = true;
+                isStartSearch = false;
+
+            }
 
 
         }
