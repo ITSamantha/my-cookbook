@@ -39,6 +39,8 @@ namespace MainForm
         //ПРОВЕРЬ СООТВЕТСТВИЕ ВСЕХ КНОПОК
         public int whatClicked = (int)Star_Marks.NoMark;
 
+        bool isPhoto = false;
+
         public int whatButtonClicked = -1;
 
         public string ImageFileNameOpacity = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\opacity_star.png";
@@ -124,6 +126,7 @@ namespace MainForm
 
         private void addRecB_Click(object sender, EventArgs e)//Раздел "Добавление рецепта"
         {
+            isPhoto = false;
             cleanAddRecForm();
             RecReadyB.Show();
             CancelB.Show();
@@ -267,8 +270,37 @@ namespace MainForm
         }
 
         private void RecReadyB_Click(object sender, EventArgs e)//Добавление рецепта в таблицу "Мои рецепты"
-        {
-            if (ControllerForBD.InsertToMyRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text, Instruments.convertImageIntoB(this.RecPhoto.Image)))
+        {//ПРОВЕРКА ПУСТОТЫ ВСЕГО!
+            if (rec_name.Text == String.Empty) { MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Вы не ввели название." : "You have not entered a name.","Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+
+            if (Instr_rec.Text == String.Empty) { MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Вы не ввели инструкцию." : "You have not entered an instruction.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+
+            if (Ingr_rec.Text == String.Empty) { MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Вы не ввели ингредиенты." : "You have not entered ingredients.", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+            
+            time_rec.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+
+            //string temp1 = time_rec.Text[3].ToString() + time_rec.Text[4].ToString();
+
+            //string temp2 = time_rec.Text[6].ToString() + time_rec.Text[7].ToString();
+
+            int res1, res2;
+            
+            //int.TryParse(temp1, out res1);
+
+            //int.TryParse(temp2, out res2);
+         
+            if (String.IsNullOrEmpty(time_rec.Text) || String.IsNullOrWhiteSpace(time_rec.Text)) {
+                MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Вы не ввели время ." : "You have not entered time .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            /*if(res1 >= 60 || res2 >= 60)
+            {
+                MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Вы не ввели время  некорректно." : "You have  entered time incorrectly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }*/
+
+            //КАК ОТСЛЕЖТИВАТЬ ИЗМЕНЕНИЯ!?
+            if (ControllerForBD.InsertToMyRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text, isPhoto?Instruments.convertImageIntoB(this.RecPhoto.Image):null))
             {
                 MessageBox.Show("Рецепт успешно добавлен.", "Добавление рецепта");//МБ СДЕЛАТЬ СВОЮ ФОРМУ
             }
@@ -301,13 +333,14 @@ namespace MainForm
         private void RecPhoto_Click(object sender, EventArgs e)//ДОБАВЛЕНИЕ ФОТО В РЕЦЕПТ ДОДЕЛАТЬ!??!?!?
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-
-           
+            
             if (openFileDialog.ShowDialog() == DialogResult.Cancel) return;
 
             string filename = openFileDialog.FileName;
 
             RecPhoto.Image = Image.FromFile(filename);
+
+            isPhoto = true;
 
             //RecPhoto.Size = new Size(Height/3, Height / 3);//ПОДУМАТЬ над фото(размер, основное) и т.п.
 
@@ -671,7 +704,7 @@ namespace MainForm
 
             allStarsOpacityNull();
 
-        //    RecPhoto.Image = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\.png"); // ДОДЕЛАТЬ!!!!!!!!!!!!!!!!!!!
+            RecPhoto.Image = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\add.png"); // ДОДЕЛАТЬ!!!!!!!!!!!!!!!!!!!
         }
 
         //Функция для проверки активности кнопок
@@ -898,15 +931,18 @@ namespace MainForm
 
                     pb.SizeMode = PictureBoxSizeMode.CenterImage;
 
-                   pb.BackgroundImageLayout = ImageLayout.Stretch; // выбери нужный
-                    
+                    pb.BackgroundImageLayout = ImageLayout.Stretch; 
                 }
             }
             else
             {
-                //по умолчанию картинка
+                pb.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\standart_photo.jpg");
+
+                pb.SizeMode = PictureBoxSizeMode.CenterImage;
+
+                pb.BackgroundImageLayout = ImageLayout.Stretch;
             }
-          //  pb.BackgroundImage = Image.FromFile();
+         
 
             t.Controls.Add(pb, 0, 0);
 
