@@ -61,7 +61,7 @@ namespace MainForm
         {
             InitializeComponent();
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password = ; Database = MyDatabase; ");//Подключение БД
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv ; Database = MyDatabase; ");//Подключение БД
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
 
@@ -893,10 +893,13 @@ namespace MainForm
                 using (MemoryStream productImageStream = new System.IO.MemoryStream(r.Pic))
                 {
                     ImageConverter imageConverter = new System.Drawing.ImageConverter();
-                    pb.BackgroundImage = imageConverter.ConvertFrom(r.Pic) as System.Drawing.Image;
-                    pb.SizeMode = PictureBoxSizeMode.CenterImage;
-                    pb.BackgroundImageLayout = ImageLayout.Zoom; // выбери нужный
 
+                    pb.BackgroundImage = imageConverter.ConvertFrom(r.Pic) as System.Drawing.Image;
+
+                    pb.SizeMode = PictureBoxSizeMode.CenterImage;
+
+                   pb.BackgroundImageLayout = ImageLayout.Stretch; // выбери нужный
+                    
                 }
             }
             else
@@ -907,7 +910,7 @@ namespace MainForm
 
             t.Controls.Add(pb, 0, 0);
 
-            t.Controls[0].SetBounds(t.Bounds.X, t.Bounds.Y, t.Size.Width / 2, t.Size.Height);
+            t.Controls[0].SetBounds(50, 0, t.Size.Height , t.Size.Height );
 
             Instruments.SetRoundedShape(t.Controls[0], 80);
 
