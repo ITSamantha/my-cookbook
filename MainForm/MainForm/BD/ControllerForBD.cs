@@ -530,6 +530,11 @@ namespace bd
 
         public static void deleteById(int id)
         {
+            string textCommand = $"delete from images where(id = {id})";
+            NpgsqlConnection connection = new NpgsqlConnection(configConnection);
+            connection.Open();
+            var command = new NpgsqlCommand(textCommand, connection);
+            command.ExecuteNonQuery();
             string textCommand = $"delete from recipes where(id = {id})";
             NpgsqlConnection connection = new NpgsqlConnection(configConnection);
             connection.Open();
