@@ -24,7 +24,8 @@ namespace MainForm
             Add_Rec = 3,
             Settings = 4,
             Help = 5,
-            Start_Page = 6
+            Start_Page = 6,
+            SearchResultPage=7
         }
 
         public enum Star_Marks : int//Перечисление оценки
@@ -48,13 +49,7 @@ namespace MainForm
         public string ImageFileNameFull = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\full_star.png";
 
         public Instruments Instruments;
-
-        List<TableLayoutPanel> myList;
-
-        List<TableLayoutPanel> inetList;
-
-        List<TableLayoutPanel> favList;
-
+        
         public Thread thread;
 
         Recipe main_recipe;
@@ -63,7 +58,7 @@ namespace MainForm
         {
             InitializeComponent();
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =; Database = MyDatabase; ");//Подключение БД
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv; Database = MyDatabase; ");//Подключение БД
 
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
 
@@ -75,8 +70,8 @@ namespace MainForm
 
             markDif.SelectedIndex = 0;//Начальная оценка сложности  - 1
 
-            tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
-
+            //tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
+            tabContr.SelectedIndex = 7;//Стартовая страница
         }
 
         private void closeB_Click(object sender, EventArgs e)
@@ -555,6 +550,21 @@ namespace MainForm
                     general_recipes_list.SetBounds(MyRecPage.Bounds.X + Instruments.intervalX / 6, myL.Bounds.Y + myL.Height, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
                 }
             }
+
+            //SearchPage changes
+            {
+                //"Запрос поиска"
+                {
+                    searchTB.SetBounds(buttonPanel.Width+800 , 6, 400, 40);
+                    Instruments.SetRoundedShape(searchTB,10);
+                }
+                //"Кнопка поиска"
+                {
+                    searchB.SetBounds(searchTB.Size.Width + searchTB.Bounds.X+5, 6, 100, 40);
+                    
+                }
+                
+            }
         }
 
         public void setColors()
@@ -564,6 +574,8 @@ namespace MainForm
             CancelB.BackColor = Instruments.myPurpleColor;
             
             RecReadyB.BackColor = Instruments.myPurpleColor;
+
+            searchB.BackColor = Color.White;
 
             deleteRecB.BackColor = Instruments.myPurpleColor;
 
@@ -642,6 +654,8 @@ namespace MainForm
             CancelB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.cancelRu : LanguagesForAddingRecipe.cancelEn;
 
             RecReadyB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addBRu : LanguagesForAddingRecipe.addBEn;
+
+            searchB.Text= LanguagesForAddingRecipe.isRu ? "Поиск" : "Search";
 
             deleteRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.delBRu : LanguagesForAddingRecipe.delBEn;
 
@@ -763,8 +777,6 @@ namespace MainForm
             
             bool isAll = false;
             
-            myList = new List<TableLayoutPanel>();
-            
             while (!isAll)
             {
                 if (ControllerForBD.isStartMy)
@@ -776,8 +788,7 @@ namespace MainForm
                         var t = createTableForRecipes(r);
                         
                         my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(t)));
-
-                        myList.Add(t);
+                        
 
                         ControllerForBD.myRecipes.Remove(r);
                         
@@ -804,6 +815,58 @@ namespace MainForm
                 }
             }
         }
+
+        public void showAllFavRecipes()
+        {
+            Action action = () => fav_recipes_list.Controls.Clear();
+
+            if (InvokeRequired) { Invoke(action); }
+
+            else { fav_recipes_list.Controls.Clear(); }
+
+            i = counter = 0;
+
+            bool isAll = false;
+            
+
+            while (!isAll)
+            {
+                if (ControllerForBD.isStartStar)
+                {
+                    if (ControllerForBD.starRecipes.Count != 0)
+                    {
+                        Recipe r = ControllerForBD.starRecipes.ElementAt(0);
+
+                        var t = createTableForRecipes(r);
+
+                        fav_recipes_list.BeginInvoke((MethodInvoker)(() => fav_recipes_list.Controls.Add(t)));
+
+                        ControllerForBD.starRecipes.Remove(r);
+
+                    }
+                    if ((ControllerForBD.starRecipes.Count == 0) && (ControllerForBD.isDoneStar))
+                    {
+                        isAll = true;
+
+                        //fav_recipes_list.BeginInvoke((MethodInvoker)(() => fav_recipes_list.Controls.Add(pbForNoRec())));
+
+                        //fav_recipes_list.BeginInvoke((MethodInvoker)(() => fav_recipes_list.Controls.Add(labelForNoRec())));
+                    }
+                }
+                else
+                {
+                    if ((ControllerForBD.isDoneStar))
+                    {
+                        isAll = true;
+
+                        fav_recipes_list.BeginInvoke((MethodInvoker)(() => fav_recipes_list.Controls.Add(pbForNoRec())));
+
+                        fav_recipes_list.BeginInvoke((MethodInvoker)(() => fav_recipes_list.Controls.Add(labelForNoRec())));
+                    }
+                }
+            }
+            
+        }
        
         
         public void showAllInetRecipes()//Вывести все рецепты из Интернета
@@ -818,8 +881,6 @@ namespace MainForm
             
             bool isAll = false;
 
-            inetList = new List<TableLayoutPanel>();
-
             while (!isAll)
             {
                 if (ControllerForBD.isStartInet)
@@ -829,9 +890,7 @@ namespace MainForm
                         Recipe r = ControllerForBD.inetRecipes.ElementAt(0);
 
                         var t = createTableForRecipes(r);
-
-                        inetList.Add(t);
-
+                        
                         general_recipes_list.BeginInvoke((MethodInvoker)(() => general_recipes_list.Controls.Add(t)));
 
                         ControllerForBD.inetRecipes.Remove(r);
@@ -905,13 +964,13 @@ namespace MainForm
 
             if (counter % 2 == 0)
             {
-                t.SetBounds(intervalX + (int)(partsForPanel / 2) * intervalX, i, (int)(partsForPanel / 2) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+                t.SetBounds(intervalX + (int)(partsForPanel / 2) * intervalX, i, (int)(partsForPanel / 2) * intervalX-40, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
 
                 i += t.Height + intervalY;
             }
             else
             {
-                t.SetBounds(0, (i), (int)(partsForPanel / 2) * intervalX, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
+                t.SetBounds(0, (i), (int)(partsForPanel / 2) * intervalX-40, InstrPanel.Height);//НЕ ЗАБУДЬ КНОПКУ ИЗБРАННОЕ
             }
             t.BackColor = Instruments.buttonPanelColor;
             
@@ -1123,22 +1182,13 @@ namespace MainForm
             //ДОДЕЛАТЬ UPDATE
         }
 
-
-
-
-
-
-        //А КАК ЛУЧШЕ СДЕЛАТЬ СЧЕТ?g КООРДИНАТАМ!!!
-        /*Обработчик для нескольких кнопок
-         foreach (var item in this.Controls) //обходим все элементы формы
-    {
-        if (item is Button) // проверяем, что это кнопка
+        private void searchB_Click(object sender, EventArgs e)
         {
-            ((Button)item).Click += CommonBtn_Click; //приводим к типу и устанавливаем обработчик события  
+            if (searchTB.Text == String.Empty)
+            {
+                MessageBox.Show(LanguagesForAddingRecipe.isRu?"Строка поиска пуста":"Search text box is empty.","Error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                return;
+            }
         }
-    } 
-             */
-
-
     }
 }
