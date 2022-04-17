@@ -686,5 +686,38 @@ namespace bd
             reader.Close();
             connection.Close();
         }
+        private static void editRecipe(string name, string category, string ingredients, string guide, string marklike, string markdif, string time, byte[] image)
+        {
+            NpgsqlConnection connection = new NpgsqlConnection(configConnection);
+            connection.Open();
+            string textCommand = "Update recipes (name, category, ingredients, guide, time, marklike, markdif, type )";
+            textCommand += $"values ('{name}','{category}','{ingredients}','{guide}','{time}',{marklike},{markdif}, 0)";
+            textCommand += " returning id;";
+            NpgsqlCommand npgsqlCommand = new NpgsqlCommand(textCommand, connection);
+            int id = (int)npgsqlCommand.ExecuteScalar();
+            npgsqlCommand = new NpgsqlCommand("Insert into images(id, pic) values (" + id + ", @Image )", connection);
+            NpgsqlParameter parameter = npgsqlCommand.CreateParameter();
+            parameter.ParameterName = "@Image";
+            parameter.NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Bytea;
+            parameter.Value = image;
+
+
+            npgsqlCommand.Parameters.Add(parameter);
+
+
+            try
+            {
+                npgsqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+            }
+           
+            connection.Close();
+           
+      
+}
     }
+    
 }
