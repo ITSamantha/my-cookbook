@@ -335,15 +335,15 @@ namespace bd
                 {
                     byte[] picture = null;
                     r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
-                    if (picture != null)
-                    {
-                        picture = (byte[])reader[7];
+                   
+                        picture = reader[7] as byte[];
                         r.Pic = picture;
-                    }
-                    else
-                    {
-                        r.Pic = null;
-                    }
+                  
+                        
+                   
+                   
+                      
+                    
                     myRecipes.Add(r);
                 }
                 isDoneMy = true;
@@ -434,7 +434,7 @@ namespace bd
                 {
                     byte[] picture = null;
                     r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
-                    picture = (byte[])reader[7];
+                    picture = reader[7] as byte[];
                     r.Pic = picture;
                     inetRecipes.Add(r);
                 }
@@ -493,7 +493,7 @@ namespace bd
                 {
                     byte[] picture = null;
                     r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
-                    picture = (byte[])reader[7];
+                    picture = reader[7] as byte[];
                     r.Pic = picture;
                     starRecipes.Add(r);
                 }
