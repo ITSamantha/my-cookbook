@@ -968,10 +968,10 @@
             // SearchResultPage
             // 
             this.SearchResultPage.Controls.Add(this.search_list);
-            this.SearchResultPage.Location = new System.Drawing.Point(4, 30);
+            this.SearchResultPage.Location = new System.Drawing.Point(4, 22);
             this.SearchResultPage.Name = "SearchResultPage";
             this.SearchResultPage.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchResultPage.Size = new System.Drawing.Size(1021, 652);
+            this.SearchResultPage.Size = new System.Drawing.Size(1021, 660);
             this.SearchResultPage.TabIndex = 7;
             this.SearchResultPage.Text = "tabPage1";
             this.SearchResultPage.UseVisualStyleBackColor = true;

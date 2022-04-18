@@ -55,6 +55,8 @@ namespace MainForm
         Recipe main_recipe;
 
         bool isCollapsed=true;
+
+        
         
         public MainForm()
         {
@@ -72,8 +74,8 @@ namespace MainForm
 
             markDif.SelectedIndex = 0;//Начальная оценка сложности  - 1
 
-            //tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
-            tabContr.SelectedIndex = 7;//Стартовая страница
+            tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
+           //tabContr.SelectedIndex = 7;//Стартовая страница
         }
 
         private void closeB_Click(object sender, EventArgs e)
@@ -1209,7 +1211,7 @@ namespace MainForm
         {
             if (main_recipe != null)
             {
-                //ControllerForBD.deleteById(main_recipe.Id);//ДЛЯ РЕЦЕПТОВ ИЗ ИНТЕРНЕТА ТАКОЕ НЕ ДЕЛАЕМ
+                ControllerForBD.deleteById(main_recipe.Id);//ДЛЯ РЕЦЕПТОВ ИЗ ИНТЕРНЕТА ТАКОЕ НЕ ДЕЛАЕМ
                 tabContr.SelectedIndex = (int)Buttons.Start_Page;
                 whatButtonClicked = -1;
                 checkButtonsColors(-1);
@@ -1233,6 +1235,36 @@ namespace MainForm
                 MessageBox.Show(LanguagesForAddingRecipe.isRu?"Строка поиска пуста":"Search text box is empty.","Error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
             }
+            List<string> checkedCategory = new List<string>();
+
+            List<string> checkedDiff = new List<string>();
+
+            List<string> checkedMarkLike = new List<string>();
+            if (categoryCheckB.CheckedItems.Count != 0)
+            {
+                foreach (var item in categoryCheckB.CheckedItems)
+                {
+                    checkedCategory.Add(item.ToString());
+                }
+            }
+            if (diffCheckB.CheckedItems.Count != 0)
+            {
+                foreach (var item in diffCheckB.CheckedItems)
+                {
+                    checkedDiff.Add(item.ToString());
+                }
+            }
+            if (rateCheckB.CheckedItems.Count != 0)
+            {
+                foreach (var item in rateCheckB.CheckedItems)
+                {
+                    checkedMarkLike.Add(item.ToString()[0].ToString());
+                }
+            }
+            
+
+
+
         }
 
         private void FilterB_Click(object sender, EventArgs e)//Повторное нажатие?

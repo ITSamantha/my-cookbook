@@ -528,7 +528,7 @@ namespace bd
 
 
 
-       /* public static void deleteById(int id)
+       public static void deleteById(int id)
         {
             string textCommand = $"delete from images where(id = {id})";
             NpgsqlConnection connection = new NpgsqlConnection(configConnection);
@@ -540,7 +540,7 @@ namespace bd
             connection.Open();
              command = new NpgsqlCommand(textCommand, connection);
             command.ExecuteNonQuery();
-        }*/
+        }
 
 
 
