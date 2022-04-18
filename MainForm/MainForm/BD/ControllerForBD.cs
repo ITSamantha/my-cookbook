@@ -527,7 +527,75 @@ namespace bd
 
 
 
+        public static string createFilter(int type, List<string> categories,List<string> marklikes, List<string> markdifs , bool star)
+        {
+            string filter = "";
 
+            if (type == 0)
+            {
+                if (!filter.Equals(""))
+                {
+                    filter+=" and ";
+                }
+                filter+= "type = 0";
+                
+            }else
+                if (type == 1)
+            {
+                if (!filter.Equals(""))
+                {
+                    filter += " and ";
+                }
+                filter += "type = 1";
+         
+            }
+            string f = "";
+            foreach(string cat in categories)
+            {
+                
+               if (!f.Equals(""))
+                {
+                    f += " or ";
+                }
+                f += ("category = "+cat);
+            }
+
+            if (!filter.Equals(""))
+            {
+                filter += " and ";
+            }
+            filter += f;
+            f = "";
+
+            foreach (string like in marklikes)
+            {
+                if (!f.Equals(""))
+                {
+                    f += " or ";
+                }
+                f += ("marklike = "+like);
+            }
+            if (!filter.Equals(""))
+            {
+                filter += " and ";
+            }
+            filter += f;
+            f = "";
+            foreach (string dif in markdifs)
+            {
+                if (!f.Equals(""))
+                {
+                    f += " or ";
+                }
+                f += ("markdif = " + dif);
+            }
+            if (!filter.Equals(""))
+            {
+                filter += " and ";
+            }
+            filter += f;
+            return filter;
+        }
        public static void deleteById(int id)
         {
             string textCommand = $"delete from images where(id = {id})";
