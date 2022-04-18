@@ -1775,6 +1775,18 @@
         tr/nPrwARg6re7Y/RDIAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="FilterB.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAAOwAAADsAXkocb0AAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
+        AAAAjklEQVRYR+3UQQqDUAwE0A8trgtCRe/aExZ0UQWP44w1UAQtP2pW82BAA2ayMomIyI4bUnwfD+EO
+        7sr2Qgakmt98+G2PcFe2B/JGRqThINMT+SAdUnLg4T3ilHKTe8Sp5eb3iJqDDZeUm39HXFputo4IKTfr
+        I0LLDYtYyP8EE1puWNguCS839yUiIuKU0gTHyyFAMq9GVAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAALADAACwAwAAAAAAAAAA

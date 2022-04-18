@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.buttonPanel = new System.Windows.Forms.TableLayoutPanel();
             this.settingsB = new System.Windows.Forms.Button();
@@ -92,11 +93,20 @@
             this.startPage = new System.Windows.Forms.TabPage();
             this.startLabel = new System.Windows.Forms.Label();
             this.startBox = new System.Windows.Forms.PictureBox();
-            this.closeB = new System.Windows.Forms.Button();
             this.SearchResultPage = new System.Windows.Forms.TabPage();
             this.search_list = new System.Windows.Forms.TableLayoutPanel();
+            this.closeB = new System.Windows.Forms.Button();
             this.searchTB = new System.Windows.Forms.TextBox();
             this.searchB = new System.Windows.Forms.Button();
+            this.FilterB = new System.Windows.Forms.Button();
+            this.filterPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.catl = new System.Windows.Forms.Label();
+            this.categoryCheckB = new System.Windows.Forms.CheckedListBox();
+            this.difl = new System.Windows.Forms.Label();
+            this.diffCheckB = new System.Windows.Forms.CheckedListBox();
+            this.ratel = new System.Windows.Forms.Label();
+            this.rateCheckB = new System.Windows.Forms.CheckedListBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -124,6 +134,7 @@
             this.startPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.startBox)).BeginInit();
             this.SearchResultPage.SuspendLayout();
+            this.filterPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonPanel
@@ -330,10 +341,10 @@
             // 
             this.FavPage.Controls.Add(this.fav_recipes_list);
             this.FavPage.Controls.Add(this.favL);
-            this.FavPage.Location = new System.Drawing.Point(4, 30);
+            this.FavPage.Location = new System.Drawing.Point(4, 22);
             this.FavPage.Name = "FavPage";
             this.FavPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FavPage.Size = new System.Drawing.Size(1021, 652);
+            this.FavPage.Size = new System.Drawing.Size(1021, 660);
             this.FavPage.TabIndex = 1;
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
@@ -847,9 +858,9 @@
             // 
             this.settingsPage.Controls.Add(this.LanguagePanel);
             this.settingsPage.Controls.Add(this.SettingsL);
-            this.settingsPage.Location = new System.Drawing.Point(4, 30);
+            this.settingsPage.Location = new System.Drawing.Point(4, 22);
             this.settingsPage.Name = "settingsPage";
-            this.settingsPage.Size = new System.Drawing.Size(1021, 652);
+            this.settingsPage.Size = new System.Drawing.Size(1021, 660);
             this.settingsPage.TabIndex = 4;
             this.settingsPage.Text = "Настройки";
             this.settingsPage.UseVisualStyleBackColor = true;
@@ -906,9 +917,9 @@
             // helpPage
             // 
             this.helpPage.Controls.Add(this.helpL);
-            this.helpPage.Location = new System.Drawing.Point(4, 30);
+            this.helpPage.Location = new System.Drawing.Point(4, 22);
             this.helpPage.Name = "helpPage";
-            this.helpPage.Size = new System.Drawing.Size(1021, 652);
+            this.helpPage.Size = new System.Drawing.Size(1021, 660);
             this.helpPage.TabIndex = 5;
             this.helpPage.Text = "tabPage1";
             this.helpPage.UseVisualStyleBackColor = true;
@@ -927,9 +938,9 @@
             // 
             this.startPage.Controls.Add(this.startLabel);
             this.startPage.Controls.Add(this.startBox);
-            this.startPage.Location = new System.Drawing.Point(4, 30);
+            this.startPage.Location = new System.Drawing.Point(4, 22);
             this.startPage.Name = "startPage";
-            this.startPage.Size = new System.Drawing.Size(1021, 652);
+            this.startPage.Size = new System.Drawing.Size(1021, 660);
             this.startPage.TabIndex = 6;
             this.startPage.Text = "tabPage1";
             this.startPage.UseVisualStyleBackColor = true;
@@ -953,20 +964,6 @@
             this.startBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.startBox.TabIndex = 0;
             this.startBox.TabStop = false;
-            // 
-            // closeB
-            // 
-            this.closeB.BackColor = System.Drawing.Color.Transparent;
-            this.closeB.FlatAppearance.BorderSize = 0;
-            this.closeB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeB.Image = ((System.Drawing.Image)(resources.GetObject("closeB.Image")));
-            this.closeB.Location = new System.Drawing.Point(1329, 0);
-            this.closeB.Margin = new System.Windows.Forms.Padding(0);
-            this.closeB.Name = "closeB";
-            this.closeB.Size = new System.Drawing.Size(75, 55);
-            this.closeB.TabIndex = 3;
-            this.closeB.UseVisualStyleBackColor = false;
-            this.closeB.Click += new System.EventHandler(this.closeB_Click);
             // 
             // SearchResultPage
             // 
@@ -992,6 +989,20 @@
             this.search_list.Size = new System.Drawing.Size(200, 100);
             this.search_list.TabIndex = 6;
             // 
+            // closeB
+            // 
+            this.closeB.BackColor = System.Drawing.Color.Transparent;
+            this.closeB.FlatAppearance.BorderSize = 0;
+            this.closeB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeB.Image = ((System.Drawing.Image)(resources.GetObject("closeB.Image")));
+            this.closeB.Location = new System.Drawing.Point(1329, 0);
+            this.closeB.Margin = new System.Windows.Forms.Padding(0);
+            this.closeB.Name = "closeB";
+            this.closeB.Size = new System.Drawing.Size(75, 55);
+            this.closeB.TabIndex = 3;
+            this.closeB.UseVisualStyleBackColor = false;
+            this.closeB.Click += new System.EventHandler(this.closeB_Click);
+            // 
             // searchTB
             // 
             this.searchTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1013,11 +1024,113 @@
             this.searchB.UseVisualStyleBackColor = true;
             this.searchB.Click += new System.EventHandler(this.searchB_Click);
             // 
+            // FilterB
+            // 
+            this.FilterB.BackColor = System.Drawing.Color.White;
+            this.FilterB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.FilterB.FlatAppearance.BorderSize = 0;
+            this.FilterB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FilterB.Image = ((System.Drawing.Image)(resources.GetObject("FilterB.Image")));
+            this.FilterB.Location = new System.Drawing.Point(717, 746);
+            this.FilterB.Name = "FilterB";
+            this.FilterB.Size = new System.Drawing.Size(32, 23);
+            this.FilterB.TabIndex = 19;
+            this.FilterB.UseVisualStyleBackColor = false;
+            this.FilterB.Click += new System.EventHandler(this.FilterB_Click);
+            // 
+            // filterPanel
+            // 
+            this.filterPanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.filterPanel.Controls.Add(this.catl);
+            this.filterPanel.Controls.Add(this.categoryCheckB);
+            this.filterPanel.Controls.Add(this.difl);
+            this.filterPanel.Controls.Add(this.diffCheckB);
+            this.filterPanel.Controls.Add(this.ratel);
+            this.filterPanel.Controls.Add(this.rateCheckB);
+            this.filterPanel.Location = new System.Drawing.Point(393, 749);
+            this.filterPanel.MaximumSize = new System.Drawing.Size(360, 630);
+            this.filterPanel.MinimumSize = new System.Drawing.Size(360, 0);
+            this.filterPanel.Name = "filterPanel";
+            this.filterPanel.Size = new System.Drawing.Size(360, 167);
+            this.filterPanel.TabIndex = 6;
+            // 
+            // catl
+            // 
+            this.catl.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.catl.Location = new System.Drawing.Point(3, 0);
+            this.catl.Name = "catl";
+            this.catl.Size = new System.Drawing.Size(357, 25);
+            this.catl.TabIndex = 0;
+            this.catl.Text = "label1";
+            // 
+            // categoryCheckB
+            // 
+            this.categoryCheckB.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.categoryCheckB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.categoryCheckB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.categoryCheckB.FormattingEnabled = true;
+            this.categoryCheckB.Location = new System.Drawing.Point(33, 28);
+            this.categoryCheckB.Margin = new System.Windows.Forms.Padding(33, 3, 3, 3);
+            this.categoryCheckB.Name = "categoryCheckB";
+            this.categoryCheckB.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.categoryCheckB.Size = new System.Drawing.Size(327, 252);
+            this.categoryCheckB.TabIndex = 2;
+            // 
+            // difl
+            // 
+            this.difl.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.difl.Location = new System.Drawing.Point(3, 283);
+            this.difl.Name = "difl";
+            this.difl.Size = new System.Drawing.Size(357, 25);
+            this.difl.TabIndex = 3;
+            this.difl.Text = "label1";
+            // 
+            // diffCheckB
+            // 
+            this.diffCheckB.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.diffCheckB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.diffCheckB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.diffCheckB.FormattingEnabled = true;
+            this.diffCheckB.Location = new System.Drawing.Point(33, 311);
+            this.diffCheckB.Margin = new System.Windows.Forms.Padding(33, 3, 3, 3);
+            this.diffCheckB.Name = "diffCheckB";
+            this.diffCheckB.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.diffCheckB.Size = new System.Drawing.Size(327, 140);
+            this.diffCheckB.TabIndex = 4;
+            // 
+            // ratel
+            // 
+            this.ratel.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ratel.Location = new System.Drawing.Point(3, 454);
+            this.ratel.Name = "ratel";
+            this.ratel.Size = new System.Drawing.Size(357, 25);
+            this.ratel.TabIndex = 5;
+            // 
+            // rateCheckB
+            // 
+            this.rateCheckB.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rateCheckB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rateCheckB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rateCheckB.FormattingEnabled = true;
+            this.rateCheckB.Location = new System.Drawing.Point(33, 482);
+            this.rateCheckB.Margin = new System.Windows.Forms.Padding(33, 3, 3, 3);
+            this.rateCheckB.Name = "rateCheckB";
+            this.rateCheckB.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.rateCheckB.Size = new System.Drawing.Size(327, 168);
+            this.rateCheckB.TabIndex = 6;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 15;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1300, 781);
+            this.Controls.Add(this.filterPanel);
+            this.Controls.Add(this.FilterB);
             this.Controls.Add(this.searchB);
             this.Controls.Add(this.searchTB);
             this.Controls.Add(this.closeB);
@@ -1066,6 +1179,7 @@
             this.startPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.startBox)).EndInit();
             this.SearchResultPage.ResumeLayout(false);
+            this.filterPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1141,6 +1255,15 @@
         private System.Windows.Forms.TableLayoutPanel search_list;
         private System.Windows.Forms.TextBox searchTB;
         private System.Windows.Forms.Button searchB;
+        private System.Windows.Forms.Button FilterB;
+        private System.Windows.Forms.FlowLayoutPanel filterPanel;
+        private System.Windows.Forms.Label catl;
+        private System.Windows.Forms.CheckedListBox categoryCheckB;
+        private System.Windows.Forms.Label difl;
+        private System.Windows.Forms.CheckedListBox diffCheckB;
+        private System.Windows.Forms.Label ratel;
+        private System.Windows.Forms.CheckedListBox rateCheckB;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

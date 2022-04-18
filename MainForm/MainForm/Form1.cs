@@ -54,6 +54,8 @@ namespace MainForm
 
         Recipe main_recipe;
 
+        bool isCollapsed=true;
+        
         public MainForm()
         {
             InitializeComponent();
@@ -555,13 +557,27 @@ namespace MainForm
             {
                 //"Запрос поиска"
                 {
-                    searchTB.SetBounds(buttonPanel.Width+800 , 6, 400, 40);
+                    searchTB.SetBounds(buttonPanel.Width+760 , 6, 400, 40);
                     Instruments.SetRoundedShape(searchTB,10);
                 }
                 //"Кнопка поиска"
                 {
-                    searchB.SetBounds(searchTB.Size.Width + searchTB.Bounds.X+5, 6, 100, 40);
+                    searchB.SetBounds(searchTB.Size.Width + searchTB.Bounds.X+40, 6, 100, 40);
                     
+                }
+                //Кнопка "Фильтр"
+                {
+
+                    //ДИАНА, НАЙДИ КАРТИНКИ ДЛЯ РАСКРЫТИЯ И ЗАКРЫТИЯ
+                    FilterB.SetBounds(searchTB.Size.Width + searchTB.Bounds.X-10 , 6, 40, 40);
+
+                    FilterB.BackColor = Color.White;
+
+                    Instruments.SetRoundedShape(FilterB, 10);
+                }
+                {
+                    filterPanel.SetBounds( searchTB.Bounds.X +70, 46,0,0 /*360, 400*/);
+
                 }
                 
             }
@@ -629,11 +645,11 @@ namespace MainForm
 
             TitleL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.titleRu : LanguagesForAddingRecipe.titleEn;
 
-            RateLable.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.rateRu : LanguagesForAddingRecipe.rateEn;
+            RateLable.Text=ratel.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.rateRu : LanguagesForAddingRecipe.rateEn;
 
             PhotoLab.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.photoRu : LanguagesForAddingRecipe.photoEn;
 
-            CategoryL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.categoryRu : LanguagesForAddingRecipe.categoryEn;
+            CategoryL.Text=catl.Text  = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.categoryRu : LanguagesForAddingRecipe.categoryEn;
 
             IngredL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.ingRu : LanguagesForAddingRecipe.ingEn;
 
@@ -663,18 +679,24 @@ namespace MainForm
 
             InstrL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.guideRu : LanguagesForAddingRecipe.guideEn;
 
-            DiffL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
+            DiffL.Text=difl.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
+
+            
 
         }
 
         public void categoryInit()//Инициализация категорий в соответствии с языком
         {
             CategoryCB.Items.Clear();
+            rateCheckB.Items.Clear();
+            diffCheckB.Items.Clear();
+            categoryCheckB.Items.Clear();
             if (LanguagesForAddingRecipe.isRu)
             {
                 foreach (var item in LanguagesForAddingRecipe.categoriesRu)
                 {
                     CategoryCB.Items.Add(item);
+                    categoryCheckB.Items.Add(item);
                 }
                 CategoryCB.SelectedIndex = 0;
             }
@@ -683,9 +705,26 @@ namespace MainForm
                 foreach (var item in LanguagesForAddingRecipe.categoriesEn)
                 {
                     CategoryCB.Items.Add(item);
+                    categoryCheckB.Items.Add(item);
                 }
                 CategoryCB.SelectedIndex = 1;
             }
+            for (int i = 1; i < 6; i++)
+            {
+                diffCheckB.Items.Add(i);
+                if (i == 1)
+                {
+                    rateCheckB.Items.Add(i + " звезда");
+                    continue;
+                }
+                if (i == 5)
+                {
+                    rateCheckB.Items.Add(i + " звезд");
+                    continue;
+                }
+                rateCheckB.Items.Add(i + " звезды");
+            }
+           
         }
 
         private void allStarsOpacityNull()
@@ -1170,7 +1209,7 @@ namespace MainForm
         {
             if (main_recipe != null)
             {
-                ControllerForBD.deleteById(main_recipe.Id);//ДЛЯ РЕЦЕПТОВ ИЗ ИНТЕРНЕТА ТАКОЕ НЕ ДЕЛАЕМ
+                //ControllerForBD.deleteById(main_recipe.Id);//ДЛЯ РЕЦЕПТОВ ИЗ ИНТЕРНЕТА ТАКОЕ НЕ ДЕЛАЕМ
                 tabContr.SelectedIndex = (int)Buttons.Start_Page;
                 whatButtonClicked = -1;
                 checkButtonsColors(-1);
@@ -1184,10 +1223,45 @@ namespace MainForm
 
         private void searchB_Click(object sender, EventArgs e)
         {
+            if(whatButtonClicked!=(int)Buttons.Fav_Rec&& whatButtonClicked != (int)Buttons.My_Rec&& whatButtonClicked != (int)Buttons.General_Rec)
+            {
+                MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Для поиска Вам необходимо зайти в какой-либо раздел" : "To use search you have to choose a page.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             if (searchTB.Text == String.Empty)
             {
                 MessageBox.Show(LanguagesForAddingRecipe.isRu?"Строка поиска пуста":"Search text box is empty.","Error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
+            }
+        }
+
+        private void FilterB_Click(object sender, EventArgs e)//Повторное нажатие?
+        {
+            filterPanel.Width = filterPanel.MaximumSize.Width;
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (isCollapsed)
+            {
+                FilterB.Image = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\collapse.png");
+                filterPanel.Height += 30;
+                if (filterPanel.Size == filterPanel.MaximumSize)
+                {
+                    timer1.Stop();
+                    isCollapsed = false;
+                }
+            }
+            else
+            {
+                FilterB.Image = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\expand.png");
+                filterPanel.Height -= 30;
+                if (filterPanel.Size == filterPanel.MinimumSize)
+                {
+                    timer1.Stop();
+                    isCollapsed = true;
+                }
             }
         }
     }
