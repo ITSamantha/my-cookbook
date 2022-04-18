@@ -8,13 +8,13 @@ namespace MainForm.BD
 {
     public class PairForList
     {
-        public string name;
+     
         public double index;
         public long id;
-       public PairForList(long id, string name, double index)
+       public PairForList(long id,  double index)
         {
             this.id = id;
-            this.name = name;
+         
             this.index = index;
         }
     }
