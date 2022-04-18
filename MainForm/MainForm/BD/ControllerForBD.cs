@@ -535,10 +535,10 @@ namespace bd
             connection.Open();
             var command = new NpgsqlCommand(textCommand, connection);
             command.ExecuteNonQuery();
-            string textCommand = $"delete from recipes where(id = {id})";
-            NpgsqlConnection connection = new NpgsqlConnection(configConnection);
+            textCommand = $"delete from recipes where(id = {id})";
+            connection = new NpgsqlConnection(configConnection);
             connection.Open();
-            var command = new NpgsqlCommand(textCommand, connection);
+             command = new NpgsqlCommand(textCommand, connection);
             command.ExecuteNonQuery();
         }
 
@@ -724,10 +724,11 @@ namespace bd
                         }
                         else
                         {
-                            
-                            PairForList pair = new PairForList(id, name, Search.indexEquals(text, name));
-                            if (pair.index >= 49) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                            double ind = Search.indexEquals(text, name);
+                            if (ind >= 49) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                             {
+                                PairForList pair = new PairForList(id,  ind);
                                 // r = SelectById(id, "recipes");
                                 // searchRecipes.Add(r);
                                 pairlist.Add(pair);
