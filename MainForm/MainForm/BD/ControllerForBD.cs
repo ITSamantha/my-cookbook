@@ -571,7 +571,7 @@ namespace bd
             {
                 f += ")";
             }
-                if (!filter.Equals(""))
+                if ((!filter.Equals(""))&&(!f.Equals("")))
             {
                 filter += " and ";
             }
@@ -595,7 +595,7 @@ namespace bd
             {
                 f += ")";
             }
-            if (!filter.Equals(""))
+            if ((!filter.Equals("")) && (!f.Equals("")))
             {
                 filter += " and ";
             }
@@ -618,7 +618,7 @@ namespace bd
             {
                 f += ")";
             }
-            if (!filter.Equals(""))
+            if ((!filter.Equals("")) && (!f.Equals("")))
             {
                 filter += " and ";
             }
@@ -784,7 +784,7 @@ namespace bd
                     text = p.textSearch;
                     if (!f.Equals(""))
                     {
-                        textCommand += "where";
+                        textCommand += " where ";
                         textCommand += f;
                     }
 
