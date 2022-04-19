@@ -107,6 +107,7 @@
             this.ratel = new System.Windows.Forms.Label();
             this.rateCheckB = new System.Windows.Forms.CheckedListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.searchL = new System.Windows.Forms.Label();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -813,6 +814,7 @@
             this.PhotoPanel.Controls.Add(this.PhotoLab, 0, 0);
             this.PhotoPanel.Controls.Add(this.RecPhoto, 0, 1);
             this.PhotoPanel.Location = new System.Drawing.Point(37, 122);
+            this.PhotoPanel.Margin = new System.Windows.Forms.Padding(0);
             this.PhotoPanel.Name = "PhotoPanel";
             this.PhotoPanel.RowCount = 2;
             this.PhotoPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -836,9 +838,10 @@
             // 
             this.RecPhoto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RecPhoto.Image = ((System.Drawing.Image)(resources.GetObject("RecPhoto.Image")));
-            this.RecPhoto.Location = new System.Drawing.Point(3, 34);
+            this.RecPhoto.Location = new System.Drawing.Point(10, 34);
+            this.RecPhoto.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.RecPhoto.Name = "RecPhoto";
-            this.RecPhoto.Size = new System.Drawing.Size(289, 281);
+            this.RecPhoto.Size = new System.Drawing.Size(275, 281);
             this.RecPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.RecPhoto.TabIndex = 1;
             this.RecPhoto.TabStop = false;
@@ -967,11 +970,12 @@
             // 
             // SearchResultPage
             // 
+            this.SearchResultPage.Controls.Add(this.searchL);
             this.SearchResultPage.Controls.Add(this.search_list);
-            this.SearchResultPage.Location = new System.Drawing.Point(4, 22);
+            this.SearchResultPage.Location = new System.Drawing.Point(4, 30);
             this.SearchResultPage.Name = "SearchResultPage";
             this.SearchResultPage.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchResultPage.Size = new System.Drawing.Size(1021, 660);
+            this.SearchResultPage.Size = new System.Drawing.Size(1021, 652);
             this.SearchResultPage.TabIndex = 7;
             this.SearchResultPage.Text = "tabPage1";
             this.SearchResultPage.UseVisualStyleBackColor = true;
@@ -979,7 +983,6 @@
             // search_list
             // 
             this.search_list.AutoScroll = true;
-            this.search_list.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.search_list.ColumnCount = 1;
             this.search_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.search_list.Location = new System.Drawing.Point(410, 276);
@@ -1124,6 +1127,16 @@
             this.timer1.Interval = 15;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // searchL
+            // 
+            this.searchL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.searchL.Location = new System.Drawing.Point(368, 3);
+            this.searchL.Name = "searchL";
+            this.searchL.Size = new System.Drawing.Size(357, 52);
+            this.searchL.TabIndex = 7;
+            this.searchL.Text = "результат";
+            this.searchL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1264,6 +1277,7 @@
         private System.Windows.Forms.Label ratel;
         private System.Windows.Forms.CheckedListBox rateCheckB;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label searchL;
     }
 }
 

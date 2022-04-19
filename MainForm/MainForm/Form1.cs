@@ -74,8 +74,9 @@ namespace MainForm
 
             markDif.SelectedIndex = 0;//Начальная оценка сложности  - 1
 
-            tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
-           //tabContr.SelectedIndex = 7;//Стартовая страница
+            //tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
+
+           tabContr.SelectedIndex = 7;//Стартовая страница
         }
 
         private void closeB_Click(object sender, EventArgs e)
@@ -96,7 +97,6 @@ namespace MainForm
                 thread.Start();
             }
             whatButtonClicked = (int)Buttons.My_Rec;
-
         }
 
         private void favB_Click(object sender, EventArgs e)//Раздел "Избранное"
@@ -303,6 +303,11 @@ namespace MainForm
             {
                 MessageBox.Show("Рецепт успешно добавлен.", "Добавление рецепта");//МБ СДЕЛАТЬ СВОЮ ФОРМУ
             }
+            else
+            {
+                MessageBox.Show("Что-то пошло не так.", "Добавление рецепта");//МБ СДЕЛАТЬ СВОЮ ФОРМУ
+            }
+            cleanAddRecForm();
         }
         
         private void LangCB_SelectedIndexChanged(object sender, EventArgs e)//Смена языка в приложении
@@ -341,7 +346,7 @@ namespace MainForm
 
             isPhoto = true;
 
-            //RecPhoto.Size = new Size(Height/3, Height / 3);//ПОДУМАТЬ над фото(размер, основное) и т.п.
+          
 
         }
 
@@ -410,6 +415,8 @@ namespace MainForm
                 //"Заголовок"
                 {
                     AddLabel.SetBounds(addRecPage.Bounds.X, addRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
+
+                    searchL.SetBounds(addRecPage.Bounds.X, addRecPage.Bounds.Y - Instruments.tabControlOffset, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.intervalHeight);
                 }
 
                 //"Название"
@@ -424,8 +431,7 @@ namespace MainForm
                     Instruments.SetRoundedShape(PhotoPanel, Instruments.radius);
                     
                     PhotoPanel.SetBounds(TitlePanel.Bounds.X, TitlePanel.Bounds.Y + TitlePanel.Height + Instruments.intervalHeight / 2, 2 * Instruments.intervalX/*5 * Instruments.intervalHeight*/, 5 * Instruments.intervalHeight);
-
-                    RecPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    //ПОДУМАТЬ НАД КРАСОТОЙ?
                 }
 
                 //"Оценка рецепта"
@@ -539,6 +545,10 @@ namespace MainForm
                 //Панель для моих рецептов
                 {
                     my_recipes_list.SetBounds(MyRecPage.Bounds.X + Instruments.intervalX / 6, myL.Bounds.Y + myL.Height, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
+                }
+                //Панель для поиска
+                {
+                    search_list.SetBounds(MyRecPage.Bounds.X + Instruments.intervalX / 6, myL.Bounds.Y + myL.Height, Instruments.formWidth - Instruments.buttonPanelWidth, Instruments.heightOfTabControlWithoutLabels - (int)(1.5 * Instruments.intervalHeight));
                 }
             }
 
@@ -683,7 +693,9 @@ namespace MainForm
 
             DiffL.Text=difl.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
 
-            
+            searchL.Text = LanguagesForAddingRecipe.isRu ? "Результат поиска" :"Result of search";
+
+
 
         }
 
@@ -1046,7 +1058,7 @@ namespace MainForm
 
             t.Controls.Add(pb, 0, 0);
 
-            t.Controls[0].SetBounds(50, 0, t.Size.Height , t.Size.Height );
+            t.Controls[0].SetBounds(50, 0, t.Size.Height+60, t.Size.Height );
 
             Instruments.SetRoundedShape(t.Controls[0], 80);
 
@@ -1235,11 +1247,14 @@ namespace MainForm
                 MessageBox.Show(LanguagesForAddingRecipe.isRu?"Строка поиска пуста":"Search text box is empty.","Error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
             }
+            string filter="";
+
             List<string> checkedCategory = new List<string>();
 
             List<string> checkedDiff = new List<string>();
 
             List<string> checkedMarkLike = new List<string>();
+
             if (categoryCheckB.CheckedItems.Count != 0)
             {
                 foreach (var item in categoryCheckB.CheckedItems)
@@ -1261,11 +1276,35 @@ namespace MainForm
                     checkedMarkLike.Add(item.ToString()[0].ToString());
                 }
             }
-            
+            if (tabContr.SelectedIndex == (int)Buttons.My_Rec)//2 для всех рецептов
+            {
+                filter=ControllerForBD.createFilter(0, checkedCategory, checkedMarkLike, checkedDiff, false);
+            }
+            if (tabContr.SelectedIndex == (int)Buttons.Fav_Rec)
+            {
+                filter=ControllerForBD.createFilter(0, checkedCategory, checkedMarkLike, checkedDiff, true);
+            }
+            if (tabContr.SelectedIndex == (int)Buttons.General_Rec)
+            {
+                filter=ControllerForBD.createFilter(1, checkedCategory, checkedMarkLike, checkedDiff, false);
+            }
+            PairSearch pair = new PairSearch(filter, searchTB.Text);
+
+            ControllerForBD.StartSelectSearchRecipes(pair);
+
+           // thread = new Thread(showAllSearchRecipes);
+
+            thread.Start();
+
+
+
+
 
 
 
         }
+
+        //public void
 
         private void FilterB_Click(object sender, EventArgs e)//Повторное нажатие?
         {
