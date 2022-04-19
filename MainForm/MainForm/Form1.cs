@@ -694,9 +694,7 @@ namespace MainForm
             DiffL.Text=difl.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
 
             searchL.Text = LanguagesForAddingRecipe.isRu ? "Результат поиска" :"Result of search";
-
-
-
+            
         }
 
         public void categoryInit()//Инициализация категорий в соответствии с языком
@@ -1292,20 +1290,11 @@ namespace MainForm
 
             ControllerForBD.StartSelectSearchRecipes(pair);
 
-           // thread = new Thread(showAllSearchRecipes);
-
-            thread.Start();
-
-
-
-
-
+           /
 
 
         }
-
-        //public void
-
+        
         private void FilterB_Click(object sender, EventArgs e)//Повторное нажатие?
         {
             filterPanel.Width = filterPanel.MaximumSize.Width;
