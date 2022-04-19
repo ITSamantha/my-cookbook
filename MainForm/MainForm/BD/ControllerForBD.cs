@@ -181,18 +181,18 @@ namespace bd
                 string textCommand;
                 if (table.Equals("starrecipes"))
                 {
-                    textCommand = $"Select * from recipes where ((id = {id}) and (star = true))";
+                    textCommand = $"Select recipes.id, category, ingredients, guide, marklike, name, markdif,star, time, images.pic from recipes left join Images on recipes.id = images.id  where ((recipes.id = {id}) and (star = true))";
                 }
                 else if (table.Equals("myrecipes"))
                 {
-                    textCommand = $"Select * from recipes where ((id = {id}) and (type = 0))";
+                    textCommand = $"Select  recipes.id, category, ingredients, guide, marklike, name, markdif,star, time, images.pic from recipes left join Images on recipes.id = images.id where ((recipes.id = {id}) and (type = 0))";
                 }else if (table.Equals("inetrecipes"))
                 {
-                    textCommand = $"Select * from recipes where ((id = {id}) and (type = 1))";
+                    textCommand = $"Select  recipes.id, category, ingredients, guide, marklike, name, markdif,star, time, images.pic from recipes left join Images on recipes.id = images.id where ((recipes.id = {id}) and (type = 1))";
                 }
                 else
                 {
-                    textCommand = $"Select * from recipes where ((id = {id}))";
+                    textCommand = $"Select  recipes.id, category, ingredients, guide, marklike, name, markdif,star, time, images.pic from recipes left join Images on recipes.id = images.id where ((recipes.id = {id}))";
                 }
                     Recipe r = null;
 
@@ -200,7 +200,14 @@ namespace bd
                 var reader = command.ExecuteReader();
                 while (reader.Read())
                 {
+                    byte[] picture = null;
                     r = new Recipe(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetTimeSpan(8).ToString(), reader.GetString(3), reader.GetDouble(4).ToString(), reader.GetString(5), reader.GetDouble(6).ToString(), reader.GetBoolean(7));
+                    picture = reader[9] as byte[];
+                    r.Pic = picture;
+
+
+
+
                 }
                 reader.Close();
                 connection.Close();
