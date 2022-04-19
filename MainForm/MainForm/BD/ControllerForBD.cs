@@ -562,6 +562,10 @@ namespace bd
                     f += "(";
                 }
                 f += ("category = '"+cat+"'");
+
+
+
+
             }
             if (!f.Equals(""))
             {
