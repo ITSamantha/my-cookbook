@@ -94,7 +94,6 @@
             this.startLabel = new System.Windows.Forms.Label();
             this.startBox = new System.Windows.Forms.PictureBox();
             this.SearchResultPage = new System.Windows.Forms.TabPage();
-            this.search_list = new System.Windows.Forms.TableLayoutPanel();
             this.closeB = new System.Windows.Forms.Button();
             this.searchTB = new System.Windows.Forms.TextBox();
             this.searchB = new System.Windows.Forms.Button();
@@ -108,6 +107,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.searchL = new System.Windows.Forms.Label();
             this.ratel = new System.Windows.Forms.Label();
+            this.search_list = new System.Windows.Forms.Panel();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -941,9 +941,9 @@
             // 
             this.startPage.Controls.Add(this.startLabel);
             this.startPage.Controls.Add(this.startBox);
-            this.startPage.Location = new System.Drawing.Point(4, 22);
+            this.startPage.Location = new System.Drawing.Point(4, 30);
             this.startPage.Name = "startPage";
-            this.startPage.Size = new System.Drawing.Size(1021, 660);
+            this.startPage.Size = new System.Drawing.Size(1021, 652);
             this.startPage.TabIndex = 6;
             this.startPage.Text = "tabPage1";
             this.startPage.UseVisualStyleBackColor = true;
@@ -970,8 +970,8 @@
             // 
             // SearchResultPage
             // 
-            this.SearchResultPage.Controls.Add(this.searchL);
             this.SearchResultPage.Controls.Add(this.search_list);
+            this.SearchResultPage.Controls.Add(this.searchL);
             this.SearchResultPage.Location = new System.Drawing.Point(4, 30);
             this.SearchResultPage.Name = "SearchResultPage";
             this.SearchResultPage.Padding = new System.Windows.Forms.Padding(3);
@@ -979,18 +979,6 @@
             this.SearchResultPage.TabIndex = 7;
             this.SearchResultPage.Text = "tabPage1";
             this.SearchResultPage.UseVisualStyleBackColor = true;
-            // 
-            // search_list
-            // 
-            this.search_list.AutoScroll = true;
-            this.search_list.ColumnCount = 1;
-            this.search_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.search_list.Location = new System.Drawing.Point(410, 276);
-            this.search_list.Name = "search_list";
-            this.search_list.RowCount = 1;
-            this.search_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.search_list.Size = new System.Drawing.Size(200, 100);
-            this.search_list.TabIndex = 6;
             // 
             // closeB
             // 
@@ -1140,6 +1128,14 @@
             this.ratel.Size = new System.Drawing.Size(357, 25);
             this.ratel.TabIndex = 7;
             // 
+            // search_list
+            // 
+            this.search_list.AutoScroll = true;
+            this.search_list.Location = new System.Drawing.Point(410, 276);
+            this.search_list.Name = "search_list";
+            this.search_list.Size = new System.Drawing.Size(200, 100);
+            this.search_list.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1268,7 +1264,6 @@
         private System.Windows.Forms.Button updateRecB;
         private System.Windows.Forms.Button deleteRecB;
         private System.Windows.Forms.TabPage SearchResultPage;
-        private System.Windows.Forms.TableLayoutPanel search_list;
         private System.Windows.Forms.TextBox searchTB;
         private System.Windows.Forms.Button searchB;
         private System.Windows.Forms.Button FilterB;
@@ -1281,6 +1276,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label searchL;
         private System.Windows.Forms.Label ratel;
+        private System.Windows.Forms.Panel search_list;
     }
 }
 
