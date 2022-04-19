@@ -1260,6 +1260,10 @@ namespace MainForm
                     checkedCategory.Add(item.ToString());
                 }
             }
+            else
+            {
+
+            }
             if (diffCheckB.CheckedItems.Count != 0)
             {
                 foreach (var item in diffCheckB.CheckedItems)
@@ -1273,7 +1277,7 @@ namespace MainForm
                 {
                     checkedMarkLike.Add(item.ToString()[0].ToString());
                 }
-            }
+            }//ДОДЕЛАТЬ, ЕСЛИ ФИЛЬТР ПУСТОЙ, ТО В PairSearch pair = new PairSearch(filter, searchTB.Text); В ФИЛЬТР ПЕРЕДАВАТЬ ""
             if (tabContr.SelectedIndex == (int)Buttons.My_Rec)//2 для всех рецептов
             {
                 filter=ControllerForBD.createFilter(0, checkedCategory, checkedMarkLike, checkedDiff, false);
@@ -1288,9 +1292,41 @@ namespace MainForm
             }
             PairSearch pair = new PairSearch(filter, searchTB.Text);
 
-            ControllerForBD.StartSelectSearchRecipes(pair);
+            ControllerForBD.alterSearch(pair);
 
-           /
+            tabContr.SelectedIndex = (int)Buttons.SearchResultPage;
+
+            showAllSearchRecipe();
+
+           
+
+           
+
+
+        }
+
+        public void showAllSearchRecipe()
+        {
+            if (ControllerForBD.searchRecipes.Count != 0)
+            {
+                foreach (var search in ControllerForBD.searchRecipes)
+                {
+                    var t = createTableForRecipes(search);
+
+                    search_list.BeginInvoke((MethodInvoker)(() => search_list.Controls.Add(t)));
+
+                }
+            }
+            else
+            {
+                search_list.BeginInvoke((MethodInvoker)(() => search_list.Controls.Add(pbForNoRec())));
+
+                search_list.BeginInvoke((MethodInvoker)(() => search_list.Controls.Add(labelForNoRec())));
+            }
+            
+
+
+
 
 
         }
