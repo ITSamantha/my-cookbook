@@ -104,10 +104,10 @@
             this.categoryCheckB = new System.Windows.Forms.CheckedListBox();
             this.difl = new System.Windows.Forms.Label();
             this.diffCheckB = new System.Windows.Forms.CheckedListBox();
-            this.ratel = new System.Windows.Forms.Label();
             this.rateCheckB = new System.Windows.Forms.CheckedListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.searchL = new System.Windows.Forms.Label();
+            this.ratel = new System.Windows.Forms.Label();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -1047,14 +1047,14 @@
             this.filterPanel.Controls.Add(this.catl);
             this.filterPanel.Controls.Add(this.categoryCheckB);
             this.filterPanel.Controls.Add(this.difl);
-            this.filterPanel.Controls.Add(this.diffCheckB);
-            this.filterPanel.Controls.Add(this.ratel);
             this.filterPanel.Controls.Add(this.rateCheckB);
-            this.filterPanel.Location = new System.Drawing.Point(393, 749);
+            this.filterPanel.Controls.Add(this.ratel);
+            this.filterPanel.Controls.Add(this.diffCheckB);
+            this.filterPanel.Location = new System.Drawing.Point(407, 746);
             this.filterPanel.MaximumSize = new System.Drawing.Size(360, 630);
             this.filterPanel.MinimumSize = new System.Drawing.Size(360, 0);
             this.filterPanel.Name = "filterPanel";
-            this.filterPanel.Size = new System.Drawing.Size(360, 167);
+            this.filterPanel.Size = new System.Drawing.Size(360, 318);
             this.filterPanel.TabIndex = 6;
             // 
             // catl
@@ -1070,6 +1070,7 @@
             // 
             this.categoryCheckB.BackColor = System.Drawing.Color.WhiteSmoke;
             this.categoryCheckB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.categoryCheckB.CheckOnClick = true;
             this.categoryCheckB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.categoryCheckB.FormattingEnabled = true;
             this.categoryCheckB.Location = new System.Drawing.Point(33, 28);
@@ -1092,34 +1093,28 @@
             // 
             this.diffCheckB.BackColor = System.Drawing.Color.WhiteSmoke;
             this.diffCheckB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.diffCheckB.CheckOnClick = true;
             this.diffCheckB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.diffCheckB.FormattingEnabled = true;
-            this.diffCheckB.Location = new System.Drawing.Point(33, 311);
+            this.diffCheckB.Location = new System.Drawing.Point(33, 482);
             this.diffCheckB.Margin = new System.Windows.Forms.Padding(33, 3, 3, 3);
             this.diffCheckB.Name = "diffCheckB";
             this.diffCheckB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.diffCheckB.Size = new System.Drawing.Size(327, 140);
             this.diffCheckB.TabIndex = 4;
             // 
-            // ratel
-            // 
-            this.ratel.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ratel.Location = new System.Drawing.Point(3, 454);
-            this.ratel.Name = "ratel";
-            this.ratel.Size = new System.Drawing.Size(357, 25);
-            this.ratel.TabIndex = 5;
-            // 
             // rateCheckB
             // 
             this.rateCheckB.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rateCheckB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rateCheckB.CheckOnClick = true;
             this.rateCheckB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rateCheckB.FormattingEnabled = true;
-            this.rateCheckB.Location = new System.Drawing.Point(33, 482);
+            this.rateCheckB.Location = new System.Drawing.Point(33, 311);
             this.rateCheckB.Margin = new System.Windows.Forms.Padding(33, 3, 3, 3);
             this.rateCheckB.Name = "rateCheckB";
             this.rateCheckB.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.rateCheckB.Size = new System.Drawing.Size(327, 168);
+            this.rateCheckB.Size = new System.Drawing.Size(327, 140);
             this.rateCheckB.TabIndex = 6;
             // 
             // timer1
@@ -1136,6 +1131,14 @@
             this.searchL.TabIndex = 7;
             this.searchL.Text = "результат";
             this.searchL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ratel
+            // 
+            this.ratel.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ratel.Location = new System.Drawing.Point(3, 454);
+            this.ratel.Name = "ratel";
+            this.ratel.Size = new System.Drawing.Size(357, 25);
+            this.ratel.TabIndex = 7;
             // 
             // MainForm
             // 
@@ -1274,10 +1277,10 @@
         private System.Windows.Forms.CheckedListBox categoryCheckB;
         private System.Windows.Forms.Label difl;
         private System.Windows.Forms.CheckedListBox diffCheckB;
-        private System.Windows.Forms.Label ratel;
         private System.Windows.Forms.CheckedListBox rateCheckB;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label searchL;
+        private System.Windows.Forms.Label ratel;
     }
 }
 
