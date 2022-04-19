@@ -62,7 +62,7 @@ namespace MainForm
         {
             InitializeComponent();
 
-            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =; Database = MyDatabase; ");//Подключение БД
+            ControllerForBD.Сonnect("Server = localhost; Port = 5432;UserId = postgres; Password =01dr10kv; Database = MyDatabase; ");//Подключение БД
             formChanges(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height - 50);
 
             setColors();
@@ -73,9 +73,8 @@ namespace MainForm
 
             markDif.SelectedIndex = 0;//Начальная оценка сложности  - 1
 
-            //tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
-
-           tabContr.SelectedIndex = 7;//Стартовая страница
+            tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
+            
         }
 
         private void closeB_Click(object sender, EventArgs e)
@@ -1234,6 +1233,7 @@ namespace MainForm
 
         private void searchB_Click(object sender, EventArgs e)
         {
+
             if(whatButtonClicked!=(int)Buttons.Fav_Rec&& whatButtonClicked != (int)Buttons.My_Rec&& whatButtonClicked != (int)Buttons.General_Rec)
             {
                 MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Для поиска Вам необходимо зайти в какой-либо раздел" : "To use search you have to choose a page.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1258,10 +1258,6 @@ namespace MainForm
                 {
                     checkedCategory.Add(item.ToString());
                 }
-            }
-            else
-            {
-
             }
             if (diffCheckB.CheckedItems.Count != 0)
             {
@@ -1289,6 +1285,7 @@ namespace MainForm
             {
                 filter=ControllerForBD.createFilter(1, checkedCategory, checkedMarkLike, checkedDiff, false);
             }
+
             PairSearch pair = new PairSearch(filter, searchTB.Text);
 
             ControllerForBD.alterSearch(pair);
@@ -1306,13 +1303,25 @@ namespace MainForm
 
         public void showAllSearchRecipe()
         {
+            Action action = () =>search_list.Controls.Clear();
+
+            if (InvokeRequired) { Invoke(action); }
+
+            else { search_list.Controls.Clear(); }
+
+            i = counter = 0;
+
             if (ControllerForBD.searchRecipes.Count != 0)
             {
-                foreach (var search in ControllerForBD.searchRecipes)
+                while(ControllerForBD.searchRecipes.Count != 0)
                 {
-                    var t = createTableForRecipes(search);
+                    Recipe r = ControllerForBD.searchRecipes.ElementAt(0);
+
+                    var t = createTableForRecipes(r);
 
                     search_list.BeginInvoke((MethodInvoker)(() => search_list.Controls.Add(t)));
+
+                    ControllerForBD.searchRecipes.Remove(r);
 
                 }
             }
@@ -1323,10 +1332,6 @@ namespace MainForm
                 search_list.BeginInvoke((MethodInvoker)(() => search_list.Controls.Add(labelForNoRec())));
             }
             
-
-
-
-
 
         }
         
