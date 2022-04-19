@@ -557,10 +557,17 @@ namespace bd
                 {
                     f += " or ";
                 }
-                f += ("category = "+cat);
+                if (f.Equals(""))
+                {
+                    f += "(";
+                }
+                f += ("category = '"+cat+"'");
             }
-
-            if (!filter.Equals(""))
+            if (!f.Equals(""))
+            {
+                f += ")";
+            }
+                if (!filter.Equals(""))
             {
                 filter += " and ";
             }
@@ -569,11 +576,20 @@ namespace bd
 
             foreach (string like in marklikes)
             {
+                
                 if (!f.Equals(""))
                 {
                     f += " or ";
                 }
+                if (f.Equals(""))
+                {
+                    f += "(";
+                }
                 f += ("marklike = "+like);
+            }
+            if (!f.Equals(""))
+            {
+                f += ")";
             }
             if (!filter.Equals(""))
             {
@@ -583,11 +599,20 @@ namespace bd
             f = "";
             foreach (string dif in markdifs)
             {
+               
                 if (!f.Equals(""))
                 {
                     f += " or ";
                 }
+                if (f.Equals(""))
+                {
+                    f += "(";
+                }
                 f += ("markdif = " + dif);
+            }
+            if (!f.Equals(""))
+            {
+                f += ")";
             }
             if (!filter.Equals(""))
             {
