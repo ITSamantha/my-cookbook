@@ -43,7 +43,7 @@
             this.my_recipes_list = new System.Windows.Forms.Panel();
             this.myL = new System.Windows.Forms.Label();
             this.FavPage = new System.Windows.Forms.TabPage();
-            this.fav_recipes_list = new System.Windows.Forms.TableLayoutPanel();
+            this.fav_recipes_list = new System.Windows.Forms.Panel();
             this.favL = new System.Windows.Forms.Label();
             this.GeneralPage = new System.Windows.Forms.TabPage();
             this.general_recipes_list = new System.Windows.Forms.Panel();
@@ -94,6 +94,8 @@
             this.startLabel = new System.Windows.Forms.Label();
             this.startBox = new System.Windows.Forms.PictureBox();
             this.SearchResultPage = new System.Windows.Forms.TabPage();
+            this.search_list = new System.Windows.Forms.Panel();
+            this.searchL = new System.Windows.Forms.Label();
             this.closeB = new System.Windows.Forms.Button();
             this.searchTB = new System.Windows.Forms.TextBox();
             this.searchB = new System.Windows.Forms.Button();
@@ -102,12 +104,10 @@
             this.catl = new System.Windows.Forms.Label();
             this.categoryCheckB = new System.Windows.Forms.CheckedListBox();
             this.difl = new System.Windows.Forms.Label();
-            this.diffCheckB = new System.Windows.Forms.CheckedListBox();
             this.rateCheckB = new System.Windows.Forms.CheckedListBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.searchL = new System.Windows.Forms.Label();
             this.ratel = new System.Windows.Forms.Label();
-            this.search_list = new System.Windows.Forms.Panel();
+            this.diffCheckB = new System.Windows.Forms.CheckedListBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -353,14 +353,10 @@
             // fav_recipes_list
             // 
             this.fav_recipes_list.AutoScroll = true;
-            this.fav_recipes_list.ColumnCount = 1;
-            this.fav_recipes_list.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.fav_recipes_list.Location = new System.Drawing.Point(410, 276);
             this.fav_recipes_list.Name = "fav_recipes_list";
-            this.fav_recipes_list.RowCount = 1;
-            this.fav_recipes_list.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.fav_recipes_list.Size = new System.Drawing.Size(200, 100);
-            this.fav_recipes_list.TabIndex = 5;
+            this.fav_recipes_list.TabIndex = 6;
             // 
             // favL
             // 
@@ -417,9 +413,9 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 30);
+            this.addRecPage.Location = new System.Drawing.Point(4, 22);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
@@ -941,9 +937,9 @@
             // 
             this.startPage.Controls.Add(this.startLabel);
             this.startPage.Controls.Add(this.startBox);
-            this.startPage.Location = new System.Drawing.Point(4, 30);
+            this.startPage.Location = new System.Drawing.Point(4, 22);
             this.startPage.Name = "startPage";
-            this.startPage.Size = new System.Drawing.Size(1021, 652);
+            this.startPage.Size = new System.Drawing.Size(1021, 660);
             this.startPage.TabIndex = 6;
             this.startPage.Text = "tabPage1";
             this.startPage.UseVisualStyleBackColor = true;
@@ -972,13 +968,31 @@
             // 
             this.SearchResultPage.Controls.Add(this.search_list);
             this.SearchResultPage.Controls.Add(this.searchL);
-            this.SearchResultPage.Location = new System.Drawing.Point(4, 30);
+            this.SearchResultPage.Location = new System.Drawing.Point(4, 22);
             this.SearchResultPage.Name = "SearchResultPage";
             this.SearchResultPage.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchResultPage.Size = new System.Drawing.Size(1021, 652);
+            this.SearchResultPage.Size = new System.Drawing.Size(1021, 660);
             this.SearchResultPage.TabIndex = 7;
             this.SearchResultPage.Text = "tabPage1";
             this.SearchResultPage.UseVisualStyleBackColor = true;
+            // 
+            // search_list
+            // 
+            this.search_list.AutoScroll = true;
+            this.search_list.Location = new System.Drawing.Point(410, 276);
+            this.search_list.Name = "search_list";
+            this.search_list.Size = new System.Drawing.Size(200, 100);
+            this.search_list.TabIndex = 8;
+            // 
+            // searchL
+            // 
+            this.searchL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.searchL.Location = new System.Drawing.Point(368, 3);
+            this.searchL.Name = "searchL";
+            this.searchL.Size = new System.Drawing.Size(357, 52);
+            this.searchL.TabIndex = 7;
+            this.searchL.Text = "результат";
+            this.searchL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // closeB
             // 
@@ -1077,20 +1091,6 @@
             this.difl.TabIndex = 3;
             this.difl.Text = "label1";
             // 
-            // diffCheckB
-            // 
-            this.diffCheckB.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.diffCheckB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.diffCheckB.CheckOnClick = true;
-            this.diffCheckB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.diffCheckB.FormattingEnabled = true;
-            this.diffCheckB.Location = new System.Drawing.Point(33, 482);
-            this.diffCheckB.Margin = new System.Windows.Forms.Padding(33, 3, 3, 3);
-            this.diffCheckB.Name = "diffCheckB";
-            this.diffCheckB.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.diffCheckB.Size = new System.Drawing.Size(327, 140);
-            this.diffCheckB.TabIndex = 4;
-            // 
             // rateCheckB
             // 
             this.rateCheckB.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -1105,21 +1105,6 @@
             this.rateCheckB.Size = new System.Drawing.Size(327, 140);
             this.rateCheckB.TabIndex = 6;
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 15;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // searchL
-            // 
-            this.searchL.Font = new System.Drawing.Font("Bahnschrift Condensed", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.searchL.Location = new System.Drawing.Point(368, 3);
-            this.searchL.Name = "searchL";
-            this.searchL.Size = new System.Drawing.Size(357, 52);
-            this.searchL.TabIndex = 7;
-            this.searchL.Text = "результат";
-            this.searchL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // ratel
             // 
             this.ratel.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -1128,13 +1113,24 @@
             this.ratel.Size = new System.Drawing.Size(357, 25);
             this.ratel.TabIndex = 7;
             // 
-            // search_list
+            // diffCheckB
             // 
-            this.search_list.AutoScroll = true;
-            this.search_list.Location = new System.Drawing.Point(410, 276);
-            this.search_list.Name = "search_list";
-            this.search_list.Size = new System.Drawing.Size(200, 100);
-            this.search_list.TabIndex = 8;
+            this.diffCheckB.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.diffCheckB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.diffCheckB.CheckOnClick = true;
+            this.diffCheckB.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.diffCheckB.FormattingEnabled = true;
+            this.diffCheckB.Location = new System.Drawing.Point(33, 482);
+            this.diffCheckB.Margin = new System.Windows.Forms.Padding(33, 3, 3, 3);
+            this.diffCheckB.Name = "diffCheckB";
+            this.diffCheckB.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.diffCheckB.Size = new System.Drawing.Size(327, 140);
+            this.diffCheckB.TabIndex = 4;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 15;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // MainForm
             // 
@@ -1252,7 +1248,6 @@
         public System.Windows.Forms.TabControl tabContr;
         private System.Windows.Forms.MaskedTextBox time_rec;
         public System.Windows.Forms.Button myRecB;
-        private System.Windows.Forms.TableLayoutPanel fav_recipes_list;
         private System.Windows.Forms.Panel my_recipes_list;
         private System.Windows.Forms.Button settingsB;
         private System.Windows.Forms.Button helpB;
@@ -1277,6 +1272,7 @@
         private System.Windows.Forms.Label searchL;
         private System.Windows.Forms.Label ratel;
         private System.Windows.Forms.Panel search_list;
+        private System.Windows.Forms.Panel fav_recipes_list;
     }
 }
 
