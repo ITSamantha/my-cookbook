@@ -594,104 +594,48 @@ namespace MainForm
             CategoryAndFilterInit();
 
             AddLabel.Text = LanguagesForAddingRecipe.isRu ? "Добавить рецепт" : "Add a recipe";
-
-            Title.Text = LanguagesForAddingRecipe.isRu ? "Название" : "Title";
-
-            photo.Text = LanguagesForAddingRecipe.isRu ? "Фото блюда" : "Dish photo";
-
-            Category.Text = LanguagesForAddingRecipe.isRu ? "Категория" : "Category";
-
-            Other.Text = LanguagesForAddingRecipe.isRu ? "Другое" : "Other";
-
-            Snacks.Text = LanguagesForAddingRecipe.isRu ? "Закуски" : "Snacks";
-
-            Salads.Text = LanguagesForAddingRecipe.isRu ? "Салаты" : "Salads";
-
-            FirstС.Text = LanguagesForAddingRecipe.isRu ? "Первые блюда" : "First courses";
-
-            MainС.Text = LanguagesForAddingRecipe.isRu ? "Вторые блюда" : "Main courses";
-
-            Sauces.Text = LanguagesForAddingRecipe.isRu ? "Соусы" : "Sauces";
-
-            Pastries.Text = LanguagesForAddingRecipe.isRu ? "Выпечка" : "Pastries";
-
-            Drinks.Text = LanguagesForAddingRecipe.isRu ? "Напитки" : "Drinks";
-
-            Desserts.Text = LanguagesForAddingRecipe.isRu ? "Десерты" : "Desserts";
-
-            CookT.Text = LanguagesForAddingRecipe.isRu ? "Время приготовления(ч:м:с)" : "Cooking time(h:m:s)";
-
-            PresEv.Text = LanguagesForAddingRecipe.isRu ? "Оценка рецепта" : "Prescription evaluation";
-
-            RecDiff.Text = LanguagesForAddingRecipe.isRu ? "Оценка сложности рецепта" : "Recipe Difficulty Score";
-
-            Ingred.Text = LanguagesForAddingRecipe.isRu ? "Ингредиенты" : "Ingredients";
-
-            Instruct.Text = LanguagesForAddingRecipe.isRu ? "Инструкция" : "Instruction";
-
-            Add.Text = LanguagesForAddingRecipe.isRu ? "Добавить" : "Add";
-
-            Clean.Text = LanguagesForAddingRecipe.isRu ? "Очистить" : "Clean";
-
-            Settings.Text = LanguagesForAddingRecipe.isRu ? "Настройки" : "Settings";
-
-            Language.Text = LanguagesForAddingRecipe.isRu ? "Язык" : "Language";
-
-            RuEn.Text = LanguagesForAddingRecipe.isRu ? "Русский" : "English";
-
-            GeneralRec.Text = LanguagesForAddingRecipe.isRu ? "Общие рецепты" : "General recipes";
-
-            Favourite.Text = LanguagesForAddingRecipe.isRu ? "Избранные" : "Favourite";
-
-            MyRec.Text = LanguagesForAddingRecipe.isRu ? "Мои рецепты" : "My recipes";
-
-            NoRec.Text = LanguagesForAddingRecipe.isRu ? "В этом разделе нет рецептов." : "There are no recipes in this section.";
-
-            HelpR.Text = LanguagesForAddingRecipe.isRu ? "Помощь" : "Help";
-
-            AllRec.Text = LanguagesForAddingRecipe.isRu ? "Храните все рецепты в одном месте" : "Store all recipes in one place";
             
-            startLabel.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.startRu : LanguagesForAddingRecipe.startEn;
+            startLabel.Text = LanguagesForAddingRecipe.isRu ? "Храните все рецепты в одном месте" : "Store all recipes in one place";
 
-            myRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.myRecRu : LanguagesForAddingRecipe.myRecEn;
+            myRecB.Text = LanguagesForAddingRecipe.isRu ? "Мои рецепты" : "My recipes";
 
-            favB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.favRu : LanguagesForAddingRecipe.favEn;
+            favB.Text = LanguagesForAddingRecipe.isRu ? "Избранные" : "Favourite";
 
-            generalB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.generalRu : LanguagesForAddingRecipe.generalEn;
+            generalB.Text = LanguagesForAddingRecipe.isRu ? "Общие рецепты" : "General recipes";
 
-            addRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addRu : LanguagesForAddingRecipe.addEn;
+            addRecB.Text = LanguagesForAddingRecipe.isRu ? "Добавить рецепт" : "Add a recipe";
 
-            settingsB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.setLRu : LanguagesForAddingRecipe.setLEn;
+            settingsB.Text = LanguagesForAddingRecipe.isRu ? "Настройки" : "Settings";
 
-            helpB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.helpRu : LanguagesForAddingRecipe.helpEn;
+            helpB.Text = LanguagesForAddingRecipe.isRu ? "Помощь" : "Help";
 
-            TitleL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.titleRu : LanguagesForAddingRecipe.titleEn;
+            TitleL.Text = LanguagesForAddingRecipe.isRu ? "Название" : "Title";
 
-            RateLable.Text = ratel.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.rateRu : LanguagesForAddingRecipe.rateEn;
+            RateLable.Text = ratel.Text = LanguagesForAddingRecipe.isRu ? "Оценка рецепта" : "Prescription evaluation";
 
-            PhotoLab.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.photoRu : LanguagesForAddingRecipe.photoEn;
+            PhotoLab.Text = LanguagesForAddingRecipe.isRu ? "Фото блюда" : "Dish photo";
 
-            CategoryL.Text = catl.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.categoryRu : LanguagesForAddingRecipe.categoryEn;
+            CategoryL.Text = catl.Text = LanguagesForAddingRecipe.isRu ? "Категория" : "Category";
 
-            IngredL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.ingRu : LanguagesForAddingRecipe.ingEn;
+            IngredL.Text = LanguagesForAddingRecipe.isRu ? "Ингредиенты" : "Ingredients";
 
-            TimeL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.timeRu : LanguagesForAddingRecipe.timeEn;
+            TimeL.Text = LanguagesForAddingRecipe.isRu ? "Время приготовления(ч:м:с)" : "Cooking time(h:m:s)";
 
-            genL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.generalRu : LanguagesForAddingRecipe.generalEn;
+            genL.Text = LanguagesForAddingRecipe.isRu ? "Общие рецепты" : "General recipes";
 
-            myL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.myRecRu : LanguagesForAddingRecipe.myRecEn;
+            myL.Text = LanguagesForAddingRecipe.isRu ? "Мои рецепты" : "My recipes";
 
-            favL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.favRu : LanguagesForAddingRecipe.favEn;
+            favL.Text = LanguagesForAddingRecipe.isRu ? "Избранные" : "Favourite";
 
-            helpL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.helpRu : LanguagesForAddingRecipe.helpEn;
+            helpL.Text = LanguagesForAddingRecipe.isRu ? "Помощь" : "Help";
 
-            ChangeLLabel.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.changeLRu : LanguagesForAddingRecipe.changeLEn;
+            ChangeLLabel.Text = LanguagesForAddingRecipe.isRu ? "Язык" : "Language";
 
-            SettingsL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.setLRu : LanguagesForAddingRecipe.setLEn;
+            SettingsL.Text = LanguagesForAddingRecipe.isRu ? "Настройки" : "Settings";
 
-            CancelB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.cancelRu : LanguagesForAddingRecipe.cancelEn;
+            CancelB.Text = LanguagesForAddingRecipe.isRu ? "Очистить" : "Clean";
 
-            RecReadyB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.addBRu : LanguagesForAddingRecipe.addBEn;
+            RecReadyB.Text = LanguagesForAddingRecipe.isRu ? "Добавить" : "Add";
 
             searchB.Text = LanguagesForAddingRecipe.isRu ? "Поиск" : "Search";
 
@@ -701,7 +645,7 @@ namespace MainForm
 
             InstrL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.guideRu : LanguagesForAddingRecipe.guideEn;
 
-            DiffL.Text = difl.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.diffRu : LanguagesForAddingRecipe.diffEn;
+            DiffL.Text = difl.Text = LanguagesForAddingRecipe.isRu ? "Оценка сложности рецепта" : "Recipe Difficulty Score";
 
             searchL.Text = LanguagesForAddingRecipe.isRu ? "Результат поиска" : "Result of search";
         }
