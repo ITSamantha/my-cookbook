@@ -286,22 +286,7 @@ namespace bd
          
        // Byte to image:
 
-       public static Bitmap GetImageFromByteArray(byte[] byteArray)
-          {
-             Bitmap bm = (Bitmap)_imageConverter.ConvertFrom(byteArray);
-          
-                  if (bm != null && (bm.HorizontalResolution != (int)bm.HorizontalResolution ||
-                                     bm.VerticalResolution != (int)bm.VerticalResolution))
-                  {
-                     // Correct a strange glitch that has been observed in the test program when converting 
-                     //  from a PNG file image created by CopyImageToByteArray() - the dpi value "drifts" 
-                     //  slightly away from the nominal integer value
-                     bm.SetResolution((int)(bm.HorizontalResolution + 0.5f), 
-                                      (int)(bm.VerticalResolution + 0.5f));
-                  }
-          
-             return bm;
-          }
+       
 
 
          // Чтобы получить изображение из файла jpg или png, вы должны прочитать файл в массив байтов, используя File.ReadAllBytes():
@@ -910,6 +895,7 @@ namespace bd
             reader.Close();
             connection.Close();
         }
+
         private static void editRecipe(string name, string category, string ingredients, string guide, string marklike, string markdif, string time, byte[] image)
         {
             NpgsqlConnection connection = new NpgsqlConnection(configConnection);

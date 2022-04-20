@@ -54,6 +54,8 @@ namespace MainForm
         
         public string ImageAddRec = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\add.png";//Добавление рецепта
 
+        public string StandartPhotoImage = Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\standart_photo.jpg";
+
         public Instruments Instruments;
 
         public Thread thread;
@@ -102,9 +104,7 @@ namespace MainForm
         private void myRecB_Click(object sender, EventArgs e)//Раздел "Мои рецепты"
         {
             checkButtonsColors((int)Buttons.My_Rec);
-
-            tabContr.SelectedIndex = (int)Buttons.My_Rec;
-
+            
             if (whatButtonClicked != (int)Buttons.My_Rec)
             {
                 ControllerForBD.StartSelectAllMyRecipes();
@@ -115,6 +115,8 @@ namespace MainForm
             }
 
             whatButtonClicked = (int)Buttons.My_Rec;
+
+            tabContr.SelectedIndex = (int)Buttons.My_Rec;
         }
 
         public void showAllMyRecipes()//Вывести все "Мои рецепты"
@@ -131,6 +133,12 @@ namespace MainForm
 
             isRecipe = false;
 
+            my_recipes_list.Invoke((MethodInvoker)delegate {
+
+                my_recipes_list.Enabled = false;
+            });
+           
+            
             while (!isAll)
             {
                 if (ControllerForBD.isStartMy)
@@ -151,6 +159,8 @@ namespace MainForm
                     if ((ControllerForBD.myRecipes.Count == 0) && (ControllerForBD.isDoneMy))
                     {
                         isAll = true;
+
+                        
                         if (!isRecipe)
                         {
                             my_recipes_list.BeginInvoke((MethodInvoker)(() => my_recipes_list.Controls.Add(pbForNoRec())));
@@ -167,6 +177,12 @@ namespace MainForm
                     }
                 }
             }
+
+            my_recipes_list.Invoke((MethodInvoker)delegate {
+
+                my_recipes_list.Enabled = true;
+            });
+
         }
 
         private void favB_Click(object sender, EventArgs e)//Раздел "Избранное"
@@ -200,6 +216,11 @@ namespace MainForm
             bool isAll = false;
 
             isRecipe = false;
+
+            fav_recipes_list.Invoke((MethodInvoker)delegate {
+
+                fav_recipes_list.Enabled = false;
+            });
 
             while (!isAll)
             {
@@ -238,6 +259,10 @@ namespace MainForm
                     }
                 }
             }
+            fav_recipes_list.Invoke((MethodInvoker)delegate {
+
+                fav_recipes_list.Enabled = true;
+            });
         }
 
         private void generalB_Click(object sender, EventArgs e)//Раздел "Общие рецепты"
@@ -271,6 +296,11 @@ namespace MainForm
             bool isAll = false;
 
             isRecipe = false;
+
+            general_recipes_list.Invoke((MethodInvoker)delegate {
+
+                general_recipes_list.Enabled = false;
+            });
 
             while (!isAll)
             {
@@ -308,6 +338,9 @@ namespace MainForm
                     }
                 }
             }
+            general_recipes_list.Invoke((MethodInvoker)delegate {
+                general_recipes_list.Enabled = true;
+            });
         }
 
         private void addRecB_Click(object sender, EventArgs e)//Раздел "Добавление рецепта"
@@ -480,6 +513,22 @@ namespace MainForm
 
         private void RecReadyB_Click(object sender, EventArgs e)//Добавление рецепта в таблицу "Мои рецепты"
         {
+            checkRecForm();
+
+            if (ControllerForBD.InsertToMyRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text, isPhoto ? Instruments.convertImageIntoB(this.RecPhoto.Image) : null))
+            {
+                MessageBox.Show("Рецепт успешно добавлен.", "Добавление рецепта", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+               // cleanAddRecForm();
+            }
+            else
+            {
+                MessageBox.Show("Что-то пошло не так.", "Добавление рецепта");
+            }
+        }
+
+        public void checkRecForm()
+        {
             if (rec_name.Text == String.Empty)
             {
                 MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Вы не ввели название рецепта." : "You have not entered a name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -509,21 +558,8 @@ namespace MainForm
 
                 return;
             }
-            string temp1 = time_rec.Text[2].ToString() + time_rec.Text[3].ToString();
 
-            string temp2 = time_rec.Text[4].ToString() + time_rec.Text[5].ToString();
-
-            string temp3 = time_rec.Text[0].ToString() + time_rec.Text[1].ToString();
-
-            byte res1, res2, res3;
-
-            byte.TryParse(temp1, out res1);
-
-            byte.TryParse(temp2, out res2);
-
-            byte.TryParse(temp3, out res3);
-
-            if (res1 >= 60 || res2 >= 60 || res3 >= 24)
+            if (int.Parse(time_rec.Text[2].ToString() + time_rec.Text[3].ToString()) >= 60 || int.Parse(time_rec.Text[4].ToString() + time_rec.Text[5].ToString()) >= 60 || int.Parse(time_rec.Text[0].ToString() + time_rec.Text[1].ToString()) >= 24)
             {
                 MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Вы ввели время некорректно." : "You have  entered time incorrectly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -535,17 +571,6 @@ namespace MainForm
                 MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Оценка рецепта не задана." : "Recipe's rating is not defined.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return;
-            }
-
-            if (ControllerForBD.InsertToMyRecipes(rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text, isPhoto ? Instruments.convertImageIntoB(this.RecPhoto.Image) : null))
-            {
-                MessageBox.Show("Рецепт успешно добавлен.", "Добавление рецепта", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                cleanAddRecForm();
-            }
-            else
-            {
-                MessageBox.Show("Что-то пошло не так.", "Добавление рецепта");
             }
         }
 
@@ -1363,6 +1388,7 @@ namespace MainForm
             tabContr.SelectedIndex = (int)Buttons.Add_Rec;//НЕ ЗАБУДЬ ДОДЕЛАТЬ ИЗБРАННЫЕ
 
             AddLabel.Text = "";
+            
             //МБ ИНВОУК СДЕЛАТЬ
             cleanAddRecForm();
 
@@ -1391,6 +1417,31 @@ namespace MainForm
             {
                 Instr_rec.Text = "-";
             }
+
+            if (main_recipe.Pic == null)
+            {
+                RecPhoto.Image = Image.FromFile(StandartPhotoImage);
+            }
+            else
+            {
+                RecPhoto.Image = Instruments.convertBIntoImage(main_recipe.Pic);
+                
+            }
+
+            if (int.Parse(main_recipe.Marklike)>=1){pictureBox1.Image = Image.FromFile(ImageFileNameFull);}
+            else{pictureBox1.Image = Image.FromFile(ImageFileNameOpacity);}
+
+            if (int.Parse(main_recipe.Marklike) >= 2) { pictureBox2.Image = Image.FromFile(ImageFileNameFull); }
+            else { pictureBox2.Image = Image.FromFile(ImageFileNameOpacity); }
+
+            if (int.Parse(main_recipe.Marklike) >= 3) { pictureBox3.Image = Image.FromFile(ImageFileNameFull); }
+            else { pictureBox3.Image = Image.FromFile(ImageFileNameOpacity); }
+
+            if (int.Parse(main_recipe.Marklike) >= 4) { pictureBox4.Image = Image.FromFile(ImageFileNameFull); }
+            else { pictureBox4.Image = Image.FromFile(ImageFileNameOpacity); }
+
+            if (int.Parse(main_recipe.Marklike) ==5) { pictureBox5.Image = Image.FromFile(ImageFileNameFull); }
+            else { pictureBox5.Image = Image.FromFile(ImageFileNameOpacity); }
         }
 
         /* public static void SetDoubleBuffered(Control c)//Устранение мерцания
@@ -1426,7 +1477,9 @@ namespace MainForm
 
         private void updateRecB_Click(object sender, EventArgs e)//Редактировать рецепт
         {
-            //ДОДЕЛАТЬ UPDATE
+            whatClicked = int.Parse(main_recipe.Marklike);
+            checkRecForm();
+            //ControllerForBD.editRecipe(main_recipe.Name.Equals(rec_name)?, main_recipe.Category, main_recipe.Ingredients, main_recipe.Guide, main_recipe.Marklike, main_recipe.Markdif, main_recipe.Time, main_recipe.Pic);
         }
 
         private void searchB_Click(object sender, EventArgs e)
@@ -1437,11 +1490,11 @@ namespace MainForm
                 MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Для поиска Вам необходимо зайти в какой-либо раздел" : "To use search you have to choose a page.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if (searchTB.Text == String.Empty)
+            /*if (searchTB.Text == String.Empty)
             {
                 MessageBox.Show(LanguagesForAddingRecipe.isRu ? "Строка поиска пуста" : "Search text box is empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
-            }
+            }*/
             tabContr.SelectedIndex = (int)Buttons.SearchResultPage;
 
             string filter = "";
