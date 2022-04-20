@@ -643,7 +643,7 @@ namespace MainForm
 
             updateRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.updBRu : LanguagesForAddingRecipe.updBEn;
 
-            InstrL.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.guideRu : LanguagesForAddingRecipe.guideEn;
+            InstrL.Text = LanguagesForAddingRecipe.isRu ? "Инструкция" : "Instruction";
 
             DiffL.Text = difl.Text = LanguagesForAddingRecipe.isRu ? "Оценка сложности рецепта" : "Recipe Difficulty Score";
 
