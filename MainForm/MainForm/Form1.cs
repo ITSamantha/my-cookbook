@@ -601,6 +601,24 @@ namespace MainForm
 
             Category.Text = LanguagesForAddingRecipe.isRu ? "Категория" : "Category";
 
+            Other.Text = LanguagesForAddingRecipe.isRu ? "Другое" : "Other";
+
+            Snacks.Text = LanguagesForAddingRecipe.isRu ? "Закуски" : "Snacks";
+
+            Salads.Text = LanguagesForAddingRecipe.isRu ? "Салаты" : "Salads";
+
+            FirstС.Text = LanguagesForAddingRecipe.isRu ? "Первые блюда" : "First courses";
+
+            MainС.Text = LanguagesForAddingRecipe.isRu ? "Вторые блюда" : "Main courses";
+
+            Sauces.Text = LanguagesForAddingRecipe.isRu ? "Соусы" : "Sauces";
+
+            Pastries.Text = LanguagesForAddingRecipe.isRu ? "Выпечка" : "Pastries";
+
+            Drinks.Text = LanguagesForAddingRecipe.isRu ? "Напитки" : "Drinks";
+
+            Desserts.Text = LanguagesForAddingRecipe.isRu ? "Десерты" : "Desserts";
+
             CookT.Text = LanguagesForAddingRecipe.isRu ? "Время приготовления(ч:м:с)" : "Cooking time(h:m:s)";
 
             PresEv.Text = LanguagesForAddingRecipe.isRu ? "Оценка рецепта" : "Prescription evaluation";
