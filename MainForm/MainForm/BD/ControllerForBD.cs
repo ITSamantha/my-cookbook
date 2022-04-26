@@ -31,7 +31,9 @@ namespace bd
         public static Boolean isDoneInet;
         public static Boolean isDoneStar;
         public static Boolean isDoneSearch;
-
+        public static Boolean isDoneFile;
+        public static Boolean isStartFile;
+        public static List<Recipe>  fileRecipes;
         /*
         Метод подключения:
         параметром является строка с информацией о сервере,
@@ -516,10 +518,94 @@ namespace bd
                 Console.WriteLine(e);
             }
         }
+        /*
+          isAll = false;
+
+           while (!isAll)
+            {
+                if (ControllerForBD.isStartFile)
+                {
+                    if (ControllerForBD.fileRecipes.Count != 0)
+                    {
+                        
+
+                        Recipe r = ControllerForBD.fileRecipes.ElementAt(0);
+
+                        ВОТ ТУТ Что-ТО ДЕЛАЕТЕ СВОЕ
+
+                        ControllerForBD.fileRecipes.Remove(r);
+
+                    }
+                    if ((ControllerForBD.fileRecipes.Count == 0) && (ControllerForBD.isDoneFile))
+                    {
+                        isAll = true;
+
+                        
+                       
+                    }
+                }
+                else
+                {
+                    if ((ControllerForBD.isDoneFile))
+                    {
+                        isAll = true;
+                    }
+                }
+            }
+         */
+        private static void selectAllFileRecipes()
+        {
+
+            fileRecipes = new List<Recipe>();
+            isDoneFile = false;
+            isStartFile = false;
+            try
+            {
+                NpgsqlConnection connection = new NpgsqlConnection(configConnection);
+                connection.Open();
+                fileRecipes = new List<Recipe>();
+                Recipe r = null;
+
+
+                //ВОЗМОЖНА ОШИБКА!
+
+
+                string textCommand = "Select id, name ,  category, time, marklike, markdif, star from recipes  where type = 0;";
 
 
 
-        public static string createFilter(int type, List<string> categories,List<string> marklikes, List<string> markdifs , bool star)
+
+
+                var command = new NpgsqlCommand(textCommand, connection);
+                var reader = command.ExecuteReader();
+                isDoneFile = false;
+                isStartFile = true;
+                while (reader.Read())
+                {
+                    byte[] picture = null;
+                    r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
+                 
+                    fileRecipes.Add(r);
+                }
+                isDoneFile = true;
+                reader.Close();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                isStartFile = false;
+                Console.WriteLine("Error of select all from File : \n" + e);
+                inetRecipes = null;
+                isDoneFile = true;
+            }
+        }
+
+        public static void StartSelectAllFileRecipes()
+        {
+            Thread thread = new Thread(selectAllFileRecipes);
+            thread.Start();
+        }
+public static string createFilter(int type, List<string> categories,List<string> marklikes, List<string> markdifs , bool star)
         {
             string filter = "";
 
