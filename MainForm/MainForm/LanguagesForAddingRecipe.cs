@@ -16,9 +16,9 @@ namespace MainForm
 
         static public string[] categoriesEn = new string[] { "Other", "Snacks", "Salads", "First courses", "Main courses", "Sauces", "Pastries", "Drinks", "Desserts" };
 
-        static public string addRu = "Добавить рецепт";
+        static public string addRu ="вв" ;
 
-        static public string addEn = "Add a recipe";
+        static public string addEn = "в";
 
         static public string titleRu = "Название ";
 
