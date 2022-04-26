@@ -982,21 +982,26 @@ public static string createFilter(int type, List<string> categories,List<string>
             connection.Close();
         }
 
-        private static void editRecipe(string name, string category, string ingredients, string guide, string marklike, string markdif, string time, byte[] image)
+       public static void editRecipe(long id, string name, string category, string ingredients, string guide, string marklike, string markdif, string time, byte[] image)
         {
             NpgsqlConnection connection = new NpgsqlConnection(configConnection);
             connection.Open();
-            string textCommand = "Update recipes (name, category, ingredients, guide, time, marklike, markdif, type )";
-            textCommand += $"values ('{name}','{category}','{ingredients}','{guide}','{time}',{marklike},{markdif}, 0)";
-            textCommand += " returning id;";
+            string textCommand = "Update recipes ";
+
+            textCommand += $" SET name = '{name}', category = '{category}' , ingredients = '{ingredients}', guide = '{guide}', time ='{time}', marklike= {marklike}, markdif = {markdif} where id = {id}";
+
+
+
+          
             NpgsqlCommand npgsqlCommand = new NpgsqlCommand(textCommand, connection);
-            int id = (int)npgsqlCommand.ExecuteScalar();
+            npgsqlCommand.ExecuteNonQuery();
+            /*
             npgsqlCommand = new NpgsqlCommand("Insert into images(id, pic) values (" + id + ", @Image )", connection);
             NpgsqlParameter parameter = npgsqlCommand.CreateParameter();
             parameter.ParameterName = "@Image";
             parameter.NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Bytea;
             parameter.Value = image;
-
+            
 
             npgsqlCommand.Parameters.Add(parameter);
 
@@ -1007,9 +1012,9 @@ public static string createFilter(int type, List<string> categories,List<string>
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e);
             }
-           
+           */
             connection.Close();
            
       
