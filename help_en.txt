@@ -1,0 +1,13 @@
+* After starting the .exe file, the "My Recipes" program window will appear.
+* In order to add your own recipe, you need to click on the "Add recipe" button. 
+  Then you are required to enter the name, ingredients, cooking instructions, 
+  choose a recipe grade, category and recipe difficulty rating, add cooking time,
+  and a photo of the finished dish. To save your recipe click on the "Add" button.  
+  To delete all information about the recipe, press the "Clear" button.
+* To edit or delete your recipe, go to the "My Recipes" tab 
+  and click on the recipe you created earlier. Editing someone else's recipe is not available. 
+* To find the recipe you need, use the search bar, enter the name of the recipe and click "Search". 
+  You can also click on the down arrow next to the search bar to select a Category, 
+  Difficulty Score and/or Recipe Score. 
+* Recipes you like can be marked as "Favorites". 
+* In order to change the application language from Russian to English, you need to click on the "Settings" button and select the desired application language.

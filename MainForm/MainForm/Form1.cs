@@ -389,11 +389,37 @@ namespace MainForm
         {
             checkButtonsColors((int)Buttons.Help);
 
+            help_label.Font = new Font(rec_name.Font.FontFamily, rec_name.Font.Size, rec_name.Font.Style);
+
+            help_label.SetBounds(10, helpL.Height, helpL.Width, 500);
+
+            help_label.Text = readHelpFile();
+            
             tabContr.SelectedIndex = (int)Buttons.Help;
 
             whatButtonClicked = (int)Buttons.Help;
         }
 
+        public string readHelpFile()
+        {
+            string text;
+
+            if (LanguagesForAddingRecipe.isRu)
+            {
+                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "help_ru.txt"))
+                {
+                    text = reader.ReadToEnd();
+                }
+            }
+            else
+            {
+                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "help_en.txt"))
+                {
+                    text = reader.ReadToEnd();
+                }
+            }
+            return text;
+        }
         //Обработка событий с оценкой рецепта
 
         private void pictureBox_MouseLeave(object sender, EventArgs e)
@@ -587,6 +613,8 @@ namespace MainForm
             }
 
             languageChanges();
+
+            help_label.Text = readHelpFile();
         }
 
         public void languageChanges()//Смена языка в приложении
@@ -639,9 +667,9 @@ namespace MainForm
 
             searchB.Text = LanguagesForAddingRecipe.isRu ? "Поиск" : "Search";
 
-            deleteRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.delBRu : LanguagesForAddingRecipe.delBEn;
+            deleteRecB.Text = LanguagesForAddingRecipe.isRu ? "Удалить" : "Delete";
 
-            updateRecB.Text = LanguagesForAddingRecipe.isRu ? LanguagesForAddingRecipe.updBRu : LanguagesForAddingRecipe.updBEn;
+            updateRecB.Text = LanguagesForAddingRecipe.isRu ? "Редактировать" :"Update";
 
             InstrL.Text = LanguagesForAddingRecipe.isRu ? "Инструкция" : "Instruction";
 
@@ -1478,7 +1506,9 @@ namespace MainForm
         {
             whatClicked = int.Parse(main_recipe.Marklike);
             checkRecForm();
-            //ControllerForBD.editRecipe(main_recipe.Name.Equals(rec_name)?, main_recipe.Category, main_recipe.Ingredients, main_recipe.Guide, main_recipe.Marklike, main_recipe.Markdif, main_recipe.Time, main_recipe.Pic);
+            ControllerForBD.editRecipe(main_recipe.Id,rec_name.Text, CategoryCB.Text, Ingr_rec.Text, Instr_rec.Text, whatClicked.ToString(), markDif.Text, time_rec.Text, isPhoto ? Instruments.convertImageIntoB(this.RecPhoto.Image) : null);
+
+            showAllMyRecipes();
         }
 
         private void searchB_Click(object sender, EventArgs e)

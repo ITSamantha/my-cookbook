@@ -108,6 +108,7 @@
             this.ratel = new System.Windows.Forms.Label();
             this.diffCheckB = new System.Windows.Forms.CheckedListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.help_label = new System.Windows.Forms.Label();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -342,10 +343,10 @@
             // 
             this.FavPage.Controls.Add(this.fav_recipes_list);
             this.FavPage.Controls.Add(this.favL);
-            this.FavPage.Location = new System.Drawing.Point(4, 22);
+            this.FavPage.Location = new System.Drawing.Point(4, 30);
             this.FavPage.Name = "FavPage";
             this.FavPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FavPage.Size = new System.Drawing.Size(1021, 660);
+            this.FavPage.Size = new System.Drawing.Size(1021, 652);
             this.FavPage.TabIndex = 1;
             this.FavPage.Text = "tabPage2";
             this.FavPage.UseVisualStyleBackColor = true;
@@ -372,9 +373,9 @@
             // 
             this.GeneralPage.Controls.Add(this.general_recipes_list);
             this.GeneralPage.Controls.Add(this.genL);
-            this.GeneralPage.Location = new System.Drawing.Point(4, 22);
+            this.GeneralPage.Location = new System.Drawing.Point(4, 30);
             this.GeneralPage.Name = "GeneralPage";
-            this.GeneralPage.Size = new System.Drawing.Size(1021, 660);
+            this.GeneralPage.Size = new System.Drawing.Size(1021, 652);
             this.GeneralPage.TabIndex = 2;
             this.GeneralPage.Text = "tabPage1";
             this.GeneralPage.UseVisualStyleBackColor = true;
@@ -857,9 +858,9 @@
             // 
             this.settingsPage.Controls.Add(this.LanguagePanel);
             this.settingsPage.Controls.Add(this.SettingsL);
-            this.settingsPage.Location = new System.Drawing.Point(4, 22);
+            this.settingsPage.Location = new System.Drawing.Point(4, 30);
             this.settingsPage.Name = "settingsPage";
-            this.settingsPage.Size = new System.Drawing.Size(1021, 660);
+            this.settingsPage.Size = new System.Drawing.Size(1021, 652);
             this.settingsPage.TabIndex = 4;
             this.settingsPage.Text = "Настройки";
             this.settingsPage.UseVisualStyleBackColor = true;
@@ -915,10 +916,11 @@
             // 
             // helpPage
             // 
+            this.helpPage.Controls.Add(this.help_label);
             this.helpPage.Controls.Add(this.helpL);
-            this.helpPage.Location = new System.Drawing.Point(4, 22);
+            this.helpPage.Location = new System.Drawing.Point(4, 30);
             this.helpPage.Name = "helpPage";
-            this.helpPage.Size = new System.Drawing.Size(1021, 660);
+            this.helpPage.Size = new System.Drawing.Size(1021, 652);
             this.helpPage.TabIndex = 5;
             this.helpPage.Text = "tabPage1";
             this.helpPage.UseVisualStyleBackColor = true;
@@ -937,9 +939,9 @@
             // 
             this.startPage.Controls.Add(this.startLabel);
             this.startPage.Controls.Add(this.startBox);
-            this.startPage.Location = new System.Drawing.Point(4, 22);
+            this.startPage.Location = new System.Drawing.Point(4, 30);
             this.startPage.Name = "startPage";
-            this.startPage.Size = new System.Drawing.Size(1021, 660);
+            this.startPage.Size = new System.Drawing.Size(1021, 652);
             this.startPage.TabIndex = 6;
             this.startPage.Text = "tabPage1";
             this.startPage.UseVisualStyleBackColor = true;
@@ -968,10 +970,10 @@
             // 
             this.SearchResultPage.Controls.Add(this.search_list);
             this.SearchResultPage.Controls.Add(this.searchL);
-            this.SearchResultPage.Location = new System.Drawing.Point(4, 22);
+            this.SearchResultPage.Location = new System.Drawing.Point(4, 30);
             this.SearchResultPage.Name = "SearchResultPage";
             this.SearchResultPage.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchResultPage.Size = new System.Drawing.Size(1021, 660);
+            this.SearchResultPage.Size = new System.Drawing.Size(1021, 652);
             this.SearchResultPage.TabIndex = 7;
             this.SearchResultPage.Text = "tabPage1";
             this.SearchResultPage.UseVisualStyleBackColor = true;
@@ -1132,6 +1134,14 @@
             this.timer1.Interval = 15;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // help_label
+            // 
+            this.help_label.Location = new System.Drawing.Point(132, 248);
+            this.help_label.Name = "help_label";
+            this.help_label.Size = new System.Drawing.Size(541, 69);
+            this.help_label.TabIndex = 3;
+            this.help_label.Text = "help_lable";
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1273,6 +1283,7 @@
         private System.Windows.Forms.Label ratel;
         private System.Windows.Forms.Panel search_list;
         private System.Windows.Forms.Panel fav_recipes_list;
+        private System.Windows.Forms.Label help_label;
     }
 }
 
