@@ -1017,6 +1017,7 @@ public static string createFilter(int type, List<string> categories,List<string>
            */
             connection.Close();
            
+           
       
 }
     }
