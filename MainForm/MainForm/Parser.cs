@@ -78,6 +78,12 @@ namespace MainForm
                             ingridients += g.TextContent.Trim().Replace("\n", string.Empty).Replace("  ", string.Empty) + ';';
                         var massiveGuid = _recipe[0].GetElementsByClassName("cooking-bl");
                         string guid = "";
+                        for (int i = 0; i < massive2.Length; i++)
+                        {
+                            var g2 = massive2[i].QuerySelector("p");
+                            guid += g2.TextContent.Trim().Replace("\n", string.Empty);
+
+                        }
                     }
                 }
             }
