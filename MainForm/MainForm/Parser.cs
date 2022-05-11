@@ -48,7 +48,7 @@ namespace MainForm
                 }
                 else
                 {
-                    sr = new StreamReader("testfor.txt");
+                    sr = new StreamReader(nameFile);
                     string info = sr.ReadLine();
                     if (info.Equals("True"))
                         check = false;
