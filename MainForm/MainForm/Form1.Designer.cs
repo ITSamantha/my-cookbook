@@ -104,9 +104,9 @@
             this.filterPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.catl = new System.Windows.Forms.Label();
             this.categoryCheckB = new System.Windows.Forms.CheckedListBox();
-            this.difl = new System.Windows.Forms.Label();
+            this.difl1 = new System.Windows.Forms.Label();
             this.rateCheckB = new System.Windows.Forms.CheckedListBox();
-            this.ratel = new System.Windows.Forms.Label();
+            this.difl = new System.Windows.Forms.Label();
             this.diffCheckB = new System.Windows.Forms.CheckedListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.buttonPanel.SuspendLayout();
@@ -414,9 +414,9 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 30);
+            this.addRecPage.Location = new System.Drawing.Point(4, 22);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
@@ -1058,15 +1058,15 @@
             this.filterPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.filterPanel.Controls.Add(this.catl);
             this.filterPanel.Controls.Add(this.categoryCheckB);
-            this.filterPanel.Controls.Add(this.difl);
+            this.filterPanel.Controls.Add(this.difl1);
             this.filterPanel.Controls.Add(this.rateCheckB);
-            this.filterPanel.Controls.Add(this.ratel);
+            this.filterPanel.Controls.Add(this.difl);
             this.filterPanel.Controls.Add(this.diffCheckB);
-            this.filterPanel.Location = new System.Drawing.Point(407, 746);
+            this.filterPanel.Location = new System.Drawing.Point(308, 746);
             this.filterPanel.MaximumSize = new System.Drawing.Size(360, 630);
             this.filterPanel.MinimumSize = new System.Drawing.Size(360, 0);
             this.filterPanel.Name = "filterPanel";
-            this.filterPanel.Size = new System.Drawing.Size(360, 318);
+            this.filterPanel.Size = new System.Drawing.Size(360, 293);
             this.filterPanel.TabIndex = 6;
             // 
             // catl
@@ -1092,14 +1092,14 @@
             this.categoryCheckB.Size = new System.Drawing.Size(327, 252);
             this.categoryCheckB.TabIndex = 2;
             // 
-            // difl
+            // difl1
             // 
-            this.difl.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.difl.Location = new System.Drawing.Point(3, 283);
-            this.difl.Name = "difl";
-            this.difl.Size = new System.Drawing.Size(357, 25);
-            this.difl.TabIndex = 3;
-            this.difl.Text = "label1";
+            this.difl1.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.difl1.Location = new System.Drawing.Point(3, 283);
+            this.difl1.Name = "difl1";
+            this.difl1.Size = new System.Drawing.Size(357, 25);
+            this.difl1.TabIndex = 3;
+            this.difl1.Text = "label1";
             // 
             // rateCheckB
             // 
@@ -1115,13 +1115,13 @@
             this.rateCheckB.Size = new System.Drawing.Size(327, 140);
             this.rateCheckB.TabIndex = 6;
             // 
-            // ratel
+            // difl
             // 
-            this.ratel.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ratel.Location = new System.Drawing.Point(3, 454);
-            this.ratel.Name = "ratel";
-            this.ratel.Size = new System.Drawing.Size(357, 25);
-            this.ratel.TabIndex = 7;
+            this.difl.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.difl.Location = new System.Drawing.Point(3, 454);
+            this.difl.Name = "difl";
+            this.difl.Size = new System.Drawing.Size(357, 25);
+            this.difl.TabIndex = 7;
             // 
             // diffCheckB
             // 
@@ -1275,12 +1275,12 @@
         private System.Windows.Forms.FlowLayoutPanel filterPanel;
         private System.Windows.Forms.Label catl;
         private System.Windows.Forms.CheckedListBox categoryCheckB;
-        private System.Windows.Forms.Label difl;
+        private System.Windows.Forms.Label difl1;
         private System.Windows.Forms.CheckedListBox diffCheckB;
         private System.Windows.Forms.CheckedListBox rateCheckB;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label searchL;
-        private System.Windows.Forms.Label ratel;
+        private System.Windows.Forms.Label difl;
         private System.Windows.Forms.Panel search_list;
         private System.Windows.Forms.Panel fav_recipes_list;
         private System.Windows.Forms.Label help_label;
