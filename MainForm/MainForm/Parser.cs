@@ -98,6 +98,7 @@ namespace MainForm
                         if (second < 10)
                             time += "0";
                         time += second;
+                        ControllerForBD.InsertToInetRecipes(name, category, ingridients, guid, star.ToString(), timeStar.ToString(), time, null);
                     }
                 }
             }
