@@ -46,7 +46,14 @@ namespace MainForm
                     sw.WriteLine("True");
                     sw.Close();
                 }
-             
+                else
+                {
+                    sr = new StreamReader("testfor.txt");
+                    string info = sr.ReadLine();
+                    if (info.Equals("True"))
+                        check = false;
+                    sr.Close();
+                }
 
             }
             catch (Exception ex) { }
