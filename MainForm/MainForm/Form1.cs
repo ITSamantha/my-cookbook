@@ -138,7 +138,6 @@ namespace MainForm
                 my_recipes_list.Enabled = false;
             });
            
-            
             while (!isAll)
             {
                 if (ControllerForBD.isStartMy)
@@ -183,6 +182,53 @@ namespace MainForm
                 my_recipes_list.Enabled = true;
             });
 
+        }
+
+        public static void loadAllRecipesIntoFile()
+        {
+         StringBuilder r = new StringBuilder();
+
+         bool isAll = false;
+
+           while (!isAll)
+            {
+                if (ControllerForBD.isStartFile)
+                {
+                    if (ControllerForBD.fileRecipes.Count != 0)
+                    {
+                        Recipe rec = ControllerForBD.fileRecipes.ElementAt(0);
+
+                        r.Append("Название рецепта:" + rec.Name + Environment.NewLine + "Категория:" + rec.Category + Environment.NewLine);
+
+                        r.Append("Оценка сложности:"+rec.Markdif + Environment.NewLine+"Оценка рецепта"+rec.Marklike+ Environment.NewLine);
+
+                        r.Append("Время приготовления"+rec.Time + Environment.NewLine +"Ингредиенты:"+rec.Ingredients+ Environment.NewLine);
+
+                        r.Append("Инструкция:" + rec.Guide + Environment.NewLine + Environment.NewLine);
+
+                        ControllerForBD.fileRecipes.Remove(rec);
+
+                    }
+                    if ((ControllerForBD.fileRecipes.Count == 0) && (ControllerForBD.isDoneFile))
+                    {
+                        isAll = true;
+                    }
+                }
+                else
+                {
+                    if ((ControllerForBD.isDoneFile))
+                    {
+                        isAll = true;
+                    }
+                }
+            }
+            StreamWriter writer = new StreamWriter("all_my_recipes.txt");
+
+            writer.WriteLine(r.ToString());
+
+            writer.Close();
+            
+            MessageBox.Show("Запись в файл all_my_recipes.txt успешно окончена.");
         }
 
         private void favB_Click(object sender, EventArgs e)//Раздел "Избранное"
@@ -667,6 +713,8 @@ namespace MainForm
 
             RecReadyB.Text = LanguagesForAddingRecipe.isRu ? "Добавить" : "Add";
 
+            button1.Text = LanguagesForAddingRecipe.isRu ? "Выгрузить \"Мои рецепты\" в файл" : "Load \"My recipes\" into file";
+
             searchB.Text = LanguagesForAddingRecipe.isRu ? "Поиск" : "Search";
 
             deleteRecB.Text = LanguagesForAddingRecipe.isRu ? "Удалить" : "Delete";
@@ -868,7 +916,10 @@ namespace MainForm
                 //Кнопка "добавить"
                 {
                     RecReadyB.SetBounds((int)(2 * Instruments.intervalX), InstrPanel.Bounds.Y + InstrPanel.Height + Instruments.intervalHeight / 2, Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
+
+                    button1.SetBounds(100, InstrPanel.Height + Instruments.intervalHeight / 2, 3*Instruments.intervalX, (int)(0.75 * Instruments.intervalHeight));
                 }
+            
 
                 //Кнопка "удалить"
                 {
@@ -984,6 +1035,8 @@ namespace MainForm
             CancelB.BackColor = Instruments.myPurpleColor;
 
             RecReadyB.BackColor = Instruments.myPurpleColor;
+
+            button1.BackColor = Instruments.myPurpleColor;
 
             searchB.BackColor = Color.White;
 
@@ -1168,6 +1221,9 @@ namespace MainForm
             return pb;
         }
 
+
+        public static Image image= Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\standart_photo.jpg");
+
         public TableLayoutPanel createTableForRecipes(Recipe r)//Создание рецепта для отображения
         {
             int intervalX = my_recipes_list.Width / 20;
@@ -1212,7 +1268,7 @@ namespace MainForm
             }
             else
             {
-                pb.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory().Remove(Directory.GetCurrentDirectory().Length - 27) + "images\\standart_photo.jpg");
+                pb.BackgroundImage = image;
 
                 pb.SizeMode = PictureBoxSizeMode.CenterImage;
 
@@ -1407,7 +1463,7 @@ namespace MainForm
             }
 
             RecReadyB.Hide();
-            //НЕ ЗАБУДЬ СДЕЛАТЬ ОТРИСОВКУ ЗВЕЗДОЧЕК И КАРТИНКИ РЕЦЕПТА
+
             CancelB.Hide();
 
             updateRecB.Show();
@@ -1675,6 +1731,15 @@ namespace MainForm
             }
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Загрузка начата.");
+
+            ControllerForBD.StartSelectAllFileRecipes();
+
+            thread = new Thread(loadAllRecipesIntoFile);
+
+            thread.Start();
+        }
     }
 }

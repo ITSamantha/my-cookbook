@@ -109,6 +109,7 @@
             this.difl = new System.Windows.Forms.Label();
             this.diffCheckB = new System.Windows.Forms.CheckedListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonPanel.SuspendLayout();
             this.tabContr.SuspendLayout();
             this.MyRecPage.SuspendLayout();
@@ -414,9 +415,9 @@
             this.addRecPage.Controls.Add(this.CategoryPanel);
             this.addRecPage.Controls.Add(this.PhotoPanel);
             this.addRecPage.Controls.Add(this.AddLabel);
-            this.addRecPage.Location = new System.Drawing.Point(4, 22);
+            this.addRecPage.Location = new System.Drawing.Point(4, 30);
             this.addRecPage.Name = "addRecPage";
-            this.addRecPage.Size = new System.Drawing.Size(1021, 660);
+            this.addRecPage.Size = new System.Drawing.Size(1021, 652);
             this.addRecPage.TabIndex = 3;
             this.addRecPage.Text = "Добавить";
             // 
@@ -856,11 +857,12 @@
             // 
             // settingsPage
             // 
+            this.settingsPage.Controls.Add(this.button1);
             this.settingsPage.Controls.Add(this.LanguagePanel);
             this.settingsPage.Controls.Add(this.SettingsL);
-            this.settingsPage.Location = new System.Drawing.Point(4, 22);
+            this.settingsPage.Location = new System.Drawing.Point(4, 30);
             this.settingsPage.Name = "settingsPage";
-            this.settingsPage.Size = new System.Drawing.Size(1021, 660);
+            this.settingsPage.Size = new System.Drawing.Size(1021, 652);
             this.settingsPage.TabIndex = 4;
             this.settingsPage.Text = "Настройки";
             this.settingsPage.UseVisualStyleBackColor = true;
@@ -918,9 +920,9 @@
             // 
             this.helpPage.Controls.Add(this.help_label);
             this.helpPage.Controls.Add(this.helpL);
-            this.helpPage.Location = new System.Drawing.Point(4, 22);
+            this.helpPage.Location = new System.Drawing.Point(4, 30);
             this.helpPage.Name = "helpPage";
-            this.helpPage.Size = new System.Drawing.Size(1021, 660);
+            this.helpPage.Size = new System.Drawing.Size(1021, 652);
             this.helpPage.TabIndex = 5;
             this.helpPage.Text = "tabPage1";
             this.helpPage.UseVisualStyleBackColor = true;
@@ -947,9 +949,9 @@
             // 
             this.startPage.Controls.Add(this.startLabel);
             this.startPage.Controls.Add(this.startBox);
-            this.startPage.Location = new System.Drawing.Point(4, 22);
+            this.startPage.Location = new System.Drawing.Point(4, 30);
             this.startPage.Name = "startPage";
-            this.startPage.Size = new System.Drawing.Size(1021, 660);
+            this.startPage.Size = new System.Drawing.Size(1021, 652);
             this.startPage.TabIndex = 6;
             this.startPage.Text = "tabPage1";
             this.startPage.UseVisualStyleBackColor = true;
@@ -978,10 +980,10 @@
             // 
             this.SearchResultPage.Controls.Add(this.search_list);
             this.SearchResultPage.Controls.Add(this.searchL);
-            this.SearchResultPage.Location = new System.Drawing.Point(4, 22);
+            this.SearchResultPage.Location = new System.Drawing.Point(4, 30);
             this.SearchResultPage.Name = "SearchResultPage";
             this.SearchResultPage.Padding = new System.Windows.Forms.Padding(3);
-            this.SearchResultPage.Size = new System.Drawing.Size(1021, 660);
+            this.SearchResultPage.Size = new System.Drawing.Size(1021, 652);
             this.SearchResultPage.TabIndex = 7;
             this.SearchResultPage.Text = "tabPage1";
             this.SearchResultPage.UseVisualStyleBackColor = true;
@@ -1142,6 +1144,17 @@
             this.timer1.Interval = 15;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Bahnschrift Light Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(537, 75);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1284,6 +1297,7 @@
         private System.Windows.Forms.Panel search_list;
         private System.Windows.Forms.Panel fav_recipes_list;
         private System.Windows.Forms.Label help_label;
+        private System.Windows.Forms.Button button1;
     }
 }
 

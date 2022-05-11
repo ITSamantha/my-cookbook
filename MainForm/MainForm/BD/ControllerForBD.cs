@@ -519,41 +519,6 @@ namespace bd
             }
         }
         
-            StringBuilder r = new StringBuilder();
-            isAll = false;
-
-           while (!isAll)
-            {
-                if (ControllerForBD.isStartFile)
-                {
-                    if (ControllerForBD.fileRecipes.Count != 0)
-                    {
-                        
-
-                        Recipe r = ControllerForBD.fileRecipes.ElementAt(0);
-
-                        Console.WriteLine(r.ToString());
-
-                        ControllerForBD.fileRecipes.Remove(r);
-
-                    }
-                    if ((ControllerForBD.fileRecipes.Count == 0) && (ControllerForBD.isDoneFile))
-                    {
-                        isAll = true;
-
-                        
-                       
-                    }
-                }
-                else
-                {
-                    if ((ControllerForBD.isDoneFile))
-                    {
-                        isAll = true;
-                    }
-                }
-            }
-         
         private static void selectAllFileRecipes()
         {
 
@@ -563,28 +528,22 @@ namespace bd
             try
             {
                 NpgsqlConnection connection = new NpgsqlConnection(configConnection);
+
                 connection.Open();
+
                 fileRecipes = new List<Recipe>();
+
                 Recipe r = null;
-
-
-                //ВОЗМОЖНА ОШИБКА!
-
-
-                string textCommand = "Select id, name ,  category, time, marklike, markdif, star from recipes  where type = 0;";
-
-
-
-
-
+                
+                string textCommand = "Select id, name ,  category, time, marklike, markdif,guide,ingredients from recipes  where type = 0;";
+                
                 var command = new NpgsqlCommand(textCommand, connection);
                 var reader = command.ExecuteReader();
                 isDoneFile = false;
                 isStartFile = true;
                 while (reader.Read())
                 {
-                    byte[] picture = null;
-                    r = new Recipe(reader.GetInt32(0), reader.GetString(2), null, reader.GetTimeSpan(3).ToString(), null, reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), reader.GetBoolean(6));
+                    r = new Recipe(reader.GetInt32(0), reader.GetString(2), reader.GetString(7), reader.GetTimeSpan(3).ToString(), reader.GetString(6), reader.GetDouble(4).ToString(), reader.GetString(1), reader.GetDouble(5).ToString(), false);
                  
                     fileRecipes.Add(r);
                 }
@@ -596,7 +555,7 @@ namespace bd
             {
                 isStartFile = false;
                 Console.WriteLine("Error of select all from File : \n" + e);
-                inetRecipes = null;
+                fileRecipes = null;
                 isDoneFile = true;
             }
         }
