@@ -72,6 +72,8 @@ namespace MainForm
                             category = "Первые блюда";
                         if (category.Equals("Горячие блюда"))
                             category = "Вторые блюда";
+                        var massiveIngridients = _recipe[0].GetElementsByClassName("ingredients-bl")[0].QuerySelectorAll("li");
+                        string ingridients = "";
                     }
                 }
             }
