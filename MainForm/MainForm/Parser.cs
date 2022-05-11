@@ -76,6 +76,8 @@ namespace MainForm
                         string ingridients = "";
                         foreach (var g in massiveIngridients)
                             ingridients += g.TextContent.Trim().Replace("\n", string.Empty).Replace("  ", string.Empty) + ';';
+                        var massiveGuid = _recipe[0].GetElementsByClassName("cooking-bl");
+                        string guid = "";
                     }
                 }
             }
