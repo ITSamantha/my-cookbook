@@ -57,5 +57,10 @@ namespace MainForm
 
             }
             catch (Exception ex) { }
-        }
+            if (check)
+            {
+                for (int index = 0; index < massive.Length; index++)
+                {
+                }
+            }
 }
