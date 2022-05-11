@@ -641,7 +641,7 @@ namespace MainForm
 
             TitleL.Text = LanguagesForAddingRecipe.isRu ? "Название" : "Title";
 
-            RateLable.Text = ratel.Text = LanguagesForAddingRecipe.isRu ? "Оценка рецепта" : "Prescription evaluation";
+            RateLable.Text = difl1.Text = LanguagesForAddingRecipe.isRu ? "Оценка рецепта" : "Prescription evaluation";
 
             PhotoLab.Text = LanguagesForAddingRecipe.isRu ? "Фото блюда" : "Dish photo";
 
