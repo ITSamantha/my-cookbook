@@ -32,6 +32,8 @@ namespace MainForm
             "https://www.povarenok.ru/recipes/show/90014/","https://www.povarenok.ru/recipes/show/29943/","https://www.povarenok.ru/recipes/show/57726/","https://www.povarenok.ru/recipes/show/48210/",
             "https://www.povarenok.ru/recipes/show/76443/","https://www.povarenok.ru/recipes/show/47416/"
         };
-
-    }
+        //Метод для парсинга ресурсов
+        public async void parse()
+        {
+        }
 }
