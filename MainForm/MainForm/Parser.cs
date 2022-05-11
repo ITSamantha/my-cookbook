@@ -61,6 +61,12 @@ namespace MainForm
             {
                 for (int index = 0; index < massive.Length; index++)
                 {
+                    var config = Configuration.Default.WithDefaultLoader();
+                    using (var context = BrowsingContext.New(config))
+                    using (var doc = await context.OpenAsync(massive[index]))
+                    {
+
+                    }
                 }
             }
 }
