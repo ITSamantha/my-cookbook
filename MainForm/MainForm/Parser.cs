@@ -36,6 +36,19 @@ namespace MainForm
         //Метод для парсинга ресурсов
         public async void parse()
         {
-            
+            try
+            {
+                if (!File.Exists(nameFile))
+                {
+                    fs = File.Create(nameFile);
+                    fs.Close();
+                    sw = new StreamWriter(nameFile);
+                    sw.WriteLine("True");
+                    sw.Close();
+                }
+             
+
+            }
+            catch (Exception ex) { }
         }
 }
