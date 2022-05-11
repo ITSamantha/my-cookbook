@@ -228,7 +228,7 @@ namespace MainForm
 
             writer.Close();
 
-            MessageBox.Show("Запись в файл all_my_recipes.txt успешно окончена!");
+            MessageBox.Show("Запись в файл all_my_recipes.txt успешно окончена.");
         }
 
         private void favB_Click(object sender, EventArgs e)//Раздел "Избранное"
