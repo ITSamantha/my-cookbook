@@ -518,8 +518,9 @@ namespace bd
                 Console.WriteLine(e);
             }
         }
-        /*
-          isAll = false;
+        
+            StringBuilder r = new StringBuilder();
+            isAll = false;
 
            while (!isAll)
             {
@@ -531,7 +532,7 @@ namespace bd
 
                         Recipe r = ControllerForBD.fileRecipes.ElementAt(0);
 
-                        ВОТ ТУТ Что-ТО ДЕЛАЕТЕ СВОЕ
+                        Console.WriteLine(r.ToString());
 
                         ControllerForBD.fileRecipes.Remove(r);
 
@@ -552,7 +553,7 @@ namespace bd
                     }
                 }
             }
-         */
+         
         private static void selectAllFileRecipes()
         {
 
