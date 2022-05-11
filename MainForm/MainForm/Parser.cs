@@ -51,8 +51,16 @@ namespace MainForm
                     sr = new StreamReader(nameFile);
                     string info = sr.ReadLine();
                     if (info.Equals("True"))
+                    {
                         check = false;
-                    sr.Close();
+                        sr.Close();
+                    }
+                    else
+                    {
+                        sw = new StreamWriter(nameFile);
+                        sw.WriteLine("True");
+                        sw.Close();
+                    }
                 }
 
             }
