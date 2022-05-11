@@ -13,6 +13,7 @@ namespace MainForm
         private FileStream fs;
         private StreamWriter sw;
         private StreamReader sr;
+        private string nameFile = "FileParserCheck.txt";
         private bool check = true;
         //Массив ссылок на рецепты, которые будем считывать (для считывания ссылок парсер не делал, поскольку занимает много памяти и c# не предназначен для
         //считывания ссылок на ресурсы)
@@ -35,5 +36,6 @@ namespace MainForm
         //Метод для парсинга ресурсов
         public async void parse()
         {
+            
         }
 }
