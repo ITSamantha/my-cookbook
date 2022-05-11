@@ -65,7 +65,8 @@ namespace MainForm
                     using (var context = BrowsingContext.New(config))
                     using (var doc = await context.OpenAsync(massive[index]))
                     {
-
+                        var _recipe = doc.GetElementsByClassName("content-md")[0].GetElementsByClassName("item-bl item-about");
+                        string name = _recipe[0].QuerySelector("h1").TextContent.Trim();
                     }
                 }
             }
