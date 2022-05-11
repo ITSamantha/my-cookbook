@@ -84,6 +84,9 @@ namespace MainForm
                             guid += g2.TextContent.Trim().Replace("\n", string.Empty);
 
                         }
+                        Random random = new Random();
+                        int star = random.Next(1, 5);
+                        int timeStar = random.Next(1, 5);
                     }
                 }
             }
