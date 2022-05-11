@@ -92,6 +92,9 @@ namespace MainForm
 
             tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
 
+            Parser parser = new Parser(); //создаем переменную для парсинга
+            parser.parse(); //запускаем процесс парсинга
+
         }
 
         private void closeB_Click(object sender, EventArgs e)//Кнопка закрытия
@@ -186,11 +189,11 @@ namespace MainForm
 
         public static void loadAllRecipesIntoFile()
         {
-         StringBuilder r = new StringBuilder();
+            StringBuilder r = new StringBuilder();
 
-         bool isAll = false;
+            bool isAll = false;
 
-           while (!isAll)
+            while (!isAll)
             {
                 if (ControllerForBD.isStartFile)
                 {
@@ -200,9 +203,9 @@ namespace MainForm
 
                         r.Append("Название рецепта:" + rec.Name + Environment.NewLine + "Категория:" + rec.Category + Environment.NewLine);
 
-                        r.Append("Оценка сложности:"+rec.Markdif + Environment.NewLine+"Оценка рецепта"+rec.Marklike+ Environment.NewLine);
+                        r.Append("Оценка сложности:" + rec.Markdif + Environment.NewLine + "Оценка рецепта" + rec.Marklike + Environment.NewLine);
 
-                        r.Append("Время приготовления"+rec.Time + Environment.NewLine +"Ингредиенты:"+rec.Ingredients+ Environment.NewLine);
+                        r.Append("Время приготовления" + rec.Time + Environment.NewLine + "Ингредиенты:" + rec.Ingredients + Environment.NewLine);
 
                         r.Append("Инструкция:" + rec.Guide + Environment.NewLine + Environment.NewLine);
 
@@ -227,7 +230,7 @@ namespace MainForm
             writer.WriteLine(r.ToString());
 
             writer.Close();
-            
+
             MessageBox.Show("Запись в файл all_my_recipes.txt успешно окончена.");
         }
 
