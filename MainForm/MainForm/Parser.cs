@@ -91,6 +91,13 @@ namespace MainForm
                         int hour = random.Next(0, 4);
                         int minute = random.Next(0, 59);
                         int second = random.Next(0, 59);
+                        time += "0" + hour + ":";
+                        if (minute < 10)
+                            time += "0";
+                        time += minute + ":";
+                        if (second < 10)
+                            time += "0";
+                        time += second;
                     }
                 }
             }
