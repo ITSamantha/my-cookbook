@@ -87,6 +87,10 @@ namespace MainForm
                         Random random = new Random();
                         int star = random.Next(1, 5);
                         int timeStar = random.Next(1, 5);
+                        string time = "";
+                        int hour = random.Next(0, 4);
+                        int minute = random.Next(0, 59);
+                        int second = random.Next(0, 59);
                     }
                 }
             }
