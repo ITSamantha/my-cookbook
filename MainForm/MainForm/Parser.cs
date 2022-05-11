@@ -67,6 +67,11 @@ namespace MainForm
                     {
                         var _recipe = doc.GetElementsByClassName("content-md")[0].GetElementsByClassName("item-bl item-about");
                         string name = _recipe[0].QuerySelector("h1").TextContent.Trim();
+                        string category = _recipe[0].GetElementsByClassName("article-breadcrumbs")[0].QuerySelector("span").TextContent.Trim();
+                        if (category.Equals("Бульоны и супы"))
+                            category = "Первые блюда";
+                        if (category.Equals("Горячие блюда"))
+                            category = "Вторые блюда";
                     }
                 }
             }
