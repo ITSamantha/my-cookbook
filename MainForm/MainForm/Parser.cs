@@ -74,6 +74,8 @@ namespace MainForm
                             category = "Вторые блюда";
                         var massiveIngridients = _recipe[0].GetElementsByClassName("ingredients-bl")[0].QuerySelectorAll("li");
                         string ingridients = "";
+                        foreach (var g in massiveIngridients)
+                            ingridients += g.TextContent.Trim().Replace("\n", string.Empty).Replace("  ", string.Empty) + ';';
                     }
                 }
             }
