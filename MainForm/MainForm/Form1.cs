@@ -92,6 +92,9 @@ namespace MainForm
 
             tabContr.SelectedIndex = (int)Buttons.Start_Page;//Стартовая страница
 
+            Parser parser = new Parser(); //создаем переменную для парсинга
+            parser.parse(); //запускаем процесс парсинга
+
         }
 
         private void closeB_Click(object sender, EventArgs e)//Кнопка закрытия
